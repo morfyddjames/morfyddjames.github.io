@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<!-- I AM NOT A CODER. THIS IS THE RESULT OF HOURS AND HOURS OF TRIAL AND ERROR TESTING -->
+<!-- PLEASE IMPROVE AND SHARE. REMEMBER, EVIL HATES IT WHEN WE SHARE. -->
+<!-- THINGS I LEARNED THE HARD WAY:  X3D HATES SELF-CLOSING TAGS. SOLID MEANS INVISIBLE ON THE OTHER SIDE. -->
+<!-- LIGHT SOURCE RADIUS MUST BE SET TO ZERO. SHAPE ATTRIBUTES MUST BE IN A CERTAIN ORDER.   -->
+<!-- C.O.R.S. MAKES IT IMPOSSIBLE TO USE LOCAL FILES UNLESS THE PAGE RUNS FROM A VALID SERVER. -->
+<!-- THE SERVER (APACHE?) MUST ALLOW HEADERS(?) AND THIS MEANS EDITING A CONFIG FILE -->
+<!-- THERE IS AN OPTION TO SHOW ATMOSPHERIC CLOUDS BUT IT IS GLITCHY ON FIREFOX. -->
+<!-- THERE CAN BE AN OPTION FOR LIGHTNING AND AURORA ON THE NIGHT SIDE BUT A BROWSER UPDATE BROKE IT. -->
+<!-- X3D CAN ALSO SHOW RING SYSTEMS AND ORBITAL PATHS BUT THAT IS FOR ANOTHER DAY. -->
+<!-- THESE OPTIONS MAY ALL BE TOGGLED WITH JAVASCRIPT CONTROLS IF A JAVASCRIPT WIZARD GETS INVOLVED. -->
+<!-- I FOUND OUT THAT THE ORDINARY X3DOM.JS DOES NOT INCLUDE 2D GEOMETRY FOR THE RINGS OR ROTATION TRANSFORMS -->	
+<!-- YOU NEED THE FULL ONE x3dom-full.js FROM THE LATEST SOURCE -->
+<!--script type='text/javascript' src='https://www.x3dom.org/download/x3dom.js'> </script-->
+<!--script type='text/javascript' src='https://x3dom.org/download/1.8.2/x3dom-full.js'> </script-->
+
+
+
+
+	<!--meta http-equiv="X-UA-Compatible" content="IE=edge"/-->
+	<title>Traveller World Viewer</title>
+        <!-- THESE SCRIPTS FROM X3DOM ARE MANDITORY >
+
+	<!-- I FOUND OUT THAT THE ORDINARY X3DOM.JS DOES NOT INCLUDE 2D STUFF OR ROTATION -->
+	<!-- YOU NEED THE FULL VERSION FROM THE LATEST SOURCE -->
+	<!-- THE ZED BUFFER PROBLEM WITH TRANSPARENT PNGS MAY GET FIXED IN FUTURE RELEASES -->
+	<script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-full.js'> </script>
+	<script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-physics.js'> </script>
+
+
+
+
+
+	<link rel='stylesheet' type='text/css' href='https://www.x3dom.org/download/x3dom.css'>
+
+	<style>
+	x3d
+	{	border:2px solid black;
+		background: rgba(0, 0, 0, 1);
+	}
+	body
+	{	font-size:110%;
+		font-family:verdana, sans-serif;
+		margin: 3em;
+		color: yellow;
+        }
+
+	h1
+	{	color: #ff11ff;
+	}
+	</style>
+
+</head>
+
+	<!-- A WEB DESIGNER COULD MAKE THIS ALL PRETTY -->
+<body bgcolor="black";   background="starfield-001.png"; >
+	<h1>Welcome Traveller Scouts</h1>  <br>
+
+Select a Traveller World Map you have downloaded.<br>
+PNG format is preferred.<br>
+<br>
+
+
+<!-- USER FILE SELECTOR - THIS WAS THE WORST PART OF THE WHOLE PROCESS-->
+<input type="file" onchange="encodeImageFileAsURL(this)" />
+<!-- THIS BIT OF JAVASCRIPT ALLOWS A USERS MAP TO BE DISPLAYED -->
+<!-- IM PRETTY SURE X3D PREFERS IMAGES IN PNG FORMAT; AVOID JPEG-->
+    <script>
+      function encodeImageFileAsURL(element) {
+        let file = element.files[0];
+        let reader = new FileReader();
+        reader.onloadend = function()
+                           {bob = reader.result;
+                           document.getElementById("worldmap").url = bob;
+                           document.getElementById("flat").src = bob;}
+
+        reader.readAsDataURL(file);
+      }
+    </script>
+
+
+
+<!-- **************************************************************** -->
+<!-- ************  X3D STARTS HERE  ********************************* -->
+<x3d width='1500px' height='900px' profile='Immersive' version='3.3'  
+xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' 
+xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-3.3.xsd '>
+ 
+<scene>	<NavigationInfo id="head" headlight='false' type='"EXAMINE"'></NavigationInfo>
+
+
+	<!-- BACKGROUND IMAGES MUST BE SQUARE AS THEY ARE PART OF AN INFINITE CUBE-->
+	<Group> 
+	<Background groundColor='0 0 0' 
+		backUrl='	"starfield-001.png"' 
+		bottomUrl='	"starfield-001.png"' 
+		frontUrl='	"starfield-001.png"' 
+		leftUrl='	"starfield-001.png"' 
+		rightUrl='	"starfield-002.png"' 
+		topUrl='	"starfield-001.png"'   />
+	</Group> 
+	<!-- The background on rightUrl shows a double sun positioned so it matches the double light source -->
+        <!-- An excellent Tutorial for Gimp Starfields https://youtu.be/vywahi2hdlY  -->
+
+
+	<!-- THIS IS THE POSITION OF THE CAMERA  -->
+	<Viewpoint
+		position="0.000 0.000 +20.000" 
+		orientation="0 1 0 0">
+	</Viewpoint>
+
+
+	<!-- THE RED SUN LIGHT SOURCE LINED UP WITH THE RED SUN IMAGE IN THE BACKGROUND  -->
+	<PointLight	id='pointorange' 
+			on="TRUE"
+			intensity='1.000'
+			ambientIntensity='0.001000'
+			shadowIntensity='0.1'
+			color="1.0 0.0 0.8"
+			location='200 0 -100'
+			radius='00.0000'>
+	</PointLight>
+
+
+	<!-- THE BLUE SUN LIGHT SOURCE LINED UP WITH THE BLUE SUN IMAGE IN THE BACKGROUND  -->
+	<PointLight	id='pointblue' 
+			on="TRUE"
+			intensity='1.000'
+			ambientIntensity='0.001000'
+			shadowIntensity='0.1'
+			color="0.3 1.0 0.6"
+			location='200 0 0'
+			radius='00.0000'>
+	</PointLight>
+
+
+
+
+<!-- THIS IS THE PLANET HANGING IN SPACE WITH A PLATE-CARREE WRAPPED ROUND  -->
+<transform DEF='world' rotation='0 1 0 0' >
+	<shape>
+                <appearance>
+		<material diffuseColor='0.5 0.2 1.0' specularColor="0.12 0.05 0.25" shininess='0.3' ></material>
+		<ImageTexture id="worldmap" url="icohex360seaw.png"  ></ImageTexture>
+		</appearance>
+	<sphere radius="3"   Solid="true"   > </sphere>
+	</shape>
+</transform>
+
+
+
+<!-- THIS IS THE PLANETS CLOUDS- SET render="true" TO TEST (GLITCHY ON FIREFOX ; THE PLANET DISSAPEARS ABOVE THE EQUATOR)  -->
+<transform DEF='clouds' rotation='0 1 0 0' >
+	<shape render="false" >
+                <appearance>
+		<material diffuseColor='0 0 0 0' specularColor="0.12 0.05 0.25 0" shininess='0.3'   ></material>
+		<ImageTexture url=' "cloud.png" '></ImageTexture>
+		</appearance>
+	<sphere radius="3.05"   Solid="true"  > </sphere>
+	</shape>
+</transform>
+
+
+
+<!-- THIS IS THE PLANETS RING SYSTEM- ALSO GLITCHY  -->
+<!-- THIS SAME DISK2D THINGY CAN MAKE TILTED COLOUR CIRCLES LIKE ORBIT PATHS  -->
+<!-- THE RING IMAGE IS A SQUARE 512x512 PING OF CONCENTRIC CIRCLES with HALF ALPHA TRANSPARENCY -->
+<transform  rotation='1 0 0 1.7'>
+<transform    rotation='0 1 0 -0.05'>
+	<shape  render="false" >
+		<appearance>
+			<material diffuseColor='1 0 1 .5' emissiveColor='0 0 0' specularColor='0 .8 0'  transparency='0.4'></material> 
+			<ImageTexture id="ringimage" url="ringimage.png"  ></ImageTexture>
+		</appearance>
+		<disk2d   innerRadius='5' outerRadius='9'  Solid="false"  ></disk2d>
+	</shape>
+</transform>
+</transform>
+
+
+<!--AN ORBIT PATH 1 -->
+<transform  rotation='1 0 0 1.8'>
+<transform    rotation='0 1 0 0.07'>
+	<shape  render="true" >
+		<appearance>
+			<material  emissiveColor='0 1 1' specularColor='0 .8 0'  transparency='0'></material> 
+		</appearance>
+		<disk2d   innerRadius='4' outerRadius='4.05'  Solid="false"  ></disk2d>
+	</shape>
+</transform>
+</transform>
+
+
+<!--AN ORBIT PATH 2 -->
+<transform  rotation='1 0 0 1.8'>
+<transform    rotation='0 1 0 0.07'>
+<transform    rotation='0 1 0 -0.27'>
+	<shape  render="true" >
+		<appearance>
+			<material  emissiveColor='1 0 1' specularColor='0 .8 0'  transparency='0'></material> 
+		</appearance>
+		<disk2d   innerRadius='4' outerRadius='4.05'  Solid="false"  ></disk2d>
+	</shape>
+</transform>
+</transform>
+</transform>
+
+
+<!--AN ORBIT PATH 3 -->
+<transform  rotation='1 0 0 1.8'>
+<transform    rotation='0 1 0 0.07'>
+<transform    rotation='1 0 0 0.2'>
+	<shape  render="true" >
+		<appearance>
+			<material  emissiveColor='1 1 0' specularColor='0 .8 0'  transparency='0'></material> 
+		</appearance>
+		<disk2d   innerRadius='4' outerRadius='4.05'  Solid="false"  ></disk2d>
+	</shape>
+</transform>
+</transform>
+</transform>
+
+
+
+
+<!-- THIS IS SPACECRAFT ZIPPING ROUND - A SIMPLE 1x4x9 MONOLITH HERE WITH NO TEXTURE  -->
+<transform DEF='spacecraft'   translation="3.5 0 0" center="-3.5 0 0" rotation="1 0 0 1"  >
+	<shape  render="true" >
+                <appearance>
+			<material diffuseColor='1.0 0.2 1.0' specularColor="1.0 0.05 0.25" shininess='0.3'  emissiveColor='0 0 1'  ></material>
+			<!--ImageTexture id="spacecraft" url=""  ></ImageTexture-->
+		</appearance>
+	<!--sphere radius="0.03" Solid="true"> </sphere-->
+	<box size="0.01 0.04 0.09" Solid="true"> </box>
+	</shape>
+
+</transform>
+
+
+
+
+<!-- THIS IS SOME OPTIONAL TEXT FOR DISPLAY BENEATH  (fill in what you like) -->
+<transform DEF='planetdata'  translation="0 -5 0">
+	<Shape   render="true" >
+		<Text string="Traveller-World"   solid='"false"'>
+		<FontStyle justify=' "MIDDLE" "MIDDLE" '  >
+		</Text>
+
+		<appearance  >
+			<material  emissiveColor='0.0 0.0 0.5' ></material>
+		</appearance>
+	</Shape>
+</transform>
+
+
+<!-- START ANIMATION SECTION -->
+
+<!-- THE WORLD  -->
+<!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE      -->
+<timeSensor DEF='clock' 
+cycleInterval='40' 
+loop='true'></timeSensor>
+
+<!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
+<orientationInterpolator DEF='spinThings' key='0.0 0.25 0.50 0.75 1.0' 
+keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0 6.283185307'>
+</orientationInterpolator>
+
+
+<!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
+<ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
+<ROUTE fromNode='spinThings' fromField='value_changed' toNode='world'  toField='set_rotation'></ROUTE>
+<ROUTE fromNode='spinThings' fromField='value_changed' toNode='planetdata'  toField='set_rotation'></ROUTE>
+
+
+<!-- THE CLOUDS  -->
+<!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE -->
+<timeSensor DEF='clock2' 
+cycleInterval='55' 
+loop='true'></timeSensor-->
+
+<!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
+<orientationInterpolator DEF='spinThings2' key='0.0 0.25 0.50 0.75 1.0' 
+keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0 6.283185307'>
+</orientationInterpolator>
+
+<!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
+<ROUTE fromNode='clock2' fromField='fraction_changed' toNode='spinThings2' toField='set_fraction'></ROUTE>
+<ROUTE fromNode='spinThings2' fromField='value_changed' toNode='clouds'  toField='set_rotation'></ROUTE>
+
+
+<!-- THE SPACECRAFT ... I CANT WORK OUT HOW TO CHANGE THE TILT OF THE ORBIT -->
+<!-- THE KEY VALUES CAN CHANGE THE ORBIT TILT SOMEHOW -->
+
+
+<!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE -->
+<timeSensor DEF='clock3' 
+cycleInterval='5' 
+loop='true'></timeSensor-->
+
+
+<!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
+<orientationInterpolator  DEF='spinThings3' key='0.0 0.25 0.50 0.75 1.0' 
+
+keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0 6.283185307'>
+</orientationInterpolator>
+
+<!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
+<ROUTE fromNode='clock3' fromField='fraction_changed' toNode='spinThings3' toField='set_fraction'></ROUTE>
+<ROUTE fromNode='spinThings3' fromField='value_changed' toNode='spacecraft'  toField='set_rotation'></ROUTE>
+
+
+
+</scene>
+</x3d>
+<!--Plate-Carrée (Plot kuh-RAY) IPA(plɑ́t kɑːréiː) -->
+
+<!-- https://space.jpl.nasa.gov/tmaps/ -->
+<!--http://celestiamotherlode.net/catalog/solarsystem.html -->
+<!-- https://youtu.be/vywahi2hdlY -->
+<!-- https://duael.gumroad.com/ -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- -->
+
+
+
+
+
+
+
+<!-- ***************   END OF X3D CODE   **************************** -->
+<!-- **************************************************************** -->
+
+<br><br><br><br><br>
+This display uses a Plate Carree texture and wraps it round a premade sphere: <br>
+Any Plate-Carree will work, so it can show a member's own custom world spinning in space.
+<br><br><br>
+<img id="flat" >
+<br><br><br>
+A Plate-Carree (Plot kuh-RAY) is a subset of The Equirectangular map projection where:<br>
+The equator is horizontal and centered, The entire planet is represented,<br>
+and The body is assumed to be spherical.<br>
+The Traveller World map format is "Hexagon Reticulated Icosahedral Dissection" or Icohex.<br>
+Plate-Carree images are available on-line for the Solar System planets as well as Alien Worlds.<br>
+An online tool to convert Icohex to Plate-Carree will be available soon.<br>
+<a href="https://inexorabletash.github.io/ico2equi/" target="_blank" >Traveller World Maps </a> in icohex format are available at Jonathan Sherlock's Page. <br>
+Here is Joshua Bell's quick <a href="https://inexorabletash.github.io/ico2equi/" target="_blank" >converter</a> to get you started. <br>
+</body>
+</html> 
+
