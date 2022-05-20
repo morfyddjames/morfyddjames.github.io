@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- cola a% git -->
+
+
+<!-- This page uses javascript to transform an Icohex TravellerWorld map to Plate-Carree -->
+<!-- The TravellerWorld maps are no projection at all as there never was any sphere  -->
+<!-- I engage the conceit that they are gnomonic projections of a sphere onto an inscribed regular icosahedron -->
+<!-- More specifically they are a "Hexagon Reticulated Icosahedral Dissection" -->
+<!-- I am an archivist and historian, I understand cartography, not javascript. It shows. -->
+<!-- The Icohex is disassembled into 40 right-triangle demifacets one at a time -->
+<!-- There are two types; 20 Arctic, and 20 Tropical -->
+<!-- Function A transforms the ARCTs while Function B does the TROPs -->
+<!-- Each facet is rotated "rightangle > top left" and placed in the input canvas -->
+<!-- Functions A or B  create new temporary output canvases -->
+<!-- The appropriate output is chosen, de-rotated and painted to the final canvas in its correct place-->
+<!-- An interpolator then runs on the final canvas to fill in any blank pixels -->
+<!--  -->
+<!--  -->
+<!-- THIS IS MEANT AS A CONTRIBUTION TO THE GENERAL COMMUNITY -->
+<!-- IMPROVE AND SHARE AS MUCH AS YOU LIKE  -->
+<!-- EVIL HATES IT WHEN WE SHARE -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!-- I PUT THIS TOGETHER WITH NO EXPERIENCE OR TRAINING IN CODE OR JAVASCRIPT -->
+<!-- I HAVE EARNED THE RIGHT TO FFYCING BRAG  -->
+<!--  -->
+<!-- Imperatrix Mundi Benifice -->
+<!-- Quiat Dico Ita ! -->
+<!--  -->
+<!-- Morfydd James -->
+<!--  -->
+
+
+
+<head>
+
+<!--meta http-equiv="X-UA-Compatible" content="IE=edge"/-->
+	<title>Icohex 2 Plate-Carree</title>
+
+<style type="text/css">
+	body	{margin:40px; background: #666;}
+	#primary	{background:#222; border:#ff0 2px solid;}
+	#demifacet	{background:#0000; border:#000 2px solid;}
+	#panel_ARCT	{background:#0000; border:#0f0 2px solid;}
+	#panel_ARCT_R	{background:#0000; border:#0f0 2px solid;}
+	#panel_TROP	{background:#0000; border:#00f 2px solid;}
+	#panel_TROP_R	{background:#0000; border:#00f 2px solid;}
+	#outputmap	{background:#f000; border:#f0f 2px solid;}</style>
+
+<script>
+/////////////////////////////////////////////////////////////////////////////////
+
+function readysetgo(){
+
+//var bgcolorout = "#600f";	// CHOOSE A COLOUR TO FILL IN LOST PIXELS
+var bgcolorout = "#0000";
+
+const Root3 = Math.sqrt(3);
+const Root5 = Math.sqrt(5);
+const PHI = (1 + Root5) / 2;
+const DeGrad = 180/Math.PI;
+const H_arct_deg = (2 * Math.atan(1/PHI)) * DeGrad;
+const H_trop_deg = Math.atan(PHI) * DeGrad;
+
+// THESE ARE THE COEFFICIENTS FOR THE CONVERSION MATHS.
+// ONLY FOR REFERENCE AS I USE EMPIRICAL VALUES IN THE FUNCTIONS
+const K = (1/(Math.sqrt(PHI + 2)));	// BASE COEFFICIENT	= 0.525731112119134
+const K1 = PHI * K;			// Y OFFSET		= 0.85065080835204
+const K2 = (PHI + 1) * K;		// Z OFFSET		= 1.37638192047117
+const K3 =  (2 * K)/ Root3;		// Y FACTOR ARCTIC	= 0.607061998206686
+const K4 = ((PHI + 1) * K)/ Root3;	// Z FACTOR ARCTIC	= 0.794654472291766
+const K5 =  (2 * PHI * K)/ Root3;	// Y FACTOR TROPICAL	= 0.982246946376846
+const K6 = K/ (PHI * Root3);		// Z FACTOR TROPICAL	= 0.18759247408508
+
+//	THE INPUT IMAGE CANVAS CONTEXT
+const fileInput = document.getElementById('inputtag');
+const currentImage = new Image();
+const primaryCanvas = document.getElementById('primary');
+const primarycontext = primaryCanvas.getContext('2d'); primarycontext.imageSmoothingEnabled = false;
+
+
+// THE MATHS -- THESE TWO FUNCTION PAIRS CONVERT X/Y IN TO LAT/LON OUT 
+function Arx(Xin, Yin){
+	XL0 = (Math.atan( (Xin) / ((Yin * 0.794654472291766 ) - 1.37638192047117) ) ) * DeGrad;
+	return XL0;}
+
+function Ary(Xin, Yin){
+	YL0 = Math.atan( (0.607061998206686 * (Yin) + 0.85065080835204) / Math.sqrt(((Xin) ** 2) + (0.794654472291766 * (Yin) - 1.37638192047117) ** 2)) * DeGrad;
+	return YL0;}
+
+function Brx(Xin, Yin){
+	XL0 = Math.atan(Xin/(-0.18759247408508 * (Yin) - 1.37638192047117)) * DeGrad;
+	return XL0;}
+
+function Bry(Xin, Yin){
+	YL0 = Math.atan((-0.982246946376846 * (Yin) + 0.85065080835204) / Math.sqrt(((Xin) ** 2) + ((-0.18759247408508 * (Yin)) - 1.37638192047117) ** 2)) * DeGrad;
+	return YL0;}
+//////////////////////////////////////////////////////////////////////////////////
+
+// Handle changes to the selected file.
+fileInput.addEventListener('change', function (changeEvent) {
+
+	if (!changeEvent	// Guard against invalid input (no files).
+	    || !changeEvent.target
+	    || !changeEvent.target.files
+	    || !changeEvent.target.files.length) {
+	return;}
+	
+	const firstFile = changeEvent.target.files[0];	// Read the file as a blob.
+	const fileUrl = URL.createObjectURL(firstFile);
+	
+	currentImage.src = fileUrl;	// Update the image.
+});	//	END fileInput.addEventListener
+
+// Wait for the image to load before drawing it to the canvas.
+currentImage.addEventListener('load', function () {
+
+//	SET ALL OF THE CANVAS SIZES BASED ON THE INPUT MAP DIMENSIONS
+//	THE INPUT MAP RATIO MUST BE 10:3*ROOT3 (~1000:520) OR WEIRD THINGS WILL HAPPEN
+	const primarywidth = currentImage.width;
+	const primaryheight = currentImage.height;
+
+alert("Start the transformation.\nThis may take up to 15 seconds.");
+
+	const facetwidth = primarywidth/10;
+	const facetheight = primaryheight/3;
+	const facetwidth2 = 2 * facetwidth;
+	const facetwidth3 = 3 * facetwidth;
+	const facetwidth4 = 4 * facetwidth;
+
+// THIS HORIZONTAL PRE-STRETCH IS USED TO FILL IN BLANK PIXELS AT THE COST OF SPEED // $$$$$ $$$$$
+	const facetwidthX = facetwidth;		// FAST WITH MANY GAPS	--  4 SECS
+//	const facetwidthX = facetwidth2;	// MEDIUM		--  7 SECS
+//	const facetwidthX = facetwidth3;	// SLOW BUT CLEANER 	-- 11 SECS
+//	const facetwidthX = facetwidth4;	// SLOWEST BUT CLEANEST -- 15 SECS
+
+	const panelwidth = primarywidth/10;
+	const pixperdeg = primarywidth/360;
+
+	const panelheightA = H_arct_deg * pixperdeg ;
+	const panelheightB = H_trop_deg * pixperdeg ;
+
+	const outputwidth = primarywidth;
+	const outputheight = outputwidth /2;
+
+	document.getElementById("primary").height=currentImage.height;
+	document.getElementById("primary").width=currentImage.width;
+
+	document.getElementById("demifacet").width=facetwidthX;
+	document.getElementById("demifacet").height=facetheight;
+
+	document.getElementById("panel_ARCT").width=panelwidth;
+	document.getElementById("panel_ARCT").height=panelheightA;
+
+	document.getElementById("panel_ARCT_R").width=panelwidth;
+	document.getElementById("panel_ARCT_R").height=panelheightA;
+
+	document.getElementById("panel_TROP").width=panelwidth;
+	document.getElementById("panel_TROP").height=panelheightB;
+
+	document.getElementById("panel_TROP_R").width=panelwidth;
+	document.getElementById("panel_TROP_R").height=panelheightB;
+
+	document.getElementById("outputmap").width=outputwidth;
+	document.getElementById("outputmap").height=outputheight;
+
+	primarycontext.drawImage(currentImage, 0, 0); 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// ALL OF THE CANVAS CONTEXTS.  IMAGESMOOTHINGENABLED = FALSE; ACCUMULATES IF TRUE: BAD!
+//	REDUNDANT	var ctxinput  = document.getElementById('primary').getContext('2d');	REDUNDANT ???
+	var ctxtemp  = document.getElementById('demifacet').getContext('2d'); ctxtemp.imageSmoothingEnabled = false;
+	var ctxARCT  = document.getElementById('panel_ARCT').getContext('2d'); ctxARCT.imageSmoothingEnabled = false;
+	var ctxARCT_R  = document.getElementById('panel_ARCT_R').getContext('2d'); ctxARCT_R.imageSmoothingEnabled = false;
+	var ctxTROP  = document.getElementById('panel_TROP').getContext('2d'); ctxTROP.imageSmoothingEnabled = false;
+	var ctxTROP_R  = document.getElementById('panel_TROP_R').getContext('2d'); ctxTROP_R.imageSmoothingEnabled = false;
+	var ctxOUTmap  = document.getElementById('outputmap').getContext('2d'); ctxOUTmap.imageSmoothingEnabled = false;
+
+	ctxOUTmap.fillStyle = bgcolorout; ctxOUTmap.fillRect(0,0,outputwidth,outputheight);	// OPTIONAL FILL COLOUR FOR DIAGNOSIS
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+// BIG LOOP 1 /////////////////////////////////////////
+
+	// THESE ARRAYS ARE AN INELEGANT WAY TO SET THE APPROPRIATE ROTATIONS FOR EACH FACET/PANEL
+const VoffsetIn  = [0, 1, 1, 2];
+const VoffsetOut = [0, panelheightB, panelheightA, (panelheightB + panelheightB)];
+const rotV = [-1,+1,-1,+1];
+const rotH = [
+	[+1,-1,+1,-1,+1,-1,+1,-1,+1,-1], 
+	[+1,-1,+1,-1,+1,-1,+1,-1,+1,-1],
+	[-1,+1,-1,+1,-1,+1,-1,+1,-1,+1],
+	[-1,+1,-1,+1,-1,+1,-1,+1,-1,+1]
+];
+
+	for(var row=0; row < 4 ; row++){
+		for(var col=0; col < 10 ; col++){
+	
+			ctxtemp.clearRect(0, 0, facetwidthX, facetheight);	 // $$$$$ $$$$$
+			ctxARCT.clearRect(0, 0, panelwidth, panelheightA);
+			ctxARCT_R.clearRect(0, 0, panelwidth, panelheightA);
+			ctxTROP.clearRect(0, 0, panelwidth, panelheightB);
+			ctxTROP_R.clearRect(0, 0, panelwidth, panelheightB);
+
+
+//		****	PLACE TRIANGLES ROTATE/TRANSLATE	TRY OVERSCALING TO FIX MISSING PIXELS HERE	****
+//			 MAKE A CLIPPING TRIANGLE TO ISOLATE THE DESIRED DEMIFACET
+			ctxtemp.beginPath(); ctxtemp.moveTo(0, 0); ctxtemp.lineTo(facetwidthX, 0); ctxtemp.lineTo(0, facetheight); ctxtemp.clip();	 // $$$$$ $$$$$
+
+			// SAVE THE DEFAULT ORIENTATION
+			ctxtemp.save();
+
+			// APPLY THE ROTATIONS
+			ctxtemp.scale( rotH[row][col], rotV[row]); 
+			ctxtemp.translate(facetwidthX * ((rotH[row][col]-1)/2), ( facetheight * (rotV[row]-1)/2));	 // $$$$$ $$$$$
+
+			// COPY THE INPUT SELECTION TO THE FACET CANVAS
+			ctxtemp.drawImage(currentImage, col * facetwidth, VoffsetIn[row]*facetheight, facetwidth, facetheight, 0,0,facetwidthX, facetheight);  // $$$$$ $$$$$
+
+			// RESET THE FACET CANVAS COORDINATES
+			ctxtemp.restore();
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+if  // IF STATEMENT 1
+(row==0 || row==3 || 0){
+
+
+//		****	PIXEL OPERATION 1 ARCT	****
+	for(var y=0; y < facetheight; y++)
+	{
+		//for(var x=0; x < facetwidthX; x++)	 // $$$$$ $$$$$  CHANGE THIS SO ONLY THE TRIANGLE IS SAMPLED
+		for(var x=0; x < (facetwidthX * ((facetheight-y)/facetheight)); x++)	 // $$$$$ $$$$$  CHANGE THIS SO ONLY THE TRIANGLE IS SAMPLED
+		{ 
+		pixel = ctxtemp.getImageData(x, y, 1, 1); // PLUCK PIXELS FROM TRIANGLE
+
+		xFa = x/facetwidthX;		// CONVERT JAVASCRIPT COORDS TO FACET COORDS (0-1)	 // $$$$$ $$$$$
+		yFa = Root3 * y/facetheight;	// CONVERT JAVASCRIPT COORDS TO FACET COORDS (0-Root3)
+
+		lonX = Arx(xFa, yFa); // FACET COORDS TO LON IN DEGREES
+		latY = Ary(xFa, yFa); // FACET COORDS TO LAT IN DEGREES
+
+		var offsetarct = 90 - H_arct_deg;	// DEGREES TO SHIFT THE BASE BACK DOWN TO ZERO
+		var offsettrop = 90 - H_trop_deg;	// DEGREES TO SHIFT THE BASE BACK DOWN TO ZERO
+
+		lonJX = lonX * pixperdeg ;			// LON TO JAVASCRIPT COORDS
+		latJY = (latY - offsetarct) * pixperdeg;	// LAT TO JAVASCRIPT COORDS 
+
+		ctxARCT.putImageData(pixel, -lonJX ,  latJY);	// BUILD PANEL: NEGATIVE LONGITUDE?? WHY??
+		} 	
+
+	}
+
+} // END IF STATEMENT 1
+else { // ELSE STATEMENT 1
+
+
+
+//		****	PIXEL OPERATION 2 TROP	**** 
+	for(var y=0; y < facetheight; y++)
+	{
+		//for(var x=0; x < facetwidthX; x++)	 // $$$$$ $$$$$  CHANGE THIS SO ONLY THE TRIANGLE IS SAMPLED
+		for(var x=0; x < (facetwidthX * ((facetheight-y)/facetheight)); x++)	 // $$$$$ $$$$$  CHANGE THIS SO ONLY THE TRIANGLE IS SAMPLED
+
+		{ 
+		pixel = ctxtemp.getImageData(x, y, 1, 1); // PLUCK PIXELS FROM TRIANGLE
+
+		xFa = x/facetwidthX;		// CONVERT JAVASCRIPT COORDS TO FACET COORDS  // $$$$$ $$$$$
+		yFa = Root3 * y/facetheight;	// CONVERT JAVASCRIPT COORDS TO FACET COORDS
+
+		lonX = Brx(xFa, yFa); // FACET COORDS TO LON IN DEGREES
+		latY = Bry(xFa, yFa); // FACET COORDS TO LAT IN DEGREES
+
+		var offsetarct = 90 - H_arct_deg;	// DEGREES TO SHIFT THE BASE BACK DOWN TO ZERO
+		var offsettrop = 90 - H_trop_deg;	// DEGREES TO SHIFT THE BASE BACK DOWN TO ZERO
+
+		lonJX = -lonX * pixperdeg ;			// LON TO JAVASCRIPT COORDS
+		latJY = (latY - offsettrop) * pixperdeg ;	// LAT TO JAVASCRIPT COORDS
+
+		ctxTROP.putImageData(pixel, lonJX , -latJY);	// BUILD PANEL: NEGATIVE LATITUDE?? WHY??
+
+		}  
+
+	}	
+} // END ELSE STATEMENT 1
+
+//////////////////////////// MOVE PROJECTED PANELS TO NEXT CANVAS WITH CORRECTED ROTATION  //////////////////
+
+
+if  // IF STATEMENT 2
+(row==0 || row==3 || 0){
+		////	// CONVERT THE ARCT CANVAS DATA BACK TO AN IMAGE -- TOOK ME AGES TO WORK THIS OUT!
+			var img_tmp1A = document.getElementById("panel_ARCT");
+			// CLEAR THE PANEL
+			ctxARCT_R.clearRect(0, 0, panelwidth, panelheightA);
+			// SAVE THE COORDINATES
+			ctxARCT_R.save();
+			// UNROTATE THE NEW PANEL
+			ctxARCT_R.scale( rotH[row][col], rotV[row]);  ctxARCT_R.translate(panelwidth * ((rotH[row][col]-1)/2),( panelheightA * (rotV[row]-1)/2));
+			// REDRAW TO THE NEW CANVAS
+			ctxARCT_R.drawImage(img_tmp1A, 0 ,0 );
+			// RESET THE COORDINATES
+			ctxARCT_R.restore(); 
+			// DRAW THE PANEL TO THE OUTPUT CANVAS
+			var img_tmp1B = document.getElementById("panel_ARCT_R");
+			ctxOUTmap.drawImage(img_tmp1B, col * panelwidth, VoffsetOut[row]);
+
+} // END IF STATEMENT 2
+else { // ELSE STATEMENT 2
+
+		////	// CONVERT THE TROP CANVAS DATA BACK TO AN IMAGE -- TOOK ME AGES TO WORK THIS OUT!
+			var img_tmp2A = document.getElementById("panel_TROP");
+			// CLEAR THE PANEL
+			ctxTROP_R.clearRect(0, 0, panelwidth, panelheightB);
+			// SAVE THE COORDINATES
+			ctxTROP_R.save();
+			// UNROTATE THE NEW PANEL
+			ctxTROP_R.scale( rotH[row][col], rotV[row]);  ctxTROP_R.translate(panelwidth * ((rotH[row][col]-1)/2),( panelheightB * (rotV[row]-1)/2));
+			// REDRAW TO THE NEW CANVAS
+			ctxTROP_R.drawImage(img_tmp2A, 0 ,0 );
+			// RESET THE COORDINATES
+			ctxTROP_R.restore();
+			// DRAW THE PANEL TO THE OUTPUT CANVAS
+			var img_tmp2B = document.getElementById("panel_TROP_R");
+			ctxOUTmap.drawImage(img_tmp2B, col * panelwidth,  VoffsetOut[row]);
+} // END ELSE STATEMENT 2
+///////////////////////////////////////////////////////////////////////////////////////////
+
+//	alert("Row= " + row + ": Col=" + col);  // UNCOMMENT THIS IF YOU WANT TO SEE EACH DEMIFACET GET CREATED
+
+
+		}	// END COL FOR LOOP
+	}		// END ROW FOR LOOP
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//	START THE INTERPOLATOR TO GET RID OF THE TRANSPARENT PIXELS THAT GOT SKIPPED
+
+var imagedata = ctxOUTmap.getImageData(0,0,outputwidth,outputheight);
+var dataxy = imagedata.data;
+dataxy[0] = 255;dataxy[1] = 255;dataxy[2] = 255;dataxy[3] = 255; // SET FIRST PIXEL TO OPAQUE WHITE
+for(var xy = 4; xy < dataxy.length; xy += 4 )
+{
+	if(dataxy[xy + 3] == 0)
+	{
+		dataxy[xy] = dataxy[xy - 4];
+		dataxy[xy + 1] = dataxy[xy - 3];
+		dataxy[xy + 2] = dataxy[xy - 2];
+		dataxy[xy + 3] = 255;
+	}
+	dataxy[xy + 3] = 255;	// FFYCING HELL !! I SPENT AN HOUR TRYING == 0.  DOES THE BROWSER SCREW WITH TRANSPARENCY???
+}
+
+ctxOUTmap.putImageData(imagedata,0,0);
+
+
+});	// END currentImage.addEventListener
+}	// END readysetgo
+/////////////////////////////////////////////////////////////////////////////////
+</script>
+</head>
+
+<body>
+
+<canvas  id="primary" width="1000" height="520"   ></canvas><br><br>
+<input  id="inputtag" type="file" accept="image/*">
+Choose a cropped Traveller World Map that looks like this:  .  .
+<img src="sample01.png"><br>
+<canvas  id="demifacet"  width="100" height="173" ></canvas>...............
+
+<canvas  id="panel_ARCT"  width="100" height="173" ></canvas>....
+<canvas  id="panel_ARCT_R"  width="100" height="173" ></canvas>....
+
+<canvas  id="panel_TROP"  width="100" height="160" ></canvas>....
+<canvas  id="panel_TROP_R"  width="100" height="160" ></canvas><br><br>
+
+<canvas  id="outputmap"  width="1000" height="500" ></canvas>
+
+<!-- THIS SCRIPT STARTS ALL THE OTHER SCRIPTS IN THE HEADER SECTION -->
+<script> onload = readysetgo; </script>
+
+</body>
+
+<!-- Imperatrix Mundi Benifice. -->
+<!-- Quiat Dico Ita! -->
+<!-- Morfydd James -->
+
+</html>
+
