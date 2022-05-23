@@ -29,7 +29,7 @@
 	<!-- YOU NEED THE FULL VERSION FROM THE LATEST SOURCE -->
 	<!-- THE ZED BUFFER PROBLEM WITH TRANSPARENT PNGS MAY GET FIXED IN FUTURE RELEASES -->
 	<script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-full.js'> </script>
-	<script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-physics.js'> </script>
+	<!--script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-physics.js'> </script-->
 
 
 
@@ -39,7 +39,7 @@
 
 	<style>
 	x3d
-	{	border:2px solid black;
+	{	border:2px solid green;
 		background: rgba(0, 0, 0, 1);
 	}
 	body
@@ -57,7 +57,7 @@
 </head>
 
 	<!-- A WEB DESIGNER COULD MAKE THIS ALL PRETTY -->
-<body bgcolor="black";   background="starfield-001.png"; >
+<body bgcolor="black";> <!--   background="starfield-001.png"; -->
 	<h1>Welcome Traveller Scouts</h1>  <br>
 
 Select a Traveller World Map you have downloaded.<br>
@@ -86,7 +86,7 @@ PNG format is preferred.<br>
 
 <!-- **************************************************************** -->
 <!-- ************  X3D STARTS HERE  ********************************* -->
-<x3d width='1500px' height='900px' profile='Immersive' version='3.3'  
+<x3d width='1500px' height='900px' profile='Immersive' version='3.3'  border="green"
 xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' 
 xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-3.3.xsd '>
  
@@ -142,6 +142,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-3.3.xs
 
 <!-- THIS IS THE PLANET HANGING IN SPACE WITH A PLATE-CARREE WRAPPED ROUND  -->
 <transform DEF='world' rotation='0 1 0 0' >
+	<transform DEF='AxialTilt' rotation='0 0 -1 0.4' >
 	<shape>
                 <appearance>
 		<material diffuseColor='0.5 0.2 1.0' specularColor="0.12 0.05 0.25" shininess='0.3' ></material>
@@ -149,13 +150,14 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-3.3.xs
 		</appearance>
 	<sphere radius="3"   Solid="true"   > </sphere>
 	</shape>
+	</transform>
 </transform>
 
 
 
 <!-- THIS IS THE PLANETS CLOUDS- SET render="true" TO TEST (GLITCHY ON FIREFOX ; THE PLANET DISSAPEARS ABOVE THE EQUATOR)  -->
 <transform DEF='clouds' rotation='0 1 0 0' >
-	<shape render="false" >
+	<shape render="true" >
                 <appearance>
 		<material diffuseColor='0 0 0 0' specularColor="0.12 0.05 0.25 0" shininess='0.3'   ></material>
 		<ImageTexture url=' "cloud.png" '></ImageTexture>
@@ -259,22 +261,56 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-3.3.xs
 
 <!-- START ANIMATION SECTION -->
 
-<!-- THE WORLD  -->
+<!-- THE WORLD  ::: KEYVALUES =  sin(AxialTilt) cos(AxialTilt) 0 quartercircles -->
 <!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE      -->
 <timeSensor DEF='clock' 
 cycleInterval='40' 
 loop='true'></timeSensor>
 
 <!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
-<orientationInterpolator DEF='spinThings' key='0.0 0.25 0.50 0.75 1.0' 
-keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0 6.283185307'>
-</orientationInterpolator>
+<orientationInterpolator DEF='spinThings' 
 
+key='0.0 0.25 0.50 0.75 1.0' 
+keyValue='
+
+.39 .92 0 			0  
+.39 .92 0  		1.570796327  
+.39 .92 0  		3.141592654  
+.39 .92 0  		4.71238898  
+.39 .92 0  		6.283185307
+'>
+
+</orientationInterpolator>
 
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
 <ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
 <ROUTE fromNode='spinThings' fromField='value_changed' toNode='world'  toField='set_rotation'></ROUTE>
+
+
+
+<!-- THE TEXT  -->
+<!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE      -->
+<timeSensor DEF='clock' 
+cycleInterval='40' 
+loop='true'></timeSensor>
+
+<!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
+<orientationInterpolator DEF='spinThings' 
+
+key='0.0 0.25 0.50 0.75 1.0' 
+keyValue='
+0 1 0 0 
+0 1 0 1.570796327
+0 1 0 3.141592654  
+0 1 0 4.71238898  
+0 1 0 6.283185307 '>
+
+</orientationInterpolator>
+
+<!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
+<ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
 <ROUTE fromNode='spinThings' fromField='value_changed' toNode='planetdata'  toField='set_rotation'></ROUTE>
+
 
 
 <!-- THE CLOUDS  -->
@@ -291,6 +327,9 @@ keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
 <ROUTE fromNode='clock2' fromField='fraction_changed' toNode='spinThings2' toField='set_fraction'></ROUTE>
 <ROUTE fromNode='spinThings2' fromField='value_changed' toNode='clouds'  toField='set_rotation'></ROUTE>
+
+
+
 
 
 <!-- THE SPACECRAFT ... I CANT WORK OUT HOW TO CHANGE THE TILT OF THE ORBIT -->
@@ -319,10 +358,11 @@ keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0
 </x3d>
 <!--Plate-Carrée (Plot kuh-RAY) IPA(plɑ́t kɑːréiː) -->
 
+<!-- -->
 <!-- https://space.jpl.nasa.gov/tmaps/ -->
 <!--http://celestiamotherlode.net/catalog/solarsystem.html -->
-<!-- https://youtu.be/vywahi2hdlY -->
-<!-- https://duael.gumroad.com/ -->
+<!-- https://youtu.be/vywahi2hdlY   Starfield video tutorial-->
+<!-- https://duael.gumroad.com/  Robert Stein's Alien Planets -->
 <!-- -->
 <!-- -->
 <!-- -->
@@ -355,7 +395,7 @@ and The body is assumed to be spherical.<br>
 The Traveller World map format is "Hexagon Reticulated Icosahedral Dissection" or Icohex.<br>
 Plate-Carree images are available on-line for the Solar System planets as well as Alien Worlds.<br>
 An online tool to convert Icohex to Plate-Carree will be available soon.<br>
-<a href="http://members.ozemail.com.au/~jonoreita/TravellerWorlds/" target="_blank" >Traveller World Maps </a> in icohex format are available at Jonathan Sherlock's Page. <br>
+<a href="https://inexorabletash.github.io/ico2equi/" target="_blank" >Traveller World Maps </a> in icohex format are available at Jonathan Sherlock's Page. <br>
 Here is Joshua Bell's quick <a href="https://inexorabletash.github.io/ico2equi/" target="_blank" >converter</a> to get you started. <br>
 
 
@@ -365,8 +405,21 @@ A beta version of the  <a href="https://morfyddjames.github.io/platecarree.html"
 This beta version engages a precision better than 14 parts per billion at the cost of speed. 
 <br><br>
 
-	
-	
-	</body>
+</body>
 </html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
