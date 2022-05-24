@@ -93,7 +93,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-3.3.xs
 <scene>	<NavigationInfo id="head" headlight='false' type='"EXAMINE"'></NavigationInfo>
 
 
-	<!-- BACKGROUND IMAGES MUST BE SQUARE AS THEY ARE PART OF AN INFINITE CUBE-->
+	<!-- BACKGROUND IMAGES MUST BE SQUARE AS THEY ARE PART OF AN INFINITE CUBE 2048x2048 -->
 	<Group> 
 	<Background groundColor='0 0 0' 
 		backUrl='	"starfield-001.png"' 
@@ -140,7 +140,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-3.3.xs
 
 
 
-<!-- THIS IS THE PLANET HANGING IN SPACE WITH A PLATE-CARREE WRAPPED ROUND  -->
+<!-- THIS IS THE PLANET HANGING IN SPACE WITH A PLATE-CARREE WRAPPED ROUND.. SET AXIAL TILT IN RADIANS NEGATIVE ZED AXIS  -->
 <transform DEF='world' rotation='0 1 0 0' >
 	<transform DEF='AxialTilt' rotation='0 0 -1 0.4' >
 	<shape>
@@ -176,7 +176,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-3.3.xs
 	<shape  render="true" >
 		<appearance>
 			<material diffuseColor='1 0 1 .5' emissiveColor='0 0 0' specularColor='0 .8 0'  transparency='0.4'></material> 
-			<ImageTexture id="ringimage" url="ringimage.png"  ></ImageTexture>
+			<ImageTexture id="ringimage" url="ringimage3.png"  ></ImageTexture>
 		</appearance>
 		<disk2d   innerRadius='5' outerRadius='9'  Solid="false"  ></disk2d>
 	</shape>
@@ -261,7 +261,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-3.3.xs
 
 <!-- START ANIMATION SECTION -->
 
-<!-- THE WORLD  ::: KEYVALUES =  sin(AxialTilt) cos(AxialTilt) 0 quartercircles -->
+<!-- THE WORLD  ::: KEYVALUES =  sin(AxialTilt) cos(AxialTilt) 0 RADIANQUARTERS -->
 <!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE      -->
 <timeSensor DEF='clock' 
 cycleInterval='40' 
@@ -395,13 +395,13 @@ and The body is assumed to be spherical.<br>
 The Traveller World map format is "Hexagon Reticulated Icosahedral Dissection" or Icohex.<br>
 Plate-Carree images are available on-line for the Solar System planets as well as Alien Worlds.<br>
 An online tool to convert Icohex to Plate-Carree will be available soon.<br>
-<a href="https://inexorabletash.github.io/ico2equi/" target="_blank" >Traveller World Maps </a> in icohex format are available at Jonathan Sherlock's Page. <br>
+<a href="https://inexorabletash.github.io/ico2equi/" target="_blank" >Traveller World Maps</a> in icohex format are available at Jonathan Sherlock's Page. <br>
 Here is Joshua Bell's quick <a href="https://inexorabletash.github.io/ico2equi/" target="_blank" >converter</a> to get you started. <br>
 
 
 <br><br>
 
-A beta version of the  <a href="https://morfyddjames.github.io/platecarree.html" target="_blank" > New Map Converter </a>  is now available.<br>
+A beta version of the  <a href="https://morfyddjames.github.io/platecarree.html" target="_blank" >New Map Converter</a>  is now available.<br>
 This beta version engages a precision better than 14 parts per billion at the cost of speed. 
 <br><br>
 
