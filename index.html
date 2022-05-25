@@ -19,21 +19,14 @@
 <!--script type='text/javascript' src='https://x3dom.org/download/1.8.2/x3dom-full.js'> </script-->
 
 
-
-
 	<!--meta http-equiv="X-UA-Compatible" content="IE=edge"/-->
 	<title>Traveller World Viewer</title>
         <!-- THESE SCRIPTS FROM X3DOM ARE MANDITORY >
-
 	<!-- I FOUND OUT THAT THE ORDINARY X3DOM.JS DOES NOT INCLUDE 2D STUFF OR ROTATION -->
 	<!-- YOU NEED THE FULL VERSION FROM THE LATEST SOURCE -->
 	<!-- THE ZED BUFFER PROBLEM WITH TRANSPARENT PNGS MAY GET FIXED IN FUTURE RELEASES -->
+	<!-- script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-physics.js'> </script-->
 	<script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-full.js'> </script>
-	<!--script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-physics.js'> </script-->
-
-
-
-
 
 	<link rel='stylesheet' type='text/css' href='https://www.x3dom.org/download/x3dom.css'>
 
@@ -59,6 +52,55 @@
 	<!-- A WEB DESIGNER COULD MAKE THIS ALL PRETTY -->
 <body bgcolor="black";> <!--   background="starfield-001.png"; -->
 	<h1>Welcome Traveller Scouts</h1>  <br>
+<!--  -->
+
+<!-- INPUT CONTROLS -->
+<!-- AXIAL TILT -->
+<br><label for="AxialTilt">Axial Tilt:</label>
+<select id="AxialTilt" name="AxialTilt">
+  <option value="0">0</option>
+  <option value="10">10</option>
+  <option value="20" selected>20</option>
+  <option value="30">30</option>
+  <option value="40">40</option>
+  <option value="50">50</option>
+  <option value="60">60</option>
+  <option value="70">70</option>
+  <option value="80">80</option>
+  <option value="90">90</option>
+</select> <br>
+
+<!-- ROTATION -->
+<br><label for="rotsecs">Rotation Time:</label>
+<select id="rotsecs" name="rotsecs">
+  <option value="5">0</option>
+  <option value="10">10</option>
+  <option value="20">20</option>
+  <option value="30">30</option>
+  <option value="40">40</option>
+  <option value="50" selected>50</option>
+  <option value="60">60</option>
+  <option value="70">70</option>
+  <option value="80">80</option>
+  <option value="90">90</option>
+</select> <br>
+
+<!-- STAR TYPE -->
+<br><label for="startype">Star Type:</label>
+<select id="startype" name="startype">
+  <option value="O">O</option>
+  <option value="B">B</option>
+  <option value="A">A</option>
+  <option value="F">F</option>
+  <option value="G" selected >G</option>
+  <option value="K">K</option>
+  <option value="M">M</option>
+</select> <br>
+
+
+
+<input type="range" id="AxialTiltxxx" name="Axial Tilt" min="0" max="90">
+<br>
 
 Select a Traveller World Map you have downloaded.<br>
 PNG format is preferred.<br>
@@ -69,7 +111,7 @@ PNG format is preferred.<br>
 <input type="file" onchange="encodeImageFileAsURL(this)" />
 <!-- THIS BIT OF JAVASCRIPT ALLOWS A USERS MAP TO BE DISPLAYED -->
 <!-- IM PRETTY SURE X3D PREFERS IMAGES IN PNG FORMAT; AVOID JPEG-->
-    <script  type='text/javascript' >
+    <script>
       function encodeImageFileAsURL(element) {
         let file = element.files[0];
         let reader = new FileReader();
@@ -93,7 +135,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <scene>	<NavigationInfo id="head" headlight='false' type='"EXAMINE"'></NavigationInfo>
 
 
-	<!-- BACKGROUND IMAGES MUST BE SQUARE AS THEY ARE PART OF AN INFINITE CUBE 2048x2048 -->
+	<!-- BACKGROUND IMAGES MUST BE SQUARE AS THEY ARE PART OF AN INFINITE CUBE  2048x2048-->
 	<Group> 
 	<Background groundColor='0 0 0' 
 		backUrl='	"starfield-001.png"' 
@@ -140,7 +182,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 
 
-<!-- THIS IS THE PLANET HANGING IN SPACE WITH A PLATE-CARREE WRAPPED ROUND.. SET AXIAL TILT IN RADIANS NEGATIVE ZED AXIS  -->
+<!-- THIS IS THE PLANET HANGING IN SPACE WITH A PLATE-CARREE WRAPPED ROUND  -->
 <transform DEF='world' rotation='0 1 0 0' >
 	<transform DEF='AxialTilt' rotation='0 0 -1 0.4' >
 	<shape>
@@ -175,7 +217,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <transform    rotation='0 1 0 -0.05'>
 	<shape  render="true" >
 		<appearance>
-			<material diffuseColor='1 0 1 .5' emissiveColor='0 0 0' specularColor='0 .8 0'  transparency='0.4'></material> 
+			<material diffuseColor='1 0 1 .2' emissiveColor='0 0 0' specularColor='0 .8 0'  transparency='0.2'></material> 
 			<ImageTexture id="ringimage" url="ringimage3.png"  ></ImageTexture>
 		</appearance>
 		<disk2d   innerRadius='5' outerRadius='9'  Solid="false"  ></disk2d>
@@ -261,7 +303,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 <!-- START ANIMATION SECTION -->
 
-<!-- THE WORLD  ::: KEYVALUES =  sin(AxialTilt) cos(AxialTilt) 0 RADIANQUARTERS -->
+<!-- THE WORLD  ::: KEYVALUES =  sin(AxialTilt) cos(AxialTilt) 0 quartercircles -->
 <!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE      -->
 <timeSensor DEF='clock' 
 cycleInterval='40' 
@@ -269,7 +311,6 @@ loop='true'></timeSensor>
 
 <!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
 <orientationInterpolator DEF='spinThings' 
-
 key='0.0 0.25 0.50 0.75 1.0' 
 keyValue='
 
@@ -281,7 +322,6 @@ keyValue='
 '>
 
 </orientationInterpolator>
-
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
 <ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
 <ROUTE fromNode='spinThings' fromField='value_changed' toNode='world'  toField='set_rotation'></ROUTE>
@@ -293,20 +333,11 @@ keyValue='
 <timeSensor DEF='clock' 
 cycleInterval='40' 
 loop='true'></timeSensor>
-
 <!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
 <orientationInterpolator DEF='spinThings' 
-
 key='0.0 0.25 0.50 0.75 1.0' 
-keyValue='
-0 1 0 0 
-0 1 0 1.570796327
-0 1 0 3.141592654  
-0 1 0 4.71238898  
-0 1 0 6.283185307 '>
-
+keyValue='0 1 0 0 0 1 0 1.570796327 0 1 0 3.141592654 0 1 0 4.71238898 0 1 0 6.283185307 '>
 </orientationInterpolator>
-
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
 <ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
 <ROUTE fromNode='spinThings' fromField='value_changed' toNode='planetdata'  toField='set_rotation'></ROUTE>
@@ -314,16 +345,14 @@ keyValue='
 
 
 <!-- THE CLOUDS  -->
-<!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE -->
+<!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE... WORLD +10 IS GOOD -->
 <timeSensor DEF='clock2' 
-cycleInterval='55' 
+cycleInterval='50' 
 loop='true'></timeSensor-->
-
 <!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
 <orientationInterpolator DEF='spinThings2' key='0.0 0.25 0.50 0.75 1.0' 
 keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0 6.283185307'>
 </orientationInterpolator>
-
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
 <ROUTE fromNode='clock2' fromField='fraction_changed' toNode='spinThings2' toField='set_fraction'></ROUTE>
 <ROUTE fromNode='spinThings2' fromField='value_changed' toNode='clouds'  toField='set_rotation'></ROUTE>
@@ -334,20 +363,14 @@ keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0
 
 <!-- THE SPACECRAFT ... I CANT WORK OUT HOW TO CHANGE THE TILT OF THE ORBIT -->
 <!-- THE KEY VALUES CAN CHANGE THE ORBIT TILT SOMEHOW -->
-
-
 <!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE -->
 <timeSensor DEF='clock3' 
 cycleInterval='5' 
 loop='true'></timeSensor-->
-
-
 <!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
 <orientationInterpolator  DEF='spinThings3' key='0.0 0.25 0.50 0.75 1.0' 
-
 keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0 6.283185307'>
 </orientationInterpolator>
-
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
 <ROUTE fromNode='clock3' fromField='fraction_changed' toNode='spinThings3' toField='set_fraction'></ROUTE>
 <ROUTE fromNode='spinThings3' fromField='value_changed' toNode='spacecraft'  toField='set_rotation'></ROUTE>
@@ -401,7 +424,7 @@ Here is Joshua Bell's quick <a href="https://inexorabletash.github.io/ico2equi/"
 
 <br><br>
 
-A beta version of the  <a href="https://morfyddjames.github.io/platecarree.html" target="_blank" >New Map Converter</a>  is now available.<br>
+A beta version of the  <a href="https://morfyddjames.github.io/platecarree.html" target="_blank" > New Map Converter </a>  is now available.<br>
 This beta version engages a precision better than 14 parts per billion at the cost of speed. 
 <br><br>
 
