@@ -48,6 +48,17 @@
 	</style>
 
 <script>
+
+
+function validateOnlyTextField(element) {
+    var str = element.value;
+    if(!(/^[a-zA-Z0-9, ,-]+$/.test(str))){
+        // console.log('String contain number characters');
+        str = str.substr(0,  str.length -1);
+        element.value = str;
+    }
+}
+
 function changetilt(){
 	console.log("axialtilt = " + document.querySelector('#AxialTilt').value);
 	const tiltrad = document.querySelector('#AxialTilt').value * Math.PI/180;
@@ -67,13 +78,18 @@ function changerot(){	// NOT FUNCTIONING // ???
 	console.log(document.querySelector('#timeworld').cycleInterval);
 };
 
+function changename(){
+	const worldname = document.querySelector('#worldname').value; console.log("worldname="+worldname);
+	if (worldname){ document.querySelector('#worldnamedisp').setAttribute("string", `${worldname}`);}
+	else {document.querySelector('#worldnamedisp').setAttribute("string", " ");}
+};
 
 </script>
 
 </head>
 
 	<!-- A WEB DESIGNER COULD MAKE THIS ALL PRETTY -->
-<body bgcolor="black";> <!--   background="starfield-001.png"; -->
+<body bgcolor="000011";> <!--   background="starfield-001.png"; -->
 	<h1>Welcome Traveller Scouts</h1>  <br>
 <!--  -->
 
@@ -120,6 +136,23 @@ function changerot(){	// NOT FUNCTIONING // ???
   <option value="K">K</option>
   <option value="M">M</option>
 </select> <br>
+
+<label class="switch"> Clouds
+  <input  ID="cloudsw"  type="checkbox" checked>
+  <span class="slider"></span>
+</label>
+
+<label class="switch"> Rings
+  <input ID="ringsw" type="checkbox" checked>
+  <span class="slider"></span>
+</label><br><br>
+
+World Name: <input type="text" placeholder="Traveller World" id="worldname"  onkeyup="validateOnlyTextField(this)"  onchange="changename();">
+<br><br>
+
+
+
+
 
 
 
@@ -314,7 +347,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <!-- THIS IS SOME OPTIONAL TEXT FOR DISPLAY BENEATH  (fill in what you like) -->
 <transform DEF='planetdata'  translation="0 -5 0">
 	<Shape   render="true" >
-		<Text string="Traveller-World"   solid='"false"'>
+		<Text ID="worldnamedisp"  string=""   solid='"false"'>
 		<FontStyle justify=' "MIDDLE" "MIDDLE" '  >
 		</Text>
 
