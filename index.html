@@ -84,6 +84,36 @@ function changename(){
 	else {document.querySelector('#worldnamedisp').setAttribute("string", " ");}
 };
 
+
+function clouds_on(){
+	if(document.getElementById("cloudsw").checked != true)
+	{document.querySelector('#cloudon').setAttribute("render", "false"); console.log("cb.cloud="+" false");
+	} else {document.querySelector('#cloudon').setAttribute("render", "true");  console.log("cloud="+"true");}
+}
+
+
+function rings_on(){
+	if(document.getElementById("ringsw").checked != true)
+	{document.querySelector('#ringon').setAttribute("render", "false"); console.log("cb.ring="+" false");
+	} else {document.querySelector('#ringon').setAttribute("render", "true");  console.log("cb.ring="+"true");}
+}
+
+
+function orbits_on(){
+	if(document.getElementById("orbitsw").checked != true){
+		document.querySelector('#orbit1').setAttribute("render", "false"); console.log("cb.ring="+" false");
+		document.querySelector('#orbit2').setAttribute("render", "false"); console.log("cb.ring="+" false");
+		document.querySelector('#orbit3').setAttribute("render", "false"); console.log("cb.ring="+" false");
+	}
+	else{
+		document.querySelector('#orbit1').setAttribute("render", "true");  console.log("cb.ring="+"true");
+		document.querySelector('#orbit2').setAttribute("render", "true");  console.log("cb.ring="+"true");
+		document.querySelector('#orbit3').setAttribute("render", "true");  console.log("cb.ring="+"true");
+	}
+}
+
+
+
 </script>
 
 </head>
@@ -138,14 +168,22 @@ function changename(){
 </select> <br>
 
 <label class="switch"> Clouds
-  <input  ID="cloudsw"  type="checkbox" checked>
+  <input  ID="cloudsw"  type="checkbox" checked   onchange="clouds_on()";>
   <span class="slider"></span>
 </label>
 
 <label class="switch"> Rings
-  <input ID="ringsw" type="checkbox" checked>
+  <input ID="ringsw" type="checkbox" checked     onchange="rings_on()";	>
   <span class="slider"></span>
-</label><br><br>
+</label>
+
+<label class="switch"> Orbits
+  <input  ID="orbitsw"  type="checkbox" checked   onchange="orbits_on()";>
+  <span class="slider"></span>
+</label>
+
+
+<br><br>
 
 World Name: <input type="text" placeholder="Traveller World" id="worldname"  onkeyup="validateOnlyTextField(this)"  onchange="changename();">
 <br><br>
@@ -240,23 +278,26 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 
 <!-- THIS IS THE PLANET HANGING IN SPACE WITH A PLATE-CARREE WRAPPED ROUND  -->
+
 <transform DEF='world' rotation='0 1 0 0' >
+
 	<transform ID='axialtilt' DEF='AxialTilt' rotation='0 0 -1 0.4' >
 	<shape>
                 <appearance>
 		<material diffuseColor='0.5 0.2 1.0' specularColor="0.12 0.05 0.25" shininess='0.3' ></material>
 		<ImageTexture id="worldmap" url="icohex360seaw.png"  ></ImageTexture>
+
 		</appearance>
 	<sphere radius="3"   Solid="true"   > </sphere>
 	</shape>
-	</transform>
-</transform>
+
+</transform></transform>
 
 
 
 <!-- THIS IS THE PLANETS CLOUDS- SET render="true" TO TEST (GLITCHY ON FIREFOX ; THE PLANET DISSAPEARS ABOVE THE EQUATOR)  -->
 <transform DEF='clouds' rotation='0 1 0 0' >
-	<shape render="true" >
+	<shape ID="cloudon" render="false" >
                 <appearance>
 		<material diffuseColor='0 0 0 0' specularColor="0.12 0.05 0.25 0" shininess='0.3'   ></material>
 		<ImageTexture url=' "cloud.png" '></ImageTexture>
@@ -272,7 +313,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <!-- THE RING IMAGE IS A SQUARE 512x512 PING OF CONCENTRIC CIRCLES with HALF ALPHA TRANSPARENCY -->
 <transform  rotation='1 0 0 1.7'>
 <transform    rotation='0 1 0 -0.05'>
-	<shape  render="true" >
+	<shape ID="ringon"   render="true" >
 		<appearance>
 			<material diffuseColor='1 0 1 .2' emissiveColor='0 0 0' specularColor='0 .8 0'  transparency='0.2'></material> 
 			<ImageTexture id="ringimage" url="ringimage3.png"  ></ImageTexture>
@@ -286,7 +327,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <!--AN ORBIT PATH 1 -->
 <transform  rotation='1 0 0 1.8'>
 <transform    rotation='0 1 0 0.07'>
-	<shape  render="true" >
+	<shape ID="orbit1"  render="true" >
 		<appearance>
 			<material  emissiveColor='0 1 1' specularColor='0 .8 0'  transparency='0'></material> 
 		</appearance>
@@ -300,7 +341,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <transform  rotation='1 0 0 1.8'>
 <transform    rotation='0 1 0 0.07'>
 <transform    rotation='0 1 0 -0.27'>
-	<shape  render="true" >
+	<shape ID="orbit2"   render="true" >
 		<appearance>
 			<material  emissiveColor='1 0 1' specularColor='0 .8 0'  transparency='0'></material> 
 		</appearance>
@@ -315,7 +356,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <transform  rotation='1 0 0 1.8'>
 <transform    rotation='0 1 0 0.07'>
 <transform    rotation='1 0 0 0.2'>
-	<shape  render="true" >
+	<shape ID="orbit3"   render="true" >
 		<appearance>
 			<material  emissiveColor='1 1 0' specularColor='0 .8 0'  transparency='0'></material> 
 		</appearance>
