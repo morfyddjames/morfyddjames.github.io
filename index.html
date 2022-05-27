@@ -41,6 +41,12 @@
 		margin: 3em;
 		color: yellow;
         }
+	code
+	{	font-size:110%;
+		font-family:verdana, sans-serif;
+		margin: 3em;
+		color: yellow;
+        }
 
 	h1
 	{	color: #ff11ff;
@@ -50,7 +56,7 @@
 <script>
 
 
-function validateOnlyTextField(element) {
+function validateOnlyTextField(element) {	// DEEPLY FLAWED NOT SECURE !!!
     var str = element.value;
     if(!(/^[a-zA-Z0-9, ,-]+$/.test(str))){
         // console.log('String contain number characters');
@@ -59,15 +65,13 @@ function validateOnlyTextField(element) {
     }
 }
 
-function changetilt(){
+function changetilt(){	// THIS WAS DIFFICULT DUE TO MULTIPLE NESTED AXIIS ROTATIONS
 	console.log("axialtilt = " + document.querySelector('#AxialTilt').value);
 	const tiltrad = document.querySelector('#AxialTilt').value * Math.PI/180;
 	const tiltsin = Math.sin(tiltrad);
 	const tiltcos = Math.cos(tiltrad);
 	const Q0 = 0; const Q1 = 0.5*Math.PI; const Q2 = 1*Math.PI; const Q3 = 1.5*Math.PI; const Q4 = 2*Math.PI; 
-
 	document.querySelector('#axialtilt').setAttribute('rotation', `0 0 -1 ${tiltrad}`);
-
 	document.querySelector('#axialrot').setAttribute('keyValue', `${tiltsin} ${tiltcos} 0 ${Q0} ${tiltsin} ${tiltcos} 0 ${Q1} ${tiltsin} ${tiltcos} 0 ${Q2} ${tiltsin} ${tiltcos} 0 ${Q3} ${tiltsin} ${tiltcos} 0 ${Q4}`);
 	//console.log(document.querySelector('#axialrot').keyValue);
 };
@@ -85,7 +89,7 @@ function changename(){
 };
 
 
-function clouds_on(){
+function clouds_on(){	// CLOUDS CAUSE PROBLEMS DUE TO X3D TRANSPARENCY BUG
 	if(document.getElementById("cloudsw").checked != true)
 	{document.querySelector('#cloudon').setAttribute("render", "false"); console.log("cb.cloud="+" false");
 	} else {document.querySelector('#cloudon').setAttribute("render", "true");  console.log("cloud="+"true");}
@@ -112,6 +116,18 @@ function orbits_on(){
 	}
 }
 
+function stop_start(){	// THIS IS A COMPROMISE. PAUSETIME IS BETTER BUT MORE COMPLEX
+	if(document.getElementById("stopsw").checked != true)
+	{document.querySelector('#timeworld').setAttribute("enabled", "false"); console.log("cb.ring="+" false");
+	} else {document.querySelector('#timeworld').setAttribute("enabled", "true");  console.log("cb.ring="+"true");}
+}
+
+
+//<ROUTE ID="stupid" fromNode='spinThings' fromField='value_changed' toNode='world'  toField='set_rotation'></ROUTE>
+//<label class="switch"> STOP
+//  <input  ID="stopsw"  type="checkbox" checked   onchange="stop_start()";>
+//  <span class="slider"></span>
+//</label>
 
 
 </script>
@@ -122,7 +138,7 @@ function orbits_on(){
 <body bgcolor="000011";> <!--   background="starfield-001.png"; -->
 	<h1>Welcome Traveller Scouts</h1>  <br>
 <!--  -->
-
+<code>
 <!-- INPUT CONTROLS -->
 <!-- AXIAL TILT -->
 <br><label for="AxialTilt">Axial Tilt:</label>
@@ -138,7 +154,7 @@ function orbits_on(){
   <option value="70">70</option>
   <option value="80">80</option>
   <option value="89.9">90</option>
-</select> <br>
+</select>
 
 <!-- ROTATION > NOT FUNCTIONING
 <br><label for="rotsecs">Rotation Time:</label>
@@ -168,44 +184,38 @@ function orbits_on(){
 </select> <br>
 
 <label class="switch"> Clouds
-  <input  ID="cloudsw"  type="checkbox" checked   onchange="clouds_on()";>
+  <input  ID="cloudsw"  type="checkbox" unchecked   onchange="clouds_on()";>
   <span class="slider"></span>
 </label>
 
 <label class="switch"> Rings
-  <input ID="ringsw" type="checkbox" checked     onchange="rings_on()";	>
+  <input ID="ringsw" type="checkbox" unchecked     onchange="rings_on()";	>
   <span class="slider"></span>
 </label>
+
+<br>
 
 <label class="switch"> Orbits
-  <input  ID="orbitsw"  type="checkbox" checked   onchange="orbits_on()";>
+  <input  ID="orbitsw"  type="checkbox" unchecked   onchange="orbits_on()";>
   <span class="slider"></span>
 </label>
 
+<label class="switch"> Rotate
+  <input  ID="stopsw"  type="checkbox" checked   onchange="stop_start()";>
+  <span class="slider"></span>
+</label>
 
-<br><br>
+<br>
 
 World Name: <input type="text" placeholder="Traveller World" id="worldname"  onkeyup="validateOnlyTextField(this)"  onchange="changename();">
-<br><br>
-
-
-
-
-
-
-
-<!--input type="range" id="AxialTiltxxx" name="Axial Tilt" min="0" max="90"-->
 <br>
-
-Select a Traveller World Map you have downloaded.<br>
-PNG format is preferred.<br>
-<br>
-
 
 <!-- USER FILE SELECTOR - THIS WAS THE WORST PART OF THE WHOLE PROCESS-->
+Select a Traveller World Map you have <a href="https://morfyddjames.github.io/platecarree.html" target="_blank">converted<a> to Plate-Carr&#233;e format:<br>
 <input type="file" onchange="encodeImageFileAsURL(this)" />
 <!-- THIS BIT OF JAVASCRIPT ALLOWS A USERS MAP TO BE DISPLAYED -->
 <!-- IM PRETTY SURE X3D PREFERS IMAGES IN PNG FORMAT; AVOID JPEG-->
+</code>
     <script>
       function encodeImageFileAsURL(element) {
         let file = element.files[0];
@@ -279,7 +289,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 <!-- THIS IS THE PLANET HANGING IN SPACE WITH A PLATE-CARREE WRAPPED ROUND  -->
 
-<transform DEF='world' rotation='0 1 0 0' >
+<transform ID="world" DEF='world' rotation='0 1 0 0' >
 
 	<transform ID='axialtilt' DEF='AxialTilt' rotation='0 0 -1 0.4' >
 	<shape>
@@ -313,7 +323,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <!-- THE RING IMAGE IS A SQUARE 512x512 PING OF CONCENTRIC CIRCLES with HALF ALPHA TRANSPARENCY -->
 <transform  rotation='1 0 0 1.7'>
 <transform    rotation='0 1 0 -0.05'>
-	<shape ID="ringon"   render="true" >
+	<shape ID="ringon"   render="false" >
 		<appearance>
 			<material diffuseColor='1 0 1 .2' emissiveColor='0 0 0' specularColor='0 .8 0'  transparency='0.2'></material> 
 			<ImageTexture id="ringimage" url="ringimage3.png"  ></ImageTexture>
@@ -327,7 +337,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <!--AN ORBIT PATH 1 -->
 <transform  rotation='1 0 0 1.8'>
 <transform    rotation='0 1 0 0.07'>
-	<shape ID="orbit1"  render="true" >
+	<shape ID="orbit1"  render="false" >
 		<appearance>
 			<material  emissiveColor='0 1 1' specularColor='0 .8 0'  transparency='0'></material> 
 		</appearance>
@@ -341,7 +351,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <transform  rotation='1 0 0 1.8'>
 <transform    rotation='0 1 0 0.07'>
 <transform    rotation='0 1 0 -0.27'>
-	<shape ID="orbit2"   render="true" >
+	<shape ID="orbit2"   render="false" >
 		<appearance>
 			<material  emissiveColor='1 0 1' specularColor='0 .8 0'  transparency='0'></material> 
 		</appearance>
@@ -356,7 +366,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <transform  rotation='1 0 0 1.8'>
 <transform    rotation='0 1 0 0.07'>
 <transform    rotation='1 0 0 0.2'>
-	<shape ID="orbit3"   render="true" >
+	<shape ID="orbit3"   render="false" >
 		<appearance>
 			<material  emissiveColor='1 1 0' specularColor='0 .8 0'  transparency='0'></material> 
 		</appearance>
@@ -403,7 +413,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 <!-- THE WORLD  ::: KEYVALUES =  sin(AxialTilt) cos(AxialTilt) 0 quartercircles -->
 <!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE      -->
-<timeSensor ID='timeworld' DEF='clock' 
+<timeSensor ID='timeworld' DEF='clock' enabled='true'
 cycleInterval='40' 
 loop='true'></timeSensor>
 
@@ -422,7 +432,7 @@ keyValue='
 </orientationInterpolator>
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
 <ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
-<ROUTE fromNode='spinThings' fromField='value_changed' toNode='world'  toField='set_rotation'></ROUTE>
+<ROUTE ID="stupid" fromNode='spinThings' fromField='value_changed' toNode='world'  toField='set_rotation'></ROUTE>
 
 
 
@@ -503,26 +513,28 @@ keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0
 
 <!-- ***************   END OF X3D CODE   **************************** -->
 <!-- **************************************************************** -->
-
+<code>
 <br><br><br><br><br>
-This display uses a Plate Carree texture and wraps it round a premade sphere: <br>
-Any Plate-Carree will work, so it can show a member's own custom world spinning in space.
+This display uses a Plate-Carr&#233;e texture and wraps it round a premade sphere: <br>
+Any Plate-Carr&#233;e will work, so it can show a member's own custom world spinning in space.
 <br><br><br>
-<img id="flat" >
+<img id="flat"  width="200" height="100" src="icohex360seaw.png" >
 <br><br><br>
-A Plate-Carree (Plot kuh-RAY) is a subset of The Equirectangular map projection where:<br>
+
+
+A Plate-Carr&#233;e (Plot kuh-RAY) is a subset of The Equirectangular map projection where:<br>
 The equator is horizontal and centered, The entire planet is represented,<br>
 and The body is assumed to be spherical.<br>
 The Traveller World map format is "Hexagon Reticulated Icosahedral Dissection" or Icohex.<br>
-Plate-Carree images are available on-line for the Solar System planets as well as Alien Worlds.<br>
-An online tool to convert Icohex to Plate-Carree will be available soon.<br>
+Plate-Carr&#233;e images are available on-line for the Solar System planets as well as Alien Worlds.<br>
+An online tool to convert Icohex to Plate-Carr&#233;e will be available soon.<br>
 <a href="http://members.ozemail.com.au/~jonoreita/TravellerWorlds/" target="_blank" >Traveller World Maps</a> in icohex format are available at Jonathan Sherlock's Page. <br>
 Here is Joshua Bell's quick <a href="https://inexorabletash.github.io/ico2equi/" target="_blank" >converter</a> to get you started. <br>
-
+</code>
 
 <br><br>
 
-A beta version of the  <a href="https://morfyddjames.github.io/platecarree.html" target="_blank" > New Map Converter </a>  is now available.<br>
+A beta version of the  <a href="https://morfyddjames.github.io/platecarree.html" target="_blank">New Map Converter</a> is now available. <br>
 This beta version engages a precision better than 14 parts per billion at the cost of speed. 
 <br><br>
 
