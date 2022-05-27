@@ -42,14 +42,25 @@
 	<title>Icohex 2 Plate-Carree</title>
 
 <style type="text/css">
-	body	{margin:40px; background: #666;}
+	body	{margin:40px;
+		background: #000011; font-size:110%;
+		font-family:verdana, sans-serif;
+		margin: 3em; color: yellow;}
 	#primary	{background:#222; border:#ff0 2px solid;}
 	#demifacet	{background:#0000; border:#000 2px solid;}
 	#panel_ARCT	{background:#0000; border:#0f0 2px solid;}
 	#panel_ARCT_R	{background:#0000; border:#0f0 2px solid;}
 	#panel_TROP	{background:#0000; border:#00f 2px solid;}
 	#panel_TROP_R	{background:#0000; border:#00f 2px solid;}
-	#outputmap	{background:#f000; border:#f0f 2px solid;}</style>
+	#outputmap	{background:#f000; border:#f0f 2px solid;}
+	code{	font-size:110%;
+		font-family:verdana, sans-serif;
+		margin: 3em;
+		color: yellow;}
+	h1{	color: #ff11ff;}
+</style>
+
+
 
 <script>
 /////////////////////////////////////////////////////////////////////////////////
@@ -125,6 +136,7 @@ currentImage.addEventListener('load', function () {
 	const primaryheight = currentImage.height;
 
 
+
 	const facetwidth = primarywidth/10;
 	const facetheight = primaryheight/3;
 	const facetwidth2 = 2 * facetwidth;
@@ -182,7 +194,16 @@ currentImage.addEventListener('load', function () {
 
 	ctxOUTmap.fillStyle = bgcolorout; ctxOUTmap.fillRect(0,0,outputwidth,outputheight);	// OPTIONAL FILL COLOUR FOR DIAGNOSIS
 
-alert("Start the transformation.\nThis may take up to 15 seconds.");
+
+
+alert("Start the transformation.\nThis may take up to 15 seconds.\nThis Image is "+ primarywidth +" pixels wide\nImages wider than 2k take much longer");
+
+if(primarywidth > 3072){
+	alert("This image is over 3k pixels in width,\nHAVE YOU GONE MAD !??!!\nPlease scale it down.");
+	return;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 // BIG LOOP 1 /////////////////////////////////////////
 
@@ -330,7 +351,8 @@ else { // ELSE STATEMENT 2
 } // END ELSE STATEMENT 2
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-//	alert("Row= " + row + ": Col=" + col);  // UNCOMMENT THIS IF YOU WANT TO SEE EACH DEMIFACET GET CREATED
+//	UNCOMMENT THIS IF YOU WANT TO SEE EACH DEMIFACET GET CREATED
+//	alert("Watch each panel get rendered one at a time.\nRow= " + row + ": Col=" + col);  
 
 
 		}	// END COL FOR LOOP
@@ -365,20 +387,23 @@ ctxOUTmap.putImageData(imagedata,0,0);
 </script>
 </head>
 
-<body>
+<body bgcolor="000011";>
+
+<h1>Icohex to Plate-Carree Converter</h1><h5> beta version</h5>
 
 <canvas  id="primary" width="1000" height="520"   ></canvas><br><br>
 <input  id="inputtag" type="file" accept="image/*">
-Choose a cropped Traveller World Map that looks like this:  .  .
+Choose a cropped Traveller World Map that looks like this:
 <img src="sample01.png"><br>
-<canvas  id="demifacet"  width="100" height="173" ></canvas>...............
+<canvas hidden  id="demifacet"  width="100" height="173" ></canvas>
 
-<canvas  id="panel_ARCT"  width="100" height="173" ></canvas>....
-<canvas  id="panel_ARCT_R"  width="100" height="173" ></canvas>....
+<canvas hidden    id="panel_ARCT"  width="100" height="173" ></canvas>
+<canvas  hidden   id="panel_ARCT_R"  width="100" height="173" ></canvas>
 
-<canvas  id="panel_TROP"  width="100" height="160" ></canvas>....
-<canvas  id="panel_TROP_R"  width="100" height="160" ></canvas><br><br>
-
+<canvas hidden    id="panel_TROP"  width="100" height="160" ></canvas>
+<canvas hidden    id="panel_TROP_R"  width="100" height="160" ></canvas><br><br>
+<br>
+Right Click "Save Image As" on the completed map below:<br>
 <canvas  id="outputmap"  width="1000" height="500" ></canvas>
 
 <!-- THIS SCRIPT STARTS ALL THE OTHER SCRIPTS IN THE HEADER SECTION -->
@@ -391,4 +416,3 @@ Choose a cropped Traveller World Map that looks like this:  .  .
 <!-- Morfydd James -->
 
 </html>
-
