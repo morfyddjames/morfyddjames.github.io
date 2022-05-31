@@ -9,12 +9,10 @@
 <!-- LIGHT SOURCE RADIUS MUST BE SET TO ZERO. SHAPE ATTRIBUTES MUST BE IN A CERTAIN ORDER.   -->
 <!-- C.O.R.S. MAKES IT IMPOSSIBLE TO USE LOCAL FILES UNLESS THE PAGE RUNS FROM A VALID SERVER. -->
 <!-- THE SERVER (APACHE?) MUST ALLOW HEADERS(?) AND THIS MEANS EDITING A CONFIG FILE -->
-<!-- THERE IS AN OPTION TO SHOW ATMOSPHERIC CLOUDS BUT IT IS GLITCHY ON FIREFOX. -->
-<!-- THERE CAN BE AN OPTION FOR LIGHTNING AND AURORA ON THE NIGHT SIDE BUT A BROWSER UPDATE BROKE IT. -->
-<!-- X3D CAN ALSO SHOW RING SYSTEMS AND ORBITAL PATHS BUT THAT IS FOR ANOTHER DAY. -->
-<!-- THESE OPTIONS MAY ALL BE TOGGLED WITH JAVASCRIPT CONTROLS IF A JAVASCRIPT WIZARD GETS INVOLVED. -->
+<!-- THERE IS AN OPTION TO SHOW ATMOSPHERIC CLOUDS BUT IT IS GLITCHY -->
+<!-- THERE CAN BE AN OPTION FOR LIGHTNING AND AURORA ON THE NIGHT SIDE BUT IT IS GLITCHY TOO. -->
 <!-- I FOUND OUT THAT THE ORDINARY X3DOM.JS DOES NOT INCLUDE 2D GEOMETRY FOR THE RINGS OR ROTATION TRANSFORMS -->	
-<!-- YOU NEED THE FULL ONE x3dom-full.js FROM THE LATEST SOURCE -->
+<!-- YOU NEED THE FULL ONE (x3dom-full.js) FROM THE LATEST SOURCE -->
 <!--script type='text/javascript' src='https://www.x3dom.org/download/x3dom.js'> </script-->
 <!--script type='text/javascript' src='https://x3dom.org/download/1.8.2/x3dom-full.js'> </script-->
 
@@ -31,35 +29,24 @@
 	<link rel='stylesheet' type='text/css' href='https://www.x3dom.org/download/x3dom.css'>
 
 	<style>
-	x3d
-	{	border:2px solid green;
-		background: rgba(0, 0, 0, 1);
-	}
-	body
-	{	font-size:110%;
+	x3d {	border:2px solid green;
+		background: rgba(0, 0, 0, 1);}
+	body{	font-size:110%;
 		font-family:verdana, sans-serif;
 		margin: 3em;
-		color: yellow;
-        }
-	code
-	{	font-size:110%;
+		color: yellow;}
+	code{	font-size:110%;
 		font-family:verdana, sans-serif;
 		margin: 3em;
-		color: yellow;
-        }
-
-	h1
-	{	color: #ff11ff;
-	}
+		color: yellow;}
+	h1{	color: #ff11ff;}
 	</style>
 
 <script>
 
-
 function validateOnlyTextField(element) {	// DEEPLY FLAWED NOT SECURE !!!
     var str = element.value;
     if(!(/^[a-zA-Z0-9, ,-]+$/.test(str))){
-        // console.log('String contain number characters');
         str = str.substr(0,  str.length -1);
         element.value = str;
     }
@@ -76,6 +63,70 @@ function changetilt(){	// THIS WAS DIFFICULT DUE TO MULTIPLE NESTED AXIIS ROTATI
 	//console.log(document.querySelector('#axialrot').keyValue);
 };
 
+/*		STAR TYPE COLOURS (VALID??? ish)
+	X3D USES FRACTIONS OF ONE, SO DIVIDE BY 256
+
+  O     155 176 255  #9bb0ff=	0.605 0.688 0.999
+  B     170 191 255  #aabfff=	0.664 0.776 0.999
+  A     202 215 255  #cad7ff=	0.789 0.840 0.999
+  F     248 247 255  #f8f7ff=	0.968 0.964 0.999
+  G     255 244 234  #fff4ea=	0.999 0.953 0.914
+  K     255 210 161  #ffd2a1=	0.999 0.820 0.629
+  M     255 204 111  #ffcc6f=	0.999 0.787 0.433	*/
+
+function startype(){
+	
+	const colourO = "0.605 0.688 0.999";
+	const colourB = "0.664 0.776 0.999";
+	const colourA = "0.789 0.840 0.999";
+	const colourF = "0.968 0.964 0.999";
+	const colourG = "0.999 0.953 0.914";
+	const colourK = "0.999 0.820 0.629";
+	const colourM = "0.999 0.787 0.433";
+
+	const typex = document.querySelector('#startype').value;   console.log("typex="+ typex);
+	
+	switch(typex) {
+		case 'O':	// O
+		document.querySelector('#sunimage').setAttribute('color', colourO);
+		document.querySelector('#bgimages').setAttribute('rightUrl', "Star_O.png");  console.log("typex="+ typex);
+		break;
+
+		case 'B':	// B
+		document.querySelector('#sunimage').setAttribute('color', colourB);
+		document.querySelector('#bgimages').setAttribute('rightUrl', "Star_B.png"); break;
+
+		case 'A':	// A
+		document.querySelector('#sunimage').setAttribute('color', colourA);
+		document.querySelector('#bgimages').setAttribute('rightUrl', "Star_A.png"); break;
+
+		case 'F':	// F
+		document.querySelector('#sunimage').setAttribute('color', colourF);
+		document.querySelector('#bgimages').setAttribute('rightUrl', "Star_F.png"); break;
+
+		case 'G':	// G
+		document.querySelector('#sunimage').setAttribute('color', colourG);
+		document.querySelector('#bgimages').setAttribute('rightUrl', "Star_G.png"); break;
+
+		case 'K':	// K
+		document.querySelector('#sunimage').setAttribute('color', colourK);
+		document.querySelector('#bgimages').setAttribute('rightUrl', "Star_K.png"); break;
+
+		case 'M':	// M	CHANGE THIS ONE TO A GIANT?
+		document.querySelector('#sunimage').setAttribute('color', colourM);
+		document.querySelector('#bgimages').setAttribute('rightUrl',"Star_M.png"); break;
+
+		case 'X':	// BLACK HOLE FOR FUN
+		document.querySelector('#sunimage').setAttribute('color', colourM);
+		document.querySelector('#bgimages').setAttribute('rightUrl',"Star_G.png"); break;
+
+		default:	// G
+		document.querySelector('#sunimage').setAttribute('color', colourG);
+		document.querySelector('#bgimages').setAttribute('rightUrl', "Star_G.png"); 
+
+	} 	  console.log("typex="+ 	document.querySelector('#bgimages').getAttribute('rightUrl') ); 
+}
+
 function changerot(){	// NOT FUNCTIONING // ???
 	const rotrate = document.querySelector('#rotsecs').value; console.log("rotrate="+rotrate);
 	document.querySelector('#timeworld').setAttribute("cycleInterval", `${rotrate}`);
@@ -88,20 +139,17 @@ function changename(){
 	else {document.querySelector('#worldnamedisp').setAttribute("string", " ");}
 };
 
-
 function clouds_on(){	// CLOUDS CAUSE PROBLEMS DUE TO X3D TRANSPARENCY BUG
 	if(document.getElementById("cloudsw").checked != true)
 	{document.querySelector('#cloudon').setAttribute("render", "false"); console.log("cb.cloud="+" false");
 	} else {document.querySelector('#cloudon').setAttribute("render", "true");  console.log("cloud="+"true");}
 }
 
-
 function rings_on(){
 	if(document.getElementById("ringsw").checked != true)
 	{document.querySelector('#ringon').setAttribute("render", "false"); console.log("cb.ring="+" false");
 	} else {document.querySelector('#ringon').setAttribute("render", "true");  console.log("cb.ring="+"true");}
 }
-
 
 function orbits_on(){
 	if(document.getElementById("orbitsw").checked != true){
@@ -171,9 +219,10 @@ function stop_start(){	// THIS IS A COMPROMISE. PAUSETIME IS BETTER BUT MORE COM
   <option value="90">90</option>
 </select> <br-->
 
-<!-- STAR TYPE -->
+
+
 <br><label for="startype">Star Type:</label>
-<select id="startype" name="startype">
+<select id="startype" name="startype" onchange="startype();">
   <option value="O">O</option>
   <option value="B">B</option>
   <option value="A">A</option>
@@ -242,39 +291,30 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 	<!-- BACKGROUND IMAGES MUST BE SQUARE AS THEY ARE PART OF AN INFINITE CUBE  2048x2048-->
 	<Group> 
-	<Background groundColor='0 0 0' 
-		backUrl='	"starfield-001.png"' 
-		bottomUrl='	"starfield-001.png"' 
-		frontUrl='	"starfield-001.png"' 
-		leftUrl='	"starfield-001.png"' 
-		rightUrl='	"starfield-002.png"' 
-		topUrl='	"starfield-001.png"'   />
+	<Background ID="bgimages" groundColor='0 0 0' 
+		backUrl=	"starfield-001.png" 
+		bottomUrl=	"starfield-001.png" 
+		frontUrl=	"starfield-001.png" 
+		leftUrl=	"starfield-001.png" 
+		rightUrl=	"starfield-002.png" 
+		topUrl=		"starfield-001.png"   />
 	</Group> 
 	<!-- The background on rightUrl shows a double sun positioned so it matches the double light source -->
         <!-- An excellent Tutorial for Gimp Starfields https://youtu.be/vywahi2hdlY  -->
 
 
+
+
 	<!-- THIS IS THE POSITION OF THE CAMERA  -->
-	<Viewpoint
+	<Viewpoint  ID="camera01"
+		fieldOfView='0.7854'
 		position="0.000 0.000 +20.000" 
 		orientation="0 1 0 0">
 	</Viewpoint>
 
 
-	<!-- THE RED SUN LIGHT SOURCE LINED UP WITH THE RED SUN IMAGE IN THE BACKGROUND  -->
-	<PointLight	id='pointorange' 
-			on="TRUE"
-			intensity='1.000'
-			ambientIntensity='0.001000'
-			shadowIntensity='0.1'
-			color="1.0 0.0 0.8"
-			location='200 0 -100'
-			radius='00.0000'>
-	</PointLight>
-
-
-	<!-- THE BLUE SUN LIGHT SOURCE LINED UP WITH THE BLUE SUN IMAGE IN THE BACKGROUND  -->
-	<PointLight	id='pointblue' 
+	<!-- THE SUN LIGHT SOURCE LINED UP WITH THE SUN IMAGE IN THE BACKGROUND  -->
+	<PointLight	id='sunimage' 
 			on="TRUE"
 			intensity='1.000'
 			ambientIntensity='0.001000'
@@ -285,6 +325,16 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 	</PointLight>
 
 
+	<!-- THE RED BINARY SUN LIGHT SOURCE LINED UP WITH THE RED SUN IMAGE IN THE BACKGROUND  -->
+	<PointLight	id='pointorange' 
+			on="FALSE"
+			intensity='1.000'
+			ambientIntensity='0.001000'
+			shadowIntensity='0.1'
+			color="1.0 0.0 0.8"
+			location='200 0 -100'
+			radius='00.0000'>
+	</PointLight>
 
 
 <!-- THIS IS THE PLANET HANGING IN SPACE WITH A PLATE-CARREE WRAPPED ROUND  -->
@@ -294,7 +344,8 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 	<transform ID='axialtilt' DEF='AxialTilt' rotation='0 0 -1 0.4' >
 	<shape>
                 <appearance>
-		<material diffuseColor='0.5 0.2 1.0' specularColor="0.12 0.05 0.25" shininess='0.3' ></material>
+		<material diffuseColor='1.0 1.O 1.0' specularColor="0.25 0.25 0.25" shininess='0.3' ></material>
+
 		<ImageTexture id="worldmap" url="icohex360seaw.png"  ></ImageTexture>
 
 		</appearance>
@@ -377,8 +428,6 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 </transform>
 
 
-
-
 <!-- THIS IS SPACECRAFT ZIPPING ROUND - A SIMPLE 1x4x9 MONOLITH HERE WITH NO TEXTURE  -->
 <transform DEF='spacecraft'   translation="3.5 0 0" center="-3.5 0 0" rotation="1 0 0 1"  >
 	<shape  render="true" >
@@ -391,8 +440,6 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 	</shape>
 
 </transform>
-
-
 
 
 <!-- THIS IS SOME OPTIONAL TEXT FOR DISPLAY BENEATH  (fill in what you like) -->
@@ -435,7 +482,6 @@ keyValue='
 <ROUTE ID="stupid" fromNode='spinThings' fromField='value_changed' toNode='world'  toField='set_rotation'></ROUTE>
 
 
-
 <!-- THE TEXT  -->
 <!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE      -->
 <timeSensor DEF='clock' 
@@ -449,7 +495,6 @@ keyValue='0 1 0 0 0 1 0 1.570796327 0 1 0 3.141592654 0 1 0 4.71238898 0 1 0 6.2
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
 <ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
 <ROUTE fromNode='spinThings' fromField='value_changed' toNode='planetdata'  toField='set_rotation'></ROUTE>
-
 
 
 <!-- THE CLOUDS  -->
@@ -466,9 +511,6 @@ keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0
 <ROUTE fromNode='spinThings2' fromField='value_changed' toNode='clouds'  toField='set_rotation'></ROUTE>
 
 
-
-
-
 <!-- THE SPACECRAFT ... I CANT WORK OUT HOW TO CHANGE THE TILT OF THE ORBIT -->
 <!-- THE KEY VALUES CAN CHANGE THE ORBIT TILT SOMEHOW -->
 <!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE -->
@@ -482,7 +524,6 @@ keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
 <ROUTE fromNode='clock3' fromField='fraction_changed' toNode='spinThings3' toField='set_fraction'></ROUTE>
 <ROUTE fromNode='spinThings3' fromField='value_changed' toNode='spacecraft'  toField='set_rotation'></ROUTE>
-
 
 
 </scene>
@@ -503,16 +544,11 @@ keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0
 <!-- -->
 <!-- -->
 <!-- -->
-<!-- -->
-
-
-
-
-
-
 
 <!-- ***************   END OF X3D CODE   **************************** -->
 <!-- **************************************************************** -->
+
+
 <code>
 <br><br><br><br><br>
 This display uses a Plate-Carr&#233;e texture and wraps it round a premade sphere: <br>
@@ -538,6 +574,8 @@ This beta version engages a precision better than 14 parts per billion at the co
 <br>
 </code>
 </body>
+		<!--material diffuseColor='0.5 0.2 1.0' specularColor="0.12 0.05 0.25" shininess='0.3' ></material-->
+
 </html> 
 
 
