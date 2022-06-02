@@ -7,9 +7,11 @@
 
 <!-- This page uses javascript to transform an Icohex TravellerWorld map to Plate-Carree -->
 <!-- The TravellerWorld maps are no projection at all as there never was any sphere  -->
-<!-- I engage the conceit that they are gnomonic projections of a sphere onto an inscribed regular icosahedron -->
 <!-- More specifically they are a "Hexagon Reticulated Icosahedral Dissection" -->
+<!-- I engage the conceit that they are gnomonic projections of a sphere onto an inscribed regular icosahedron -->
+<!-- THIS APPROACH IS GEODETIC BUT A LINEAR-PARALLEL INTERPRETATION IS EQUALLY VALID -->
 <!-- I am an archivist and historian, I understand cartography, not javascript. It shows. -->
+<!--  -->
 <!-- The Icohex is disassembled into 40 right-triangle demifacets one at a time -->
 <!-- There are two types; 20 Arctic, and 20 Tropical -->
 <!-- Function A transforms the ARCTs while Function B does the TROPs -->
@@ -135,7 +137,7 @@ currentImage.addEventListener('load', function () {
 	const primarywidth = currentImage.width;
 	const primaryheight = currentImage.height;
 
-
+if(primarywidth > 3072){alert("This image is over 3k pixels in width,\n(" + primarywidth +" px)\nHAVE YOU GONE MAD !??!!\nPlease scale it down.\nor use the quick converter link at the bottom.");return;}
 
 	const facetwidth = primarywidth/10;
 	const facetheight = primaryheight/3;
@@ -196,12 +198,9 @@ currentImage.addEventListener('load', function () {
 
 
 
-alert("Start the transformation.\nThis may take up to 15 seconds.\nThis Image is "+ primarywidth +" pixels wide\nImages wider than 2k take much longer");
+//alert("Start the transformation.\nThis may take up to 15 seconds.\nThis Image is "+ primarywidth +" pixels wide\nImages wider than 2k take much longer");
 
-if(primarywidth > 3072){
-	alert("This image is over 3k pixels in width,\nHAVE YOU GONE MAD !??!!\nPlease scale it down.");
-	return;
-}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -218,10 +217,12 @@ const rotH = [
 	[-1,+1,-1,+1,-1,+1,-1,+1,-1,+1]
 ];
 
+
+
 	for(var row=0; row < 4 ; row++){
 		for(var col=0; col < 10 ; col++){
 	
-			ctxtemp.clearRect(0, 0, facetwidthX, facetheight);	 // $$$$$ $$$$$
+			ctxtemp.clearRect(0, 0, facetwidthX, facetheight);
 			ctxARCT.clearRect(0, 0, panelwidth, panelheightA);
 			ctxARCT_R.clearRect(0, 0, panelwidth, panelheightA);
 			ctxTROP.clearRect(0, 0, panelwidth, panelheightB);
@@ -247,6 +248,16 @@ const rotH = [
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+  // EXPERIMENTAL BYTE/PIXEL METHOD ### AAAAA ## I CANT GET IT TO WORK. AND IT MAY NOT EVEN SAVE TIME.
+var pixelindata = ctxtemp.getImageData(0,0,facetwidthX,facetheight);
+var pixelin = pixelindata.data;
+var pixeloutdata_1 = ctxARCT.getImageData(0,0,panelwidth,panelheightA);
+var pixelout_1 = pixeloutdata_1.data; 
+var pixeloutdata_2 = ctxTROP.getImageData(0,0,panelwidth,panelheightB);
+var pixelout_2 = pixeloutdata_2.data; 
+
 if  // IF STATEMENT 1
 (row==0 || row==3 || 0){
 
@@ -254,12 +265,11 @@ if  // IF STATEMENT 1
 //		****	PIXEL OPERATION 1 ARCT	****
 	for(var y=0; y < facetheight; y++)
 	{
-		//for(var x=0; x < facetwidthX; x++)	 // $$$$$ $$$$$  CHANGE THIS SO ONLY THE TRIANGLE IS SAMPLED
-		for(var x=0; x < (facetwidthX * ((facetheight-y)/facetheight)); x++)	 // $$$$$ $$$$$  CHANGE THIS SO ONLY THE TRIANGLE IS SAMPLED
+		for(var x=0; x < (facetwidthX * ((facetheight-y)/facetheight)) ; x++)	 //	ONLY THE TRIANGLE IS SAMPLED
 		{ 
-		pixel = ctxtemp.getImageData(x, y, 1, 1); // PLUCK PIXELS FROM TRIANGLE
+		pixel = ctxtemp.getImageData(x, y, 1, 1); // PLUCK PIXELS FROM TRIANGLE  AAAAA COMMENT OUT/IN
 
-		xFa = x/facetwidthX;		// CONVERT JAVASCRIPT COORDS TO FACET COORDS (0-1)	 // $$$$$ $$$$$
+		xFa = x/facetwidthX;		// CONVERT JAVASCRIPT COORDS TO FACET COORDS (0-1)
 		yFa = Root3 * y/facetheight;	// CONVERT JAVASCRIPT COORDS TO FACET COORDS (0-Root3)
 
 		lonX = Arx(xFa, yFa); // FACET COORDS TO LON IN DEGREES
@@ -268,18 +278,20 @@ if  // IF STATEMENT 1
 		var offsetarct = 90 - H_arct_deg;	// DEGREES TO SHIFT THE BASE BACK DOWN TO ZERO
 		var offsettrop = 90 - H_trop_deg;	// DEGREES TO SHIFT THE BASE BACK DOWN TO ZERO
 
-		lonJX = lonX * pixperdeg ;			// LON TO JAVASCRIPT COORDS
-		latJY = (latY - offsetarct) * pixperdeg;	// LAT TO JAVASCRIPT COORDS 
+		lonJX = -Math.floor(lonX * pixperdeg) ;			// LON TO JAVASCRIPT COORDS NEG
+		latJY = Math.floor((latY - offsetarct) * pixperdeg);	// LAT TO JAVASCRIPT COORDS POS
 
-		ctxARCT.putImageData(pixel, -lonJX ,  latJY);	// BUILD PANEL: NEGATIVE LONGITUDE?? WHY??
+	//		for(var P=0; P<4; P++){  // EXPERIMENTAL BYTE/PIXEL METHOD ### AAAAA				
+	//		pixelout_1[Math.abs((4*(lonJX + (latJY * panelwidth)))+P)] = pixelin[(4*(x + (y * facetwidth)))+P];}
+
+		ctxARCT.putImageData(pixel, lonJX ,  latJY);	// BUILD PANEL: NEGATIVE LONGITUDE?? WHY?? AAAAA COMMENT OUT/IN
 		} 	
 
 	}
+	//	ctxARCT.putImageData(pixeloutdata_1,0,0);   // EXPERIMENTAL BYTE/PIXEL METHOD ### AAAAA
 
 } // END IF STATEMENT 1
 else { // ELSE STATEMENT 1
-
-
 
 //		****	PIXEL OPERATION 2 TROP	**** 
 	for(var y=0; y < facetheight; y++)
@@ -288,7 +300,7 @@ else { // ELSE STATEMENT 1
 		for(var x=0; x < (facetwidthX * ((facetheight-y)/facetheight)); x++)	 // $$$$$ $$$$$  CHANGE THIS SO ONLY THE TRIANGLE IS SAMPLED
 
 		{ 
-		pixel = ctxtemp.getImageData(x, y, 1, 1); // PLUCK PIXELS FROM TRIANGLE
+		pixel = ctxtemp.getImageData(x, y, 1, 1); // PLUCK PIXELS FROM TRIANGLE  AAAAA COMMENT OUT/IN
 
 		xFa = x/facetwidthX;		// CONVERT JAVASCRIPT COORDS TO FACET COORDS  // $$$$$ $$$$$
 		yFa = Root3 * y/facetheight;	// CONVERT JAVASCRIPT COORDS TO FACET COORDS
@@ -299,14 +311,20 @@ else { // ELSE STATEMENT 1
 		var offsetarct = 90 - H_arct_deg;	// DEGREES TO SHIFT THE BASE BACK DOWN TO ZERO
 		var offsettrop = 90 - H_trop_deg;	// DEGREES TO SHIFT THE BASE BACK DOWN TO ZERO
 
-		lonJX = -lonX * pixperdeg ;			// LON TO JAVASCRIPT COORDS
-		latJY = (latY - offsettrop) * pixperdeg ;	// LAT TO JAVASCRIPT COORDS
+		lonJX = -Math.floor(lonX * pixperdeg);			// LON TO JAVASCRIPT COORDS
+		latJY = -Math.floor((latY - offsettrop) * pixperdeg);	// LAT TO JAVASCRIPT COORDS
 
-		ctxTROP.putImageData(pixel, lonJX , -latJY);	// BUILD PANEL: NEGATIVE LATITUDE?? WHY??
+	//		for(var P=0; P<4; P++){  // EXPERIMENTAL BYTE/PIXEL METHOD ### AAAAA				
+	//		pixelout_2[(4*(lonJX + ((latJY * panelwidth))))+P] = pixelin[(4*(x + ((y * facetwidth))))+P];}
+
+
+		ctxTROP.putImageData(pixel, lonJX , latJY);	// BUILD PANEL: NEGATIVE LATITUDE?? WHY??  ### AAAAA COMMENT OUT/IN
 
 		}  
 
 	}	
+	//	ctxTROP.putImageData(pixeloutdata_2,0,0);   // EXPERIMENTAL BYTE/PIXEL METHOD ### AAAAA
+
 } // END ELSE STATEMENT 1
 
 //////////////////////////// MOVE PROJECTED PANELS TO NEXT CANVAS WITH CORRECTED ROTATION  //////////////////
@@ -391,7 +409,7 @@ ctxOUTmap.putImageData(imagedata,0,0);
 
 <h1>Icohex to Plate-Carr&#233;e Converter</h1><h5> beta version</h5>
 
-<canvas  id="primary" width="1000" height="520"   ></canvas><br><br>
+<canvas hidden  id="primary" width="1000" height="520"   ></canvas><br><br>
 
 Choose a cropped Traveller World Map that looks like this:
 <img src="sample01.png"><br>
@@ -399,13 +417,13 @@ Six points on top, Five points on the bottom. Less than 3k px in width.<br>
 <input  id="inputtag" type="file" accept="image/*">
 
 
-<canvas hidden  id="demifacet"  width="100" height="173" ></canvas>
+<canvas	hidden	id="demifacet"  width="100" height="173" ></canvas>
 
-<canvas hidden    id="panel_ARCT"  width="100" height="173" ></canvas>
-<canvas  hidden   id="panel_ARCT_R"  width="100" height="173" ></canvas>
+<canvas	hidden	id="panel_ARCT"  width="100" height="173" ></canvas>
+<canvas	hidden	id="panel_ARCT_R"  width="100" height="173" ></canvas>
 
-<canvas hidden    id="panel_TROP"  width="100" height="160" ></canvas>
-<canvas hidden    id="panel_TROP_R"  width="100" height="160" ></canvas><br><br>
+<canvas	hidden	id="panel_TROP"  width="100" height="160" ></canvas>
+<canvas	hidden	id="panel_TROP_R"  width="100" height="160" ></canvas><br><br>
 <br>
 Right Click "Save Image As" on the completed map below:<br>
 <canvas  id="outputmap"  width="1000" height="500" ></canvas>
@@ -423,3 +441,4 @@ Use your new Plate-Carr&#233;e in the <a href="https://morfyddjames.github.io/in
 <!-- Morfydd James -->
 
 </html>
+
