@@ -181,6 +181,14 @@ function stop_start(){	// THIS IS A COMPROMISE. PAUSETIME IS BETTER BUT MORE COM
 	} else {document.querySelector('#timeworld').setAttribute("enabled", "true");  console.log("cb.ring="+"true");}
 }
 
+	
+function full_light_on(){
+	if(document.getElementById("lightsw").checked != true)
+	{document.querySelector('#head').setAttribute("headlight", "false"); console.log("cb.ring="+" false");
+	} else {document.querySelector('#head').setAttribute("headlight", "true");  console.log("cb.ring="+"true");}
+}
+
+
 
 //<ROUTE ID="stupid" fromNode='spinThings' fromField='value_changed' toNode='world'  toField='set_rotation'></ROUTE>
 //<label class="switch"> STOP
@@ -262,6 +270,13 @@ function stop_start(){	// THIS IS A COMPROMISE. PAUSETIME IS BETTER BUT MORE COM
 
 <label class="switch"> Rotation
   <input  ID="stopsw"  type="checkbox" checked   onchange="stop_start()";>
+  <span class="slider"></span>
+</label>
+
+<br>
+
+<label class="switch"> Full Illumination
+  <input ID="lightsw" type="checkbox" unchecked  onchange="full_light_on()";	>
   <span class="slider"></span>
 </label>
 
