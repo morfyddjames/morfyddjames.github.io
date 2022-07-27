@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-	<!-- cola a% git -->
-	
 <head>
 
 <!-- I AM NOT A CODER. THIS IS THE RESULT OF HOURS AND HOURS OF TRIAL AND ERROR TESTING -->
@@ -17,8 +15,6 @@
 <!-- YOU NEED THE FULL ONE (x3dom-full.js) FROM THE LATEST SOURCE -->
 <!--script type='text/javascript' src='https://www.x3dom.org/download/x3dom.js'> </script-->
 <!--script type='text/javascript' src='https://x3dom.org/download/1.8.2/x3dom-full.js'> </script-->
-	
-	
 
 
 	<!--meta http-equiv="X-UA-Compatible" content="IE=edge"/-->
@@ -28,17 +24,13 @@
 	<!-- YOU NEED THE FULL VERSION FROM THE LATEST SOURCE -->
 	<!-- THE ZED BUFFER PROBLEM WITH TRANSPARENT PNGS MAY GET FIXED IN FUTURE RELEASES -->
 	<!-- script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-physics.js'> </script-->
-	
 	<!--script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-full.js'> </script-->
-	<script type='text/javascript' src='x3dom-full.js'> </script>
-	<!-- CHANGED TO LOCAL FILE AS X3DOM.ORG WENT DOWN 17JULY2022 RECOVERED FROM WAYBACK ARCHIVE (10JULY2022)  -->
-	
-	<!--link rel='stylesheet' type='text/css' href='https://www.x3dom.org/download/x3dom.css'-->
-	<link rel='stylesheet' type='text/css' href='x3dom.css'>
-	<!-- CHANGED TO LOCAL FILE AS X3DOM.ORG WENT DOWN 17JULY2022 RECOVERED FROM WAYBACK ARCHIVE (10JULY2022)  -->
+	<script type='text/javascript' src='x3dom/x3dom-full.js'> </script>
 
-	
-	
+	<!--link rel='stylesheet' type='text/css' href='https://www.x3dom.org/download/x3dom.css'-->
+	<link rel='stylesheet' type='text/css' href='x3dom/x3dom.css'>
+
+
 	<style>
 	x3d {	border:2px solid green;
 		background: rgba(0, 0, 0, 1);}
@@ -57,7 +49,7 @@
 
 function validateOnlyTextField(element) {	// DEEPLY FLAWED NOT SECURE !!!
     var str = element.value;
-    if(!(/^[a-zA-Z0-9, ,-]+$/.test(str))){
+    if(!(/^[a-zA-Z0-9, ,-,']+$/.test(str))){
         str = str.substr(0,  str.length -1);
         element.value = str;
     }
@@ -181,13 +173,12 @@ function stop_start(){	// THIS IS A COMPROMISE. PAUSETIME IS BETTER BUT MORE COM
 	} else {document.querySelector('#timeworld').setAttribute("enabled", "true");  console.log("cb.ring="+"true");}
 }
 
-	
+
 function full_light_on(){
 	if(document.getElementById("lightsw").checked != true)
 	{document.querySelector('#head').setAttribute("headlight", "false"); console.log("cb.ring="+" false");
 	} else {document.querySelector('#head').setAttribute("headlight", "true");  console.log("cb.ring="+"true");}
 }
-
 
 
 //<ROUTE ID="stupid" fromNode='spinThings' fromField='value_changed' toNode='world'  toField='set_rotation'></ROUTE>
@@ -203,7 +194,7 @@ function full_light_on(){
 
 	<!-- A WEB DESIGNER COULD MAKE THIS ALL PRETTY -->
 <body bgcolor="000011";> <!--   background="starfield-001.png"; -->
-	<h1>Welcome Traveller Scouts</h1>  <br>
+	<h1><a href="https://morfyddjames.github.io/index.html">Welcome Traveller Scouts</a></h1>  <br>
 <!--  -->
 <code>
 <!-- INPUT CONTROLS -->
@@ -272,7 +263,6 @@ function full_light_on(){
   <input  ID="stopsw"  type="checkbox" checked   onchange="stop_start()";>
   <span class="slider"></span>
 </label>
-
 <br>
 
 <label class="switch"> Full Illumination
@@ -397,7 +387,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 <!-- THIS IS THE PLANETS RING SYSTEM- ALSO GLITCHY  -->
 <!-- THIS SAME DISK2D THINGY CAN MAKE TILTED COLOUR CIRCLES LIKE ORBIT PATHS  -->
-<!-- THE RING IMAGE IS A SQUARE 512x512 PING OF CONCENTRIC CIRCLES with HALF ALPHA TRANSPARENCY -->
+<!-- THE RING IMAGE IS A SQUARE 512x512 PNG OF CONCENTRIC CIRCLES with HALF ALPHA TRANSPARENCY -->
 <transform  rotation='1 0 0 1.7'>
 <transform    rotation='0 1 0 -0.05'>
 	<shape ID="ringon"   render="false" >
@@ -471,7 +461,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <!-- THIS IS SOME OPTIONAL TEXT FOR DISPLAY BENEATH  (fill in what you like) -->
 <transform DEF='planetdata'  translation="0 -5 0">
 	<Shape   render="true" >
-		<Text ID="worldnamedisp"  string=""   solid='"false"'>
+		<Text ID="worldnamedisp"  string="Molly's World"   solid='"false"'>
 		<FontStyle justify=' "MIDDLE" "MIDDLE" '  >
 		</Text>
 
@@ -604,7 +594,7 @@ Many Plate-Carr&#233;e images are available on-line for the Solar System Planets
 </code>
 </body>
 		<!--material diffuseColor='0.5 0.2 1.0' specularColor="0.12 0.05 0.25" shininess='0.3' ></material-->
-
+		<!-- Description of various orbit types used by nasa https://youtu.be/PZAkiXNJIqc-->
 </html> 
 
 
