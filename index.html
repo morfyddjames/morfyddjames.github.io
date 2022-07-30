@@ -34,8 +34,15 @@
 	<style>
 	x3d {	border:2px solid green;
 		background: rgba(0, 0, 0, 1);}
+
+		a:link		{color: #ff11ff;}
+		a:visited	{color: #ff11ff;}
+		a:hover		{color: cyan;}
+		a:active	{color: red;}
+
 	body{	font-size:110%;
 		font-family:verdana, sans-serif;
+		margin: 0;
 		margin: 3em;
 		color: yellow;}
 	code{	font-size:110%;
@@ -43,13 +50,86 @@
 		margin: 3em;
 		color: yellow;}
 	h1{	color: #ff11ff;}
+
+		#toggler {
+			position: relative;
+			float:right;
+			z-index:100;
+			top: 0;
+			left: 0;
+			width: 10em;
+			height: 2em;
+			border:1px solid #666;
+			background-color:#202021;
+			color:#ccc;
+		}
+		#toggler:hover {
+			background-color:blue;
+		}
+		#mainx3dwindow {
+			width: 75%;
+			height: 75%;
+		}
+
+
 	</style>
+
+		<script type="text/javascript">
+
+			var zoomed = false;
+			
+			function toggle(elm) {
+
+				b = document.getElementById('main')
+				title = document.getElementById('title')
+				coda = document.getElementById('coda')
+				element = document.getElementById('test')
+				mainx3dwindow = document.getElementById('mainx3dwindow')
+				button = document.getElementById('toggler')
+				
+				var new_width_css;
+
+				if (zoomed == true) {
+					new_width_css = "75%";
+					b.style.padding = "10px";
+					b.style.margin = "3em"
+					title.style.display = "block";
+					coda.style.display = "block";
+					button.innerHTML = "Full Screen";
+				} else {
+					new_width_css = "100%";
+					b.style.padding = "0px";
+					b.style.margin = "0"
+					title.style.display = "none";
+					coda.style.display = "none";
+					button.innerHTML = "Restore";
+				}
+
+				zoomed = !zoomed
+
+				mainx3dwindow.style.width = new_width_css
+				mainx3dwindow.style.height = new_width_css
+			}
+		</script>
+
+
+<script>
+function screensize(){  
+const screenwidth = screen.width ;    console.log("screenwidth = "+ `${screenwidth}`);
+const screenheight = screen.height ;   console.log("screenheight = "+ `${screenheight}`);
+/*<x3d id='mainwindow' width='1500px' height='900px' profile='Immersive' version='3.3'  border="green"*/
+document.querySelector('#mainwindow').setAttribute('width', `${screenwidth}`);
+document.querySelector('#mainwindow').setAttribute('height', `${screenheight}`);
+
+}	// END screensize
+</script>
+
 
 <script>
 
 function validateOnlyTextField(element) {	// DEEPLY FLAWED NOT SECURE !!!
     var str = element.value;
-    if(!(/^[a-zA-Z0-9, ,-,']+$/.test(str))){
+    if(!(/^[a-zA-Z0-9, ,\-,']+$/.test(str))){
         str = str.substr(0,  str.length -1);
         element.value = str;
     }
@@ -177,7 +257,10 @@ function stop_start(){	// THIS IS A COMPROMISE. PAUSETIME IS BETTER BUT MORE COM
 function full_light_on(){
 	if(document.getElementById("lightsw").checked != true)
 	{document.querySelector('#head').setAttribute("headlight", "false"); console.log("cb.ring="+" false");
-	} else {document.querySelector('#head').setAttribute("headlight", "true");  console.log("cb.ring="+"true");}
+	 document.querySelector('#sunimage').setAttribute("on", "true"); console.log("cb.ring="+" false");
+	} else 
+	{document.querySelector('#head').setAttribute("headlight", "true");  console.log("cb.ring="+"true");
+	 document.querySelector('#sunimage').setAttribute("on", "false");  console.log("cb.ring="+"true");}
 }
 
 
@@ -193,7 +276,10 @@ function full_light_on(){
 </head>
 
 	<!-- A WEB DESIGNER COULD MAKE THIS ALL PRETTY -->
-<body bgcolor="000011";> <!--   background="starfield-001.png"; -->
+<body  id="main" bgcolor="000011";> <!--   background="starfield-001.png"; -->
+
+	<div id='title'>
+
 	<h1><a href="https://morfyddjames.github.io/index.html">Welcome Traveller Scouts</a></h1>  <br>
 <!--  -->
 <code>
@@ -272,7 +358,7 @@ function full_light_on(){
 
 <br>
 
-World Name Display: <input type="text" placeholder="Traveller World" id="worldname"  onkeyup="validateOnlyTextField(this)"  onchange="changename();">
+World Name Display: <input type="text" placeholder="Molly's World" id="worldname"  onkeyup="validateOnlyTextField(this)"  onchange="changename();">
 <br>
 
 <!-- USER FILE SELECTOR - THIS WAS THE WORST PART OF THE WHOLE PROCESS-->
@@ -295,10 +381,12 @@ Select a Traveller World Map you have <a href="https://morfyddjames.github.io/pl
     </script>
 
 
-
+</div>
 <!-- **************************************************************** -->
 <!-- ************  X3D STARTS HERE  ********************************* -->
-<x3d width='1500px' height='900px' profile='Immersive' version='3.3'  border="green"
+<div id="mainx3dwindow">
+<button id="toggler" onclick="toggle('mainx3dwindow');return false;">Fullscreen</button>
+<x3d  id="mainwindow" width='100%' height='100%' profile='Immersive' version='3.3'  border="green"
 xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' 
 xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
  
@@ -544,6 +632,9 @@ keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0
 
 </scene>
 </x3d>
+</div>
+
+<div id="coda">
 <!--Plate-Carrée (Plot kuh-RAY) IPA(plɑ́t kɑːréiː) -->
 
 <!-- -->
@@ -591,24 +682,16 @@ Visit <a href="https://travellermap.com/" target="_blank" >TravellerMap</a> to c
 Many Plate-Carr&#233;e images are available on-line for the Solar System Planets as well as Alien Worlds.<br>
 
 <br>
+An <a href="https://morfyddjames.github.io/essay01.html" target="_blank" >essay</a> on Planetary Cartography and Traveller.
 </code>
+
+
+<script> onload = screensize; </script>
+
+
+</div>
 </body>
 		<!--material diffuseColor='0.5 0.2 1.0' specularColor="0.12 0.05 0.25" shininess='0.3' ></material-->
 		<!-- Description of various orbit types used by nasa https://youtu.be/PZAkiXNJIqc-->
 </html> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
