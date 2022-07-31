@@ -32,7 +32,7 @@
 
 
 	<style>
-	x3d {	border:2px solid green;
+	x3d {	border:0px solid green;
 		background: rgba(0, 0, 0, 1);}
 
 		a:link		{color: #ff11ff;}
@@ -42,6 +42,7 @@
 
 	body{	font-size:110%;
 		font-family:verdana, sans-serif;
+		background-color:#000011;
 		margin: 0;
 		margin: 3em;
 		color: yellow;}
@@ -92,14 +93,16 @@
 				if (zoomed == true) {
 					new_width_css = "75%";
 					b.style.padding = "10px";
-					b.style.margin = "3em"
+					b.style.margin = "3em";
+					b.style.backgroundColor = "#000011";
 					title.style.display = "block";
 					coda.style.display = "block";
 					button.innerHTML = "Full Screen";
 				} else {
 					new_width_css = "100%";
 					b.style.padding = "0px";
-					b.style.margin = "0"
+					b.style.margin = "0";
+					b.style.backgroundColor = "#000000";
 					title.style.display = "none";
 					coda.style.display = "none";
 					button.innerHTML = "Restore";
@@ -276,7 +279,7 @@ function full_light_on(){
 </head>
 
 	<!-- A WEB DESIGNER COULD MAKE THIS ALL PRETTY -->
-<body  id="main" bgcolor="000011";> <!--   background="starfield-001.png"; -->
+<body  id="main", bgcolor="green" ;> <!--   background="starfield-001.png"; -->
 
 	<div id='title'>
 
@@ -632,9 +635,7 @@ keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0
 
 </scene>
 </x3d>
-</div>
 
-<div id="coda">
 <!--Plate-Carrée (Plot kuh-RAY) IPA(plɑ́t kɑːréiː) -->
 
 <!-- -->
@@ -655,7 +656,9 @@ keyValue='0 1 0 0  0 1 0 1.570796327  0 1 0 3.141592654  0 1 0 4.71238898  0 1 0
 <!-- ***************   END OF X3D CODE   **************************** -->
 <!-- **************************************************************** -->
 
+</div>
 
+<div id="coda">
 <code>
 <br><br><br><br><br>
 This display uses a Plate-Carr&#233;e texture and wraps it round a premade sphere: <br>
