@@ -261,9 +261,11 @@ function full_light_on(){
 	if(document.getElementById("lightsw").checked != true)
 	{document.querySelector('#head').setAttribute("headlight", "false"); console.log("cb.ring="+" false");
 	 document.querySelector('#sunimage').setAttribute("on", "true"); console.log("cb.ring="+" false");
+	 document.querySelector('#nametext').setAttribute("enabled", "true");
 	} else 
 	{document.querySelector('#head').setAttribute("headlight", "true");  console.log("cb.ring="+"true");
-	 document.querySelector('#sunimage').setAttribute("on", "false");  console.log("cb.ring="+"true");}
+	 document.querySelector('#sunimage').setAttribute("on", "false");  console.log("cb.ring="+"true");
+	 document.querySelector('#nametext').setAttribute("enabled", "false");}
 }
 
 
@@ -591,7 +593,7 @@ keyValue='
 
 <!-- THE TEXT  -->
 <!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE      -->
-<timeSensor DEF='clock' 
+<timeSensor ID='nametext' DEF='clock0'  enabled='true'
 cycleInterval='40' 
 loop='true'></timeSensor>
 <!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
@@ -600,7 +602,7 @@ key='0.0 0.25 0.50 0.75 1.0'
 keyValue='0 1 0 0 0 1 0 1.570796327 0 1 0 3.141592654 0 1 0 4.71238898 0 1 0 6.283185307 '>
 </orientationInterpolator>
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
-<ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
+<ROUTE fromNode='clock0' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
 <ROUTE fromNode='spinThings' fromField='value_changed' toNode='planetdata'  toField='set_rotation'></ROUTE>
 
 
