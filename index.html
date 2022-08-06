@@ -33,6 +33,12 @@
 	<link rel="preload" href="OPTIMA.TTF" as="font" type="font/ttf" crossorigin>
 
 	<style>
+
+
+	@font-face {
+		font-family:OPTIMA;
+		src:url(OPTIMA.TTF);}
+
 	x3d {	border:0px solid green;
 		background: rgba(0, 0, 0, 1);}
 
@@ -43,7 +49,7 @@
 
 	body{	font-size:110%;
 		font-family:verdana, sans-serif;
-			font-family: "Optima", Arial, sans-serif;
+			font-family: "OPTIMA", Arial, sans-serif;
 		background-color:#000011;
 		margin-left: 3em;
 		margin-right: 3em;
@@ -64,13 +70,13 @@
 		border-width: 0px;
 		height: 6px;}
 
-	h0{	font-family: "Optima", Arial, sans-serif;
+	h0{	font-family: "OPTIMA", Arial, sans-serif;
 		float: right;
 		margin-top: 0em;
 		margin-bottom: 0em;
 		margin-right: 0.5em;
 		margin-left: 0.5em;
-		font-family: "Optima", Arial, sans-serif;
+		font-family: "OPTIMA", Arial, sans-serif;
 		font-style: italic;
 		font-size: 3em;
 		font-weight: bold;
@@ -101,13 +107,13 @@
 		height: 75%;
 	}
 
-	h2{	font-family: "Optima", Arial, sans-serif;
+	h2{	font-family: "OPTIMA", Arial, sans-serif;
 		float: right;
 		margin-top: 0em;
 		margin-bottom: 0em;
 		margin-right: 0.5em;
 		margin-left: 0.5em;
-		font-family: "Optima", Arial, sans-serif;
+		font-family: "OPTIMA", Arial, sans-serif;
 		font-style: italic;
 		font-size: 1em;
 		font-weight: bold;
@@ -115,13 +121,13 @@
 		text-align: right;
 		border-top: 0px;}
 
-	h4{	font-family: "Optima", Arial, sans-serif;
+	h4{	font-family: "OPTIMA", Arial, sans-serif;
 		float: left;
 		margin-top: 0em;
 		margin-bottom: 0em;
 		margin-right: 0.5em;
 		margin-left: 0.5em;
-		font-family: "Optima", Arial, sans-serif;
+		font-family: "OPTIMA", Arial, sans-serif;
 		font-style: italic;
 		font-size: 0.75em;
 		font-weight: bold;
@@ -129,13 +135,6 @@
 		text-align: left;
 		border-top: 0px;}
 
-	@font-face {
-		font-family:Optima;
-		src:url(OPTIMA.TTF);
-
-
-
-}
 
 	</style>
 
@@ -434,7 +433,7 @@ function full_light_on(){
 
 <br>
 
-World Name Display: <input type="text" placeholder="Molly's World" id="worldname"  onkeyup="validateOnlyTextField(this)"  onchange="changename();">
+World Name Display: <input type="text" placeholder="Enter World Name" id="worldname"  onkeyup="validateOnlyTextField(this)"  onchange="changename();">
 <br>
 
 <!-- USER FILE SELECTOR - THIS WAS THE WORST PART OF THE WHOLE PROCESS-->
@@ -625,7 +624,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <!-- THIS IS SOME OPTIONAL TEXT FOR DISPLAY BENEATH  (fill in what you like) -->
 <transform DEF='planetdata'  translation="0 -5 0">
 	<Shape   render="true" >
-		<Text ID="worldnamedisp"  string="Molly's World"   solid='"false"'>
+		<Text ID="worldnamedisp"  string=""   solid='"false"'>
 		<FontStyle justify=' "MIDDLE" "MIDDLE" '  >
 		</Text>
 
@@ -764,7 +763,7 @@ An <a href="https://morfyddjames.github.io/essay01.html" target="_blank" >essay<
 <br><br><br><br>
 <script> onload = screensize; </script>
 
-<h4>The Traveller game in all forms is owned by Far Future Enterprises. Copyright &#169; 1977 - 2022 Far Future Enterprises.</h4> <a href="http://farfuture.net" target="_blank"><img src="FFE-m.png"  height="11" width="25" ></a>
+<h4>The Traveller game in all forms is owned by Far Future Enterprises. Copyright &#169; 1977 - 2022 Far Future Enterprises.</h4> <a href="https://farfuture.net" target="_blank"><img src="FFE-m.png"  height="11" width="25" ></a>
 </div>
 </body>
 		<!--material diffuseColor='0.5 0.2 1.0' specularColor="0.12 0.05 0.25" shininess='0.3' ></material-->
