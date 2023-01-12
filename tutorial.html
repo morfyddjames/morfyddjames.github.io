@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Tutorial</title>
+	<meta name="generator" content="LibreOffice 6.0.7.3 (Linux)"/>
+	<meta name="created" content="2022-06-06T16:08:40.158748386"/>
+	<meta name="changed" content="2022-06-07T01:45:10.801132035"/>
+	<style type="text/css">
+		p { margin-left: 0.42in; margin-right: 0.42in; color: #ffff00; font-family: "verdana", sans-serif; max-width: 700px; }
+		br { margin-left: 0.42in; margin-right: 0.42in; color: #ffff00; font-family: "verdana", sans-serif }
+		p2 { margin-left: 0.42in; margin-right: 0.42in; color: #ffffff; font-family: "verdana", sans-serif }
+		h1 { margin-left: 0.42in; margin-right: 0.42in; color: #ff11ff }
+		h1.cjk { font-family: "verdana", sans-serif }
+		h1.ctl { font-family: "verdana", sans-serif }
+		h3 { margin-left: 0.42in; margin-right: 0.42in; margin-top: 0.17in; color: #ff11ff; font-family: "Albany", sans-serif; font-size: 14pt }
+		h4 { margin-left: 0.42in; margin-right: 0.42in; margin-top: 0.07in; color: #ffffff; font-family: "Albany", sans-serif; font-size: 10pt }
+		img {margin-left: 0.42in; margin-bottom: 0.07in;}
+		a:link {  color: LightGreen; background-color: transparent;  text-decoration: none;}
+		a:visited {  color: LightGreen;  background-color: transparent;  text-decoration: none;}
+		a:hover {  color: yellow;  background-color: transparent;  text-decoration: underline;}
+		a:active {  color: LightGreen;  background-color: transparent;  text-decoration: underline;}
+
+
+	@font-face {
+		font-family:OPTIMA;
+		src:url(OPTIMA.TTF);}
+
+	x3d {	border:0px solid green;
+		background: rgba(0, 0, 0, 1);}
+
+		a:link		{color: #ff11ff;}
+		a:visited	{color: #ff11ff;}
+		a:hover		{color: cyan;}
+		a:active	{color: red;}
+
+	body{	font-size:110%;
+		font-family:verdana, sans-serif;
+			font-family: "OPTIMA", Arial, sans-serif;
+		background-color:#000011;
+		margin-left: 3em;
+		margin-right: 3em;
+		margin-bottom: 3em;
+		margin-top: 0px;
+		color: yellow;}
+	code{	font-size:110%;
+		font-family:verdana, sans-serif;
+		margin: 3em;
+		color: yellow;}
+
+	hr{	display: block;
+		background-color: red;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: auto;
+		margin-right: auto;
+		border-width: 0px;
+		height: 6px;}
+
+	h0{	font-family: "OPTIMA", Arial, sans-serif;
+		float: right;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-right: 0.5em;
+		margin-left: 0.5em;
+		font-family: "OPTIMA", Arial, sans-serif;
+		font-style: italic;
+		font-size: 3em;
+		font-weight: bold;
+		color: red;
+		text-align: right;
+		border-top: 0px solid red;}
+
+	h1{	margin-top: 5px;
+		margin-bottom: 5px;
+		padding: 0 0 0 0;
+		color: #ffffff;
+		line-height: 0px;
+		font-style: italic;}
+
+	#toggler {
+		position: relative;
+		float:right;
+		z-index:100;
+		top: 0;
+		left: 0;
+		width: 10em;
+		height: 2em;
+		border:1px solid #666;
+		background-color:#202021;
+		color:#ccc;
+	}
+	#toggler:hover {
+		background-color:blue;
+	}
+	#mainx3dwindow {
+		width: 75%;
+		height: 75%;
+	}
+
+	h2{	font-family: "OPTIMA", Arial, sans-serif;
+		float: right;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-right: 0.5em;
+		margin-left: 0.5em;
+		font-family: "OPTIMA", Arial, sans-serif;
+		font-style: italic;
+		font-size: 1em;
+		font-weight: bold;
+		color: white;
+		text-align: right;
+		border-top: 0px;}
+
+	h4{	font-family: "OPTIMA", Arial, sans-serif;
+		float: left;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-right: 0.5em;
+		margin-left: 0.5em;
+		font-family: "OPTIMA", Arial, sans-serif;
+		font-style: italic;
+		font-size: 0.75em;
+		font-weight: bold;
+		color: white;
+		text-align: left;
+		border-top: 0px;}
+
+
+	</style>
+
+
+
+</head>
+<body lang="en-US" text="#ffff00" bgcolor="#000011" dir="ltr">
+
+
+<div id='title'>
+
+<h1><a href="https://morfyddjames.github.io/index.html"><img src="Sunburst-Traveller.png" height="35" width="35" ></a> Traveller World Viewer</h1>
+
+<hr>
+	<h0>TRAVELLER</h0><br><br><br>
+	<h2>Science Fiction Adventure<br>in the Far Future</h2>
+	<br><br>
+	<h1 hidden ><a href="https://morfyddjames.github.io/index.html">Traveller World Viewer</a></h1> 
+
+<br><br>
+
+<h1 class="western">Adjust Your Pilot's Seat</h1>
+
+<br><br>
+
+
+<!--p>The Traveller World Viewer provides a cockpit view of the worlds generated at the Traveller Worlds website written by Jonathan Sherlock.</p>
+<p>Standard Traveller World maps are in Ico-hex format and must be cropped and converted to Plate-Carrée projection.</p-->
+<!--h1>The View from the bridge.</h1>
+<p>Drag the curser to move the view.
+Alt + drag to zoom in and out.</p-->
+
+
+<p>This is the view from your ship's cockpit.</p>
+
+<img src="Tut_cockpit.png">
+
+
+
+<p>The planet is rendered from your custom world map. The default world image is of a typical Traveller map with the hex grid correctly placed on a celestial body. The view and perspective can be adjusted dynamically with the cursor. Dragging alters the camera angle, scrolling (Alt + drag) will zoom in and out. The frame orientation angle can be rotated by dragging the cursor in circles. This takes some practice. Double clicking on a part of the planet will center that portion in the view.</p>
+
+<br>
+
+
+
+<br>
+<h1>The Menu Controls</h1>
+<br><br>
+<img  style='border:5px solid #0000ff'  src="Tut_menu.png">
+<br><br>
+
+<h3>Axial Tilt</h3>
+<p>Axial tilt is in degrees from North. There are 11 options; 0&deg to 90&deg plus 23&deg.
+If you want a planet to tilt more than 90 degrees (South down), create a version of the input map flipped upside down.</p>
+
+<h3>Star Type</h3>
+<p>This refers to star temperature only. There are 7 types from blue to red O,B,A,F,G,K,M.
+This changes the star image and the lighting on the planet. </p>
+
+<h3>Atmosphere</h3>
+<p>This superimposes an animated cloud layer above the surface of the planet.</p>
+
+<h3>Ring System</h3>
+<p>This projects a Saturn Type ring system above the planet with an inclination of 30&deg from the ecliptic.</p>
+
+<h3>Standard orbits</h3>
+<p>This projects three circular orbital paths above the planet.</p>
+
+<h3>Rotation</h3>
+<p>This toggles rotation. Useful for tidally locked worlds and alleviating dizziness.
+For tidally locked worlds, set the axial tilt to zero, wait for the hot hemisphere to face the sun then stop rotation.
+The rotation is currently set to 40 seconds.
+If the world has a hot pole, set the tilt to 90&deg.</p>
+
+<h3>Full Illumination</h3>
+<p>This eliminates the night shadow. Useful for surveying the planet.</p>
+
+
+<h3>World Name Display</h3>
+<p>This projects text below the world.
+The text rotates unless "Full Illumination" is selected.</p>
+
+<h3>Full Screen / Restore</h3>
+<p>This switches from interface mode to full cockpit view. 
+Use F11 to set your browser to full screen mode first.</p>
+
+<p>Use "PrtSc" on your keyboard to capture the view.
+Or whichever keystrokes your OS provides.</p>
+
+
+<h3>Reload Page</h3>
+<p>To reload the page, use "Ctrl+r"
+or click the Red Imperial Sun Logo at the top left of the page.</p>
+
+<h3>Browse</h3>
+<p>This is used to select a world map image from one of your directories to display.
+It is recommended that you name your maps "Worldname.png".
+eg Earth.png  Mars.png  Arrakis.png</p>
+<br><br>
+
+<h1>Custom Planet Maps</h1>
+
+<br><br>
+<p>The viewer is obedient. It will wrap any image around the sphere as if it were a valid map. For a realistic render, select an image in Plate-Carrée projection. Countless examples are available on websites dedicated to producing them. There are also many applications where you can create your own. You can download a zipped gallery of premade maps
+<a href="something.zip" target="_blank">here</a>.</p>
+
+
+<h3>Converting Standard Traveller Maps to Plate-Carrée</h3>
+<br>
+
+
+
+
+<br>
+
+<p>
+There are two free online map converters available by links from the viewer page. Both require that the input map be completely and correctly cropped right to the edges. 
+
+</p>
+
+
+<h3>Converting Maps from the TravellerWorlds Website</h3>
+<br><br><img  style='border:5px solid #0000ff'  src="Tut_Barden.png"><br><br>
+
+<p>1)  At The Traveller Worlds website, choose a world and select <br> 
+"Map action" >> "Download PNG Format"  from the drop-down menu at the top of the page.</p>
+
+
+
+<p>2)  Using your favorite image application, crop the map right to its points and edges.</p>
+
+
+
+<p>3)  Scale the image so that it is 4096 pixels or less in width.
+4096px is a far greater resolution than is needed for planetary display. Larger than 4096 will be rejected.</p>
+
+
+<p>4)  Save (export) the cropped image as the name of the world in PNG format.
+for example:
+Tralfamadore.png</p>
+
+
+<p>5)  Navigate to the Icohex to Plate-Carrée Converter page.</p>
+
+
+<p>6)  Click the Browse button and select your cropped map.</p>
+
+<p>The page will start immediatly to convert the Icohex to Plate-Carrée.</p>
+
+<p>This is a mathematically intensive process that might take up to a minute. The converted Plate-Carrée will be shown in the output window at 1:1 scale. Once the process is complete, right click the new projection and "Save as" to save the new map.
+This is the final map that the viewer can use. Name it something appropriate. The default is canvas.png <br>Keep a collection of converted maps in a dedicated folder for future use.</p>
+
+<p>Navigate to the viewer and select your converted map. This part is very quick.</p>
+
+
+
+
+<h3>Known issues</h3>
+<p>The animated 3D display is accomplished with the X3D JavaScript library. There is a difficulty with multi-layer transparent images in X3D. This manifests as some weird effects when displaying clouds and rings on the night side of the planets. When the good coders at X3D work out a solution, I will update the library. In the mean time, consider it a neurological side effect of hyperspace travel. Veteran travellers recommend a large Gin & Tonic. Cheers!</p>
+
+<p>Rotation and Axial Tilt are linked mathematically. Changeing the Axial Tilt when Rotation is off yeilds unexpected results. Toggling rotation on and off resets the tilt to match the desired angle.</p>
+
+<p>There are too many star types to account for all of them. In future, I may instxxxall a custom star image option.
+</p>
+
+<p>The atmospheric cloud effect is achieved with a transparent png image. They rotate independantly of the world to foster an illusion of climat. It's there to look pretty. See transparency bug above.
+</p>
+
+<p>The Ring system is a static image. Pretty for pretty's sake. Nothing more. Same transparency bug.
+</p>
+
+<p>Rotation is fixed at 40 seconds. It is there to allow a game master to correctly show day/night conditions, or correctly orient a tidal locked world.
+</p>
+
+<p>
+</p>
+<p>
+</p>
+
+<p>This web application is entirely JavaScript. Nothing is stored on any server or downloaded to your device except for the image you "save as".
+The source code is open and available in GitHub.</p>
+
+<!--
+Use the #id selector
+<p id="opening">Hyperlinks are utilized by a web browser to move from one page to another...</p>
+Create a link to the selector
+<a href="#opening">Take me to the opening paragraph.</a>
+-->
+
+</body>
+</html>
+
+
+
+
+
