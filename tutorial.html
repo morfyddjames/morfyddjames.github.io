@@ -167,7 +167,7 @@ Alt + drag to zoom in and out.</p-->
 
 
 
-<p>The planet is rendered from your custom world map. The default world image is of a typical Traveller map with the hex grid correctly placed on a celestial body. The view and perspective can be adjusted dynamically with the cursor. Dragging alters the camera angle. Alt+drag will zoom in and out. Ctrl+drag will reposition the planet.  The frame orientation angle can be rotated by dragging the cursor in circles. This takes some practice. Double clicking on a part of the planet will center that portion in the view.</p>
+<p>The planet is rendered from your custom world map. The default world image is of a typical Traveller World map with the hex grid correctly placed on a celestial body. The view and perspective can be adjusted dynamically with the cursor. Dragging alters the camera angle. Alt+drag will zoom in and out. Ctrl+drag will reposition the planet.  The frame orientation angle can be rotated by dragging the cursor in circles. Double clicking on a part of the planet will center that portion in the view.</p>
 
 <br>
 
@@ -194,11 +194,11 @@ This changes the star image and the lighting on the planet. </p>
 <p>This projects a Saturn Type ring system above the planet with an inclination of 30&deg from the Equator.</p>
 
 <h3>Standard orbits</h3>
-<p>This projects three circular orbital paths above the planet.</p>
+<p>This projects three circular orbital trajectories above the planet.</p>
 
 <h3>Rotation</h3>
 <p>This toggles rotation. Useful for tidally locked worlds and alleviating dizziness.
-For tidally locked worlds, set the axial tilt to zero, wait for the hot hemisphere to face the sun then stop rotation.
+For tidally locked worlds, set the axial tilt to zero, wait for the hot hemisphere to face the sun, then stop rotation.
 The rotation is currently set to 40 seconds.
 If the world has a hot pole, set the tilt to 90&deg.</p>
 
@@ -286,17 +286,17 @@ This is the final map that the viewer can use. Name it something appropriate. Th
 
 
 <h3>Known issues</h3>
-<p>The animated 3D display is accomplished with the X3D JavaScript library. There is a difficulty with multi-layer transparent images in X3D. This manifests as some weird effects when displaying clouds and rings on the night side of the planets. When the good coders at X3D work out a solution, I will update the library. In the mean time, consider it a neurological side effect of hyperspace travel. Veteran travellers recommend a large Gin & Tonic. Cheers!</p>
+<p>The animated 3D display is accomplished with the X3D JavaScript library. EDIT: This bug has been solved!  <s>There is a difficulty with multi-layer transparent images in X3D. This manifests as some weird effects when displaying clouds and rings on the night side of the planets. When the good coders at X3D work out a solution, I will update the library. In the mean time, consider it a neurological side effect of hyperspace travel.</s> Veteran travellers recommend a large Gin & Tonic. Cheers!</p>
 
 <p>Rotation and Axial Tilt are linked mathematically. Changing the Axial Tilt when Rotation is off yields unexpected results. Toggling rotation on and off resets the tilt to match the desired angle.</p>
 
 <p>There are too many star types to account for all of them. In future, I may install a custom star image option.
 </p>
 
-<p>The atmospheric cloud effect is achieved with a transparent png image. It rotates independently of the world to foster an illusion of climate. It's there to look pretty. See transparency bug above.
+<p>The atmospheric cloud effect is achieved with a transparent png image. It rotates independently of the world to foster an illusion of climate. It's there to look pretty.
 </p>
 
-<p>The Ring system is a static image. Pretty for pretty's sake. Nothing more. Same transparency bug.
+<p>The Ring system is a static image. Pretty for pretty's sake. Nothing more.
 </p>
 
 <p>Rotation is fixed at 40 seconds. It is there to allow a game master to correctly show day/night conditions, or correctly orient a tidal locked world.
@@ -307,8 +307,7 @@ This is the final map that the viewer can use. Name it something appropriate. Th
 <p>
 </p>
 
-<p>This web application is entirely JavaScript. Nothing is stored on any server or downloaded to your device except for the image you "save as".
-The source code is open and available in <a href="https://github.com/morfyddjames/morfyddjames.github.io" target="_blank" >GitHub.</a> </p>
+<p>This web application is entirely JavaScript. There is no backend. Nothing is stored on any server or downloaded to your device except for the image you "save as". There are no cookies and no tracking scripts. The source code is open and available in <a href="https://github.com/morfyddjames/morfyddjames.github.io" target="_blank" >GitHub.</a> </p>
 
 <!--
 Use the #id selector
