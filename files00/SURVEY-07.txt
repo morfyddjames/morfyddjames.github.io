@@ -1,0 +1,44 @@
+Jovian Rally Playtest Survey
+
+Play some solo games and some games with friends.
+
+What parts of the written rules seemed the most confusing or poorly worded?
+
+How long did it take to play through the game solo/group ? 
+
+What were the scores?
+How much fuel was left in the tank?
+How often did players run out of gas?
+
+The first version of the game have 27 moons in 9 rows (pelotons),
+I reduced it to 21 in 7. Is the game too long/short?
+
+Do you feel a "World Cup" style sporting event fits within the Traveller universe and with player scenarios?
+
+How can the game material add to the Traveller player's experience in a way that enhances roleplay and intrigue?
+
+What printable props does the game lack?
+
+What downloadable/online features would better serve game masters and players? 
+
+What was the fun level of this version?
+(Tedius Bore.)? >> (Play Again!)?
+
+There is a deep flaw in the current scoring system.
+Can you find it? How can we determine the most skilled player based on "Starting Fuel, "Used Fuel", "Remaining Fuel" ?
+
+Thank you very much for playtesting. We make the world better by sharing. This game will be release for free to all under the a license. 
+Evil hates it when we share. -- Morfydd James (Molly)
+
+The game is based on the "Travelling Salesman Problem" and Nasa "Delta-V Budget" Maps.
+Here are some links for reading about the inspiration:
+
+Travelling salesman problem
+https://en.wikipedia.org/wiki/Travelling_salesman_problem
+
+delta-v budget link 
+https://en.wikipedia.org/wiki/Delta-v_budget
+
+-- Molly
+
+
