@@ -339,6 +339,14 @@ function full_light_on(){
 }
 
 
+function satellite_on(){
+	if(document.getElementById("satellitesw").checked != true)
+	{document.querySelector('#satellite').setAttribute("render", "false"); console.log("cb.ring="+" false");
+	} else {document.querySelector('#satellite').setAttribute("render", "true");  console.log("cb.ring="+"true");}
+}
+
+
+
 //<ROUTE ID="stupid" fromNode='spinThings' fromField='value_changed' toNode='world'  toField='set_rotation'></ROUTE>
 //<label class="switch"> STOP
 //  <input  ID="stopsw"  type="checkbox" checked   onchange="stop_start()";>
@@ -438,6 +446,14 @@ function full_light_on(){
   <span class="slider"></span>
 </label>
 
+
+<label class="switch"> Satellite
+  <input ID="satellitesw" type="checkbox" unchecked  onchange="satellite_on()";	>
+  <span class="slider"></span>
+</label>
+
+
+	
 <br>
 
 Optional Text: <input type="text" placeholder="text" id="worldname"  onkeyup="validateOnlyTextField(this)"  onchange="changename();">
@@ -618,7 +634,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 <!-- THIS IS SPACECRAFT ZIPPING ROUND - A SIMPLE 1x4x9 MONOLITH HERE WITH NO TEXTURE  -->
 <transform DEF='spacecraft'   translation="3.5 0 0" center="-3.5 0 0" rotation="1 0 0 1"  >
-	<shape  render="true" >
+	<shape  ID="satellite"  render="false" >
                 <appearance>
 			<material diffuseColor='1.0 0.2 1.0' specularColor="1.0 0.05 0.25" shininess='0.3'  emissiveColor='0 0 1'  ></material>
 			<!--ImageTexture id="spacecraft" url=""  ></ImageTexture-->
