@@ -351,7 +351,7 @@ function full_light_on(){
 </head>
 
 	<!-- A WEB DESIGNER COULD MAKE THIS ALL PRETTY -->
-<body  id="main", bgcolor="green" ;> <!--   background="starfield-001."; -->
+<body  id="main", bgcolor="green" ;> <!--   background="starfield-001.png"; -->
 	<div id='title'>
 
 <h1><a href="https://morfyddjames.github.io/index.html"><img src="Sunburst-Traveller.png" height="35" width="35" ></a> Traveller World Viewer</h1>
@@ -447,7 +447,7 @@ Optional Text: <input type="text" placeholder="text" id="worldname"  onkeyup="va
 Select a Traveller World Map you have <a href="https://morfyddjames.github.io/platecarree.html" target="_blank">converted<a> to Plate-Carr&#233;e format:<br>
 <input type="file" onchange="encodeImageFileAsURL(this)" />
 <!-- THIS BIT OF JAVASCRIPT ALLOWS A USERS MAP TO BE DISPLAYED -->
-<!-- IM PRETTY SURE X3D PREFERS IMAGES IN  FORMAT; AVOID JPEG-->
+<!-- IM PRETTY SURE X3D PREFERS IMAGES IN PNG FORMAT; AVOID JPEG-->
 </code>
     <script>
       function encodeImageFileAsURL(element) {
@@ -532,8 +532,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
                 <appearance   sortKey="1" sortType="opaque"  >
 		<material diffuseColor='1.0 1.O 1.0' specularColor="0.25 0.25 0.25" shininess='0.3' ></material>
 
-		<!--ImageTexture id="worldmap" url="icohex360seaw.png"  ></ImageTexture-->
-		<ImageTexture id="worldmap" url="becksworld-eq.png"  ></ImageTexture>
+		<ImageTexture id="worldmap" url="icohex360seaw.png"  ></ImageTexture>
 
 		</appearance>
 	<sphere radius="3"   Solid="true"   > </sphere>
@@ -766,10 +765,8 @@ Many Plate-Carr&#233;e images are available on-line for the Solar System Planets
 
 <br>
 An <a href="https://morfyddjames.github.io/essay01.html" target="_blank" >essay</a> on Planetary Cartography and Traveller.
-<br>
-<br>This web application is 100% open source javascript written by a human being. No A.I. is permitted here. No exceptions.  <br><br>
 </code>
-
+<br> <br>
 	
 	
 <h4>
@@ -790,4 +787,3 @@ Because Blue is Heavier<br>
 		<!--material diffuseColor='0.5 0.2 1.0' specularColor="0.12 0.05 0.25" shininess='0.3' ></material-->
 		<!-- Description of various orbit types used by nasa https://youtu.be/PZAkiXNJIqc-->
 </html> 
-
