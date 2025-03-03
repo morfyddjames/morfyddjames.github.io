@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Icosahedral to Equirectangular Converter</title>
+
+
+
+<style>
+.img-radio {
+  float: left;
+  text-align: center;
+  margin: 8px;
+}
+<!--h5 { clear: both; }-->
+
+
+body	{margin:40px;
+		background: #000011; font-size:110%;
+		font-family:verdana, sans-serif;
+		margin: 3em; color: yellow;}
+	#primary	{background:#222; border:#ff0 2px solid;}
+	#demifacet	{background:#0000; border:#000 2px solid;}
+	#panel_ARCT	{background:#0000; border:#0f0 2px solid;}
+	#panel_ARCT_R	{background:#0000; border:#0f0 2px solid;}
+	#panel_TROP	{background:#0000; border:#00f 2px solid;}
+	#panel_TROP_R	{background:#0000; border:#00f 2px solid;}
+	#outputmap	{background:#f000; border:#f0f 2px solid;}
+	code{	font-size:110%;
+		font-family:verdana, sans-serif;
+		margin: 3em;
+		color: yellow;}
+	h1{	color: #ff11ff;}
+	
+	
+	@font-face {
+		font-family:OPTIMA;
+		src:url(unicode.optima.ttf);}
+
+	x3d {	border:0px solid green;
+		background: rgba(0, 0, 0, 1);}
+
+		a:link		{color: #ff11ff;}
+		a:visited	{color: #ff11ff;}
+		a:hover		{color: cyan;}
+		a:active	{color: red;}
+
+	body{	font-size:110%;
+		font-family:verdana, sans-serif;
+			font-family: "OPTIMA", Arial, sans-serif;
+		background-color:#000011;
+		margin-left: 3em;
+		margin-right: 3em;
+		margin-bottom: 3em;
+		margin-top: 0px;
+		color: yellow;}
+	code{	font-size:110%;
+		font-family:verdana, sans-serif;
+		margin: 3em;
+		color: yellow;}
+
+	hr{	display: block;
+		background-color: red;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-left: auto;
+		margin-right: auto;
+		border-width: 0px;
+		height: 6px;}
+
+	h0{	font-family: "OPTIMA", Arial, sans-serif;
+		float: right;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-right: 0.5em;
+		margin-left: 0.5em;
+		font-family: "OPTIMA", Arial, sans-serif;
+		font-style: italic;
+		font-size: 3em;
+		font-weight: bold;
+		color: red;
+		text-align: right;
+		border-top: 0px solid red;}
+
+	h1{	margin-top: 5px;
+		margin-bottom: 5px;
+		padding: 0 0 0 0;
+		color: #ffffff;
+		line-height: 0px;
+		font-style: italic;}
+
+	#toggler {
+		position: relative;
+		float:right;
+		z-index:100;
+		top: 0;
+		left: 0;
+		width: 10em;
+		height: 2em;
+		border:1px solid #666;
+		background-color:#202021;
+		color:#ccc;
+	}
+	#toggler:hover {
+		background-color:blue;
+	}
+	#mainx3dwindow {
+		width: 75%;
+		height: 75%;
+	}
+
+	h2{	font-family: "OPTIMA", Arial, sans-serif;
+		float: right;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-right: 0.5em;
+		margin-left: 0.5em;
+		font-family: "OPTIMA", Arial, sans-serif;
+		font-style: italic;
+		font-size: 1em;
+		font-weight: bold;
+		color: white;
+		text-align: right;
+		border-top: 0px;}
+
+	h4{	font-family: "OPTIMA", Arial, sans-serif;
+		float: left;
+		margin-top: 0em;
+		margin-bottom: 0em;
+		margin-right: 0.5em;
+		margin-left: 0.5em;
+		font-family: "OPTIMA", Arial, sans-serif;
+		font-style: italic;
+		font-size: 0.75em;
+		font-weight: bold;
+		color: white;
+		text-align: left;
+		border-top: 0px;}
+
+
+
+</style>
+
+</head>
+<body bgcolor="000011";>
+
+	
+<h1><a href="https://morfyddjames.github.io/index.html"><img src="Sunburst-Traveller.png" height="35" width="35" ></a> Traveller World Viewer -- Map Converter</h1>
+
+<hr>
+	<h0>TRAVELLER</h0><br><br><br>
+	<h2>Science Fiction Adventure<br>in the Far Future</h2>
+	<br><br>
+	<h1 hidden ><a href="https://morfyddjames.github.io/index.html">Traveller World Viewer</a></h1> 
+
+	
+<h1>Icohex Converter by Joshua Bell</h1> <br><br><br>
+
+
+<h5>1. Select map image</h2>
+<form id=image>
+<input type=file accept="image/*" name=image>
+<br><img id=loaded height=100>
+</form>
+
+<h5>2. Select map type</h2>
+<form id=options>
+<label class=img-radio>
+<input type=radio name=split value=top checked> Top<br>
+<img src="split_top.png">
+</label>
+
+<label class=img-radio>
+<input type=radio name=split value=bottom> Bottom<br>
+<img src="split_bottom.png">
+</label>
+
+<label class=img-radio>
+<input type=radio name=split value=none> None<br>
+<img src="split_none.png">
+</label>
+
+</form>
+
+<h5>3. Results</h2>
+<canvas style='border: 5px solid red;' width=4096 height=2048></canvas>
+
+<script src=ico2equi.js></script>
+
+</body>
+</html>
