@@ -30,8 +30,6 @@
 	<!--script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-full.js'> </script-->
 	<script type='text/javascript' src='x3dom-full.js'> </script>
 
-
-	
 	<!--link rel='stylesheet' type='text/css' href='https://www.x3dom.org/download/x3dom.css'-->
 	<link rel='stylesheet' type='text/css' href='x3dom.css'>
 
@@ -151,7 +149,6 @@
 
 			var zoomed = false;
 			
-			
 			function toggle(elm) {
 
 				b = document.getElementById('main')
@@ -197,16 +194,6 @@ const screenheight = screen.height ;   console.log("screenheight = "+ `${screenh
 document.querySelector('#mainwindow').setAttribute('width', `${screenwidth}`);
 document.querySelector('#mainwindow').setAttribute('height', `${screenheight}`);
 
-
-// /// RANOM PLANET TEST
-const planet_texture_list = ["Bantral.png", "Becksworld.png", "Belgard.png", "Berengaria.png", "Braudel.png", "Calefaction.png", "Chalchiutlicue.png", "Cordillon.png", "Egypt.png", "Gollere.png", "Regina.png", "Vanejen.png", "Vior.png", "Walston.png"; 
-var planet_num = Math.floor(Math.random() * 12); // 0...11
-imagetexnameurl = planet_texture_list[planet_num];
-document.getElementById("worldmap").url = imagetexnameurl;
-// /// RANOM PLANET TEST
-
-
-	
 }	// END screensize
 </script>
 
