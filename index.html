@@ -30,6 +30,21 @@
 	<!--script type='text/javascript' src='https://x3dom.org/download/dev/x3dom-full.js'> </script-->
 	<script type='text/javascript' src='x3dom-full.js'> </script>
 
+<script type='text/javascript' 	
+// ///////////////////////////////////////////////////////////
+// /////////////////// random planet test ////////////////////////
+	const planet_texture_list = [Textures/Bantral.png, Textures/Becksworld.png, Textures/Belgard.png, Textures/Berengaria.png, Textures/Braudel.png, Textures/Calefaction.png, Textures/Chalchiutlicue.png, Textures/Cordillon.png, Textures/Egypt.png, Textures/Gollere.png, Textures/Regina.png, Textures/Vanejen.png, Textures/Vior.png, Textures/Walston.png; 
+
+	var planet_num = Math.floor(Math.random() * 12); // 0...11
+	imagetexnameurl = planet_texture_list[planet_num];
+	document.getElementById("worldmap").url = imagetexnameurl;
+
+// ///////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////
+ </script>
+
+
+	
 	<!--link rel='stylesheet' type='text/css' href='https://www.x3dom.org/download/x3dom.css'-->
 	<link rel='stylesheet' type='text/css' href='x3dom.css'>
 
