@@ -148,13 +148,14 @@
 		<script type="text/javascript">
 // ///////////////////////////////////////////////////////////
 // /////////////////// random planet test ////////////////////////
-//function random_planet(){
-	const planet_texture_list = [Bantral.png, Becksworld.png, Belgard.png, Berengaria.png, Braudel.png, Calefaction.png, Chalchiutlicue.png, Cordillon.png, Egypt.png, Gollere.png, Regina.png, Vanejen.png, Vior.png, Walston.png; 
+// function random_planet(){
+	const planet_texture_list = ["Bantral.png", "Becksworld.png", "Belgard.png", "Berengaria.png", "Braudel.png", "Calefaction.png", "Chalchiutlicue.png", "Cordillon.png", "Egypt.png", "Gollere.png", "Regina.png", "Vanejen.png", "Vior.png", "Walston.png"; 
 
 	var planet_num = Math.floor(Math.random() * 12); // 0...11
 	imagetexnameurl = planet_texture_list[planet_num];
-	document.getElementById("worldmap") = imagetexnameurl;
-//}
+//	document.getElementById("worldmap") = imagetexnameurl;
+	document.querySelector('#worldmap').setAttribute("url", imagetexnameurl);
+// }
 // ///////////////////////////////////////////////////////////
 // ///////////////////////////////////////////////////////////
 			var zoomed = false;
