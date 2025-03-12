@@ -151,12 +151,6 @@
 
 			var zoomed = false;
 			
-// /// RANOM PLANET TEST
-const planet_texture_list = ["Bantral.png", "Becksworld.png", "Belgard.png", "Berengaria.png", "Braudel.png", "Calefaction.png", "Chalchiutlicue.png", "Cordillon.png", "Egypt.png", "Gollere.png", "Regina.png", "Vanejen.png", "Vior.png", "Walston.png"; 
-var planet_num = Math.floor(Math.random() * 12); // 0...11
-imagetexnameurl = planet_texture_list[planet_num];
-document.getElementById("worldmap").url = imagetexnameurl;
-// /// RANOM PLANET TEST
 			
 			function toggle(elm) {
 
@@ -202,6 +196,15 @@ const screenheight = screen.height ;   console.log("screenheight = "+ `${screenh
 /*<x3d id='mainwindow' width='1500px' height='900px' profile='Immersive' version='3.3'  border="green"*/
 document.querySelector('#mainwindow').setAttribute('width', `${screenwidth}`);
 document.querySelector('#mainwindow').setAttribute('height', `${screenheight}`);
+
+
+// /// RANOM PLANET TEST
+const planet_texture_list = ["Bantral.png", "Becksworld.png", "Belgard.png", "Berengaria.png", "Braudel.png", "Calefaction.png", "Chalchiutlicue.png", "Cordillon.png", "Egypt.png", "Gollere.png", "Regina.png", "Vanejen.png", "Vior.png", "Walston.png"; 
+var planet_num = Math.floor(Math.random() * 12); // 0...11
+imagetexnameurl = planet_texture_list[planet_num];
+document.getElementById("worldmap").url = imagetexnameurl;
+// /// RANOM PLANET TEST
+
 
 	
 }	// END screensize
