@@ -502,7 +502,7 @@ else { // ELSE STATEMENT 2
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //	START THE INTERPOLATOR TO GET RID OF THE TRANSPARENT PIXELS THAT GOT SKIPPED
-/*
+
 var imagedata = ctxOUTmap.getImageData(0,0,outputwidth,outputheight);
 var dataxy = imagedata.data;
 dataxy[0] = 255;dataxy[1] = 255;dataxy[2] = 255;dataxy[3] = 255; // SET FIRST PIXEL TO OPAQUE WHITE
@@ -513,15 +513,18 @@ for(var xy = 4; xy < dataxy.length; xy += 4 )
 		dataxy[xy] = dataxy[xy - 4];
 		dataxy[xy + 1] = dataxy[xy - 3];
 		dataxy[xy + 2] = dataxy[xy - 2];
-		dataxy[xy + 3] = 255;
+		//dataxy[xy + 3] = 255;
 	}
 	dataxy[xy + 3] = 255;	// FFYCING HELL !! I SPENT AN HOUR TRYING == 0.  DOES THE BROWSER SCREW WITH TRANSPARENCY???
 }
 
 ctxOUTmap.putImageData(imagedata,0,0);
-*/
-//	START THE INTERPOLATOR TO GET RID OF THE TRANSPARENT PIXELS THAT GOT SKIPPED
 
+
+/*
+//	START THE TTEESSTT INTERPOLATOR TO GET RID OF THE TRANSPARENT PIXELS THAT GOT SKIPPED
+//	THIS IS A VERTICAL VERSION THAT LOOKED TERRIBLE SO STICK WITH THE HORIZONTAL ONE
+	
 var imagedata = ctxOUTmap.getImageData(0,0,outputwidth,outputheight);
 var imagedatawidth = 4 * outputwidth; // This variable sets the first line of data width
 
@@ -556,7 +559,7 @@ for(var xy = imagedatawidth; xy < dataxy.length; xy += 4 )	// THIS LOOP RUNS THE
 }
 
 ctxOUTmap.putImageData(imagedata,0,0);
-
+*/
 
 
 	
