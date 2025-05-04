@@ -545,14 +545,14 @@ for(var xy = 4; xy < imagedatawidth; xy += 4 )	// THIS LOOP RUNS THE FIRST LINE
 
 for(var xy = imagedatawidth; xy < dataxy.length; xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE PAST THE FIRST LINE
 {
-	if (4 == 5) // if(dataxy[xy + 3] == 0)
+	if(dataxy[xy + 3] == 0)
 	{
 		dataxy[xy] = dataxy[xy - imagedatawidth];
 		dataxy[xy + 1] = dataxy[xy - imagedatawidth + 1];
 		dataxy[xy + 2] = dataxy[xy - imagedatawidth + 2];
 		//dataxy[xy + 3] = 255;
 	}
-	//dataxy[xy + 3] = 255;	// make opaque
+	dataxy[xy + 3] = 255;	// make opaque
 }
 
 ctxOUTmap.putImageData(imagedata,0,0);
