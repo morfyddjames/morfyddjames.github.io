@@ -548,8 +548,8 @@ for(var xy = imagedatawidth; xy < dataxy.length; xy += 4 )	// THIS LOOP RUNS THE
 	if(dataxy[xy + 3] == 0)
 	{
 		dataxy[xy] = dataxy[xy - imagedatawidth];
-		dataxy[xy + 1] = dataxy[xy - imagedatawidth];
-		dataxy[xy + 2] = dataxy[xy - imagedatawidth];
+		dataxy[xy + 1] = dataxy[xy - imagedatawidth + 1];
+		dataxy[xy + 2] = dataxy[xy - imagedatawidth + 2];
 		dataxy[xy + 3] = 255;
 	}
 	dataxy[xy + 3] = 255;	// make opaque
