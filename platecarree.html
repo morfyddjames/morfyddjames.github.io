@@ -505,64 +505,37 @@ else { // ELSE STATEMENT 2
 
 var imagedata = ctxOUTmap.getImageData(0,0,outputwidth,outputheight);
 var dataxy = imagedata.data;
+var imagedatawidth = 4 * outputwidth; // THIS SETS THE WIDTH OF A SINGLE LINE
+
+
+// BEGIN SHIFT UP ONE LINE
+for(var xy = 0; xy < dataxy.length - imagedatawidth; xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE ALL BUT THE LAST LINE
+{
+	if(dataxy[xy + 3] == 0)
+	{
+		dataxy[xy] = dataxy[xy + imagedatawidth];
+		dataxy[xy + 1] = dataxy[xy + imagedatawidth + 1];
+		dataxy[xy + 2] = dataxy[xy + imagedatawidth + 2];
+	}
+	//dataxy[xy + 3] = 255;	// make opaque
+}
+
+
 dataxy[0] = 255;dataxy[1] = 255;dataxy[2] = 255;dataxy[3] = 255; // SET FIRST PIXEL TO OPAQUE WHITE
-for(var xy = 4; xy < dataxy.length; xy += 4 )
+
+for(var xy = 4; xy < dataxy.length; xy += 4 ) // SMEAR ALL TRANSPARENCIES TO THE RIGHT
 {
 	if(dataxy[xy + 3] == 0)
 	{
 		dataxy[xy] = dataxy[xy - 4];
 		dataxy[xy + 1] = dataxy[xy - 3];
 		dataxy[xy + 2] = dataxy[xy - 2];
-		//dataxy[xy + 3] = 255;
 	}
-	dataxy[xy + 3] = 255;	// FFYCING HELL !! I SPENT AN HOUR TRYING == 0.  DOES THE BROWSER SCREW WITH TRANSPARENCY???
+	dataxy[xy + 3] = 255; // SET ALL TO OPAQUE
 }
 
 ctxOUTmap.putImageData(imagedata,0,0);
 
-
-/*
-//	START THE TTEESSTT INTERPOLATOR TO GET RID OF THE TRANSPARENT PIXELS THAT GOT SKIPPED
-//	THIS IS A VERTICAL VERSION THAT LOOKED TERRIBLE SO STICK WITH THE HORIZONTAL ONE
-	
-var imagedata = ctxOUTmap.getImageData(0,0,outputwidth,outputheight);
-var imagedatawidth = 4 * outputwidth; // This variable sets the first line of data width
-
-
-var dataxy = imagedata.data;
-
-if(dataxy[xy + 3] == 0)
-	{dataxy[0] = 255;dataxy[1] = 255;dataxy[2] = 255;dataxy[3] = 255} // SET FIRST PIXEL TO OPAQUE WHITE IF NULL
-
-for(var xy = 4; xy < imagedatawidth; xy += 4 )	// THIS LOOP RUNS THE FIRST LINE
-{
-	if(dataxy[xy + 3] == 0)
-	{
-		dataxy[xy] = dataxy[xy - 4];
-		dataxy[xy + 1] = dataxy[xy - 3];
-		dataxy[xy + 2] = dataxy[xy - 2];
-		dataxy[xy + 3] = 255;
-	}
-	dataxy[xy + 3] = 255;	// make opaque
-}
-
-for(var xy = imagedatawidth; xy < dataxy.length; xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE PAST THE FIRST LINE
-{
-	if(dataxy[xy + 3] == 0)
-	{
-		dataxy[xy] = dataxy[xy - imagedatawidth];
-		dataxy[xy + 1] = dataxy[xy - imagedatawidth + 1];
-		dataxy[xy + 2] = dataxy[xy - imagedatawidth + 2];
-		//dataxy[xy + 3] = 255;
-	}
-	dataxy[xy + 3] = 255;	// make opaque
-}
-
-ctxOUTmap.putImageData(imagedata,0,0);
-*/
-
-
-	
 
 });	// END currentImage.addEventListener
 }	// END readysetgo
@@ -620,4 +593,3 @@ Use your new Plate-Carr&#233;e in the <a href="https://morfyddjames.github.io/in
 <!-- Morfydd James -->
 
 </html>
-
