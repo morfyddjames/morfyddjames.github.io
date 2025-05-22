@@ -509,6 +509,9 @@ var imagedatawidth = 4 * outputwidth; // THIS SETS THE WIDTH OF A SINGLE LINE
 
 
 // BEGIN SHIFT UP ONE LINE
+
+
+
 for(var xy = 4; xy < (dataxy.length - imagedatawidth); xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE ALL BUT THE LAST LINE
 {
 	if(dataxy[xy + 3] != 255)
@@ -518,6 +521,30 @@ for(var xy = 4; xy < (dataxy.length - imagedatawidth); xy += 4 )	// THIS LOOP RU
 		dataxy[xy + 2] = dataxy[(xy + imagedatawidth + 2)];
 	}
 }
+
+
+for(var xy = 4; xy < (dataxy.length - imagedatawidth); xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE ALL BUT THE LAST LINE
+{
+	if(dataxy[xy + 3] != 255)
+	{
+		dataxy[xy + 0] = dataxy[(xy + imagedatawidth + 0)];
+		dataxy[xy + 1] = dataxy[(xy + imagedatawidth + 1)];
+		dataxy[xy + 2] = dataxy[(xy + imagedatawidth + 2)];
+	}
+}
+
+
+for(var xy = 4; xy < (dataxy.length - imagedatawidth); xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE ALL BUT THE LAST LINE
+{
+	if(dataxy[xy + 3] != 255)
+	{
+		dataxy[xy + 0] = dataxy[(xy + imagedatawidth + 0)];
+		dataxy[xy + 1] = dataxy[(xy + imagedatawidth + 1)];
+		dataxy[xy + 2] = dataxy[(xy + imagedatawidth + 2)];
+	}
+}
+
+
 
 
 dataxy[0] = 255;dataxy[1] = 255;dataxy[2] = 255;dataxy[3] = 255; // SET FIRST PIXEL TO OPAQUE WHITE
