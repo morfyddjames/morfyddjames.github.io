@@ -509,15 +509,14 @@ var imagedatawidth = 4 * outputwidth; // THIS SETS THE WIDTH OF A SINGLE LINE
 
 
 // BEGIN SHIFT UP ONE LINE
-for(var xy = 1; xy < dataxy.length - imagedatawidth; xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE ALL BUT THE LAST LINE
+for(var xy = 4; xy < (dataxy.length - imagedatawidth); xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE ALL BUT THE LAST LINE
 {
 	if(dataxy[xy + 3] == 0)
 	{
-		dataxy[xy] = dataxy[xy + imagedatawidth];
-		dataxy[xy + 1] = dataxy[xy + imagedatawidth + 1];
-		dataxy[xy + 2] = dataxy[xy + imagedatawidth + 2];
+		dataxy[xy + 0] = dataxy[(xy + imagedatawidth + 0)];
+		dataxy[xy + 1] = dataxy[(xy + imagedatawidth + 1)];
+		dataxy[xy + 2] = dataxy[(xy + imagedatawidth + 2)];
 	}
-	//dataxy[xy + 3] = 255;	// make opaque
 }
 
 
@@ -527,7 +526,7 @@ for(var xy = 4; xy < dataxy.length; xy += 4 ) // SMEAR ALL TRANSPARENCIES TO THE
 {
 	if(dataxy[xy + 3] == 0)
 	{
-		dataxy[xy] = dataxy[xy - 4];
+		dataxy[xy + 0] = dataxy[xy - 4];
 		dataxy[xy + 1] = dataxy[xy - 3];
 		dataxy[xy + 2] = dataxy[xy - 2];
 	}
