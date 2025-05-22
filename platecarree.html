@@ -509,7 +509,7 @@ var imagedatawidth = 4 * outputwidth; // THIS SETS THE WIDTH OF A SINGLE LINE
 
 
 // BEGIN SHIFT UP ONE LINE
-for(var xy = 0; xy < dataxy.length - imagedatawidth; xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE ALL BUT THE LAST LINE
+for(var xy = 1; xy < dataxy.length - imagedatawidth; xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE ALL BUT THE LAST LINE
 {
 	if(dataxy[xy + 3] == 0)
 	{
