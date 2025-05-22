@@ -548,7 +548,7 @@ for(var xy = 4; xy < (dataxy.length - imagedatawidth); xy += 4 )	// THIS LOOP RU
 
 
 dataxy[0] = 255;dataxy[1] = 255;dataxy[2] = 255;dataxy[3] = 255; // SET FIRST PIXEL TO OPAQUE WHITE
-
+/*
 for(var xy = 4; xy < dataxy.length; xy += 4 ) // SMEAR ALL TRANSPARENCIES TO THE RIGHT
 {
 	if(dataxy[xy + 3] == 0)
@@ -559,7 +559,7 @@ for(var xy = 4; xy < dataxy.length; xy += 4 ) // SMEAR ALL TRANSPARENCIES TO THE
 	}
 	dataxy[xy + 3] = 255; // SET ALL TO OPAQUE
 }
-
+*/
 ctxOUTmap.putImageData(imagedata,0,0);
 
 
