@@ -519,30 +519,12 @@ for(var xy = 4; xy < (dataxy.length - imagedatawidth-4); xy += 4 )	// THIS LOOP 
 		dataxy[xy + 0] = dataxy[(xy + imagedatawidth + 0)];
 		dataxy[xy + 1] = dataxy[(xy + imagedatawidth + 1)];
 		dataxy[xy + 2] = dataxy[(xy + imagedatawidth + 2)];
+		dataxy[xy + 3] = 255; // SET ALL TO OPAQUE
+
 	}
 }
 
 
-for(var xy = 4; xy < (dataxy.length - imagedatawidth-4); xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE ALL BUT THE LAST LINE
-{
-	if(dataxy[xy + 3] == 0)
-	{
-		dataxy[xy + 0] = dataxy[(xy + imagedatawidth + 0)];
-		dataxy[xy + 1] = dataxy[(xy + imagedatawidth + 1)];
-		dataxy[xy + 2] = dataxy[(xy + imagedatawidth + 2)];
-	}
-}
-
-
-for(var xy = 4; xy < (dataxy.length - imagedatawidth-4); xy += 4 )	// THIS LOOP RUNS THE WHOLE IMAGE ALL BUT THE LAST LINE
-{
-	if(dataxy[xy + 3] == 0)
-	{
-		dataxy[xy + 0] = dataxy[(xy + imagedatawidth + 0)];
-		dataxy[xy + 1] = dataxy[(xy + imagedatawidth + 1)];
-		dataxy[xy + 2] = dataxy[(xy + imagedatawidth + 2)];
-	}
-}
 
 
 
