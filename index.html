@@ -564,6 +564,14 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 
 
+<Shape>
+	<Arc2D endAngle='0' radius='4' startAngle='4.5' />
+	<Appearance DEF='arcColor'>
+		<Material diffuseColor='1 0 0' emissiveColor='0 0 1' specularColor='0 .8 0'/>
+	</Appearance>
+</Shape>
+
+
 <!-- THIS IS THE PLANETS CLOUDS- SET render="true" TO TEST (GLITCHY ON FIREFOX ; THE PLANET DISSAPEARS ABOVE THE EQUATOR)  -->
 <transform DEF='clouds' rotation='0 1 0 0' >
 	<shape ID="cloudon" render="false" >
