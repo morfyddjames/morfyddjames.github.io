@@ -566,7 +566,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <transform scale=' 0.4 1.0 1.0' translation='0.0 12.8 0.0 ' >
 <transform center='0 -12.8 0' rotation='1 0 0 -0.5' >
 <transform rotation='0 1 0 -0.2'  >
-<Shape>
+<Shape  ID="orbit1"  render="false" >
 	<Appearance DEF='MagentaAppearance'>
 		<Material  emissiveColor='1 0 1'  />
 	</Appearance>
@@ -576,7 +576,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 <!-- ORBIT ARC TEST LEO 30 DEGREES PROGRADE cyan -->
 <transform rotation='1 0 0 -1.1'  >
-<Shape>
+<Shape  ID="orbit2"  render="false" >
 	<Appearance DEF='MagentaAppearance1'>
 		<Material  emissiveColor='0 1 1'  />
 	</Appearance>
@@ -586,7 +586,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 <!-- ORBIT ARC TEST SUNSYNC 98 DEGREES RETROGRADE yellow -->
 <transform rotation='0 1 0 -7.2'  >
-<Shape>
+<Shape  ID="orbit2"  render="false" >
 	<Appearance DEF='MagentaAppearance2'>
 		<Material  emissiveColor='1 1 0'  />
 	</Appearance>
@@ -629,7 +629,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <!--AN ORBIT PATH 1 -->
 <transform  rotation='1 0 0 1.8'>
 <transform    rotation='0 1 0 0.07'>
-	<shape ID="orbit1"  render="false" >
+	<shape ID="orbit1-old"  render="false" >
 		<appearance>
 			<material  emissiveColor='0 1 1' specularColor='0 .8 0'  transparency='0'></material> 
 		</appearance>
@@ -643,7 +643,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <transform  rotation='1 0 0 1.8'>
 <transform    rotation='0 1 0 0.07'>
 <transform    rotation='0 1 0 -0.27'>
-	<shape ID="orbit2"   render="false" >
+	<shape ID="orbit2-old"   render="false" >
 		<appearance>
 			<material  emissiveColor='1 0 1' specularColor='0 .8 0'  transparency='0'></material> 
 		</appearance>
@@ -658,7 +658,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <transform  rotation='1 0 0 1.8'>
 <transform    rotation='0 1 0 0.07'>
 <transform    rotation='1 0 0 0.2'>
-	<shape ID="orbit3"   render="false" >
+	<shape ID="orbit3-old"   render="false" >
 		<appearance>
 			<material  emissiveColor='1 1 0' specularColor='0 .8 0'  transparency='0'></material> 
 		</appearance>
