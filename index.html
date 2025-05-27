@@ -588,14 +588,18 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <!-- ORBIT ARC TEST SUNSYNC 98 DEGREES RETROGRADE cyan -->
 <!--transform rotation='0 1 0 1.6' rotation='0 0 1 1.6' -->
 	<!-- ROTATION TEMPLATE XXX YYY ZZZ   -->
-<transform rotation='1 0 0 1.6' rotation='0 1 0 0.7' rotation='0 0 1 0.0' >
+<transform rotation='1 0 0  1.60' > <!--XXX-->
+<transform rotation='0 1 0  1.70' > <!--YYY-->
+<transform rotation='0 0 1  0.00' > <!--ZZZ-->
 	
-<Shape  ID="orbit3"  render="false" >
+<Shape  ID="orbit3"  render="true" >
 	<Appearance DEF='MagentaAppearance2'>
 		<Material  emissiveColor='0 1 1 '  />
 	</Appearance>
 <Arc2D endAngle='0.00' radius='5.0' startAngle='0.00'>  </Arc2D>
 </Shape>
+</transform>
+</transform>
 </transform>
 
 	
@@ -606,7 +610,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 <transform rotation='0 1 0  1.00' > <!--YYY-->
 <transform rotation='0 0 1  0.00' > <!--ZZZ-->
 	
-<Shape  ID="orbit4"  render="true" >
+<Shape  ID="orbit4"  render="false" >
 	<Appearance DEF='MagentaAppearance4'>
 		<Material  emissiveColor='1 1 1'  />
 	</Appearance>
