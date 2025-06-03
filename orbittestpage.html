@@ -226,7 +226,7 @@ function changetilt(){	// THIS WAS DIFFICULT DUE TO MULTIPLE NESTED AXIIS ROTATI
   B     170 191 255  #aabfff=	0.664 0.776 0.999
   A     202 215 255  #cad7ff=	0.789 0.840 0.999
   F     248 247 255  #f8f7ff=	0.968 0.964 0.999
-  G     255 244 234  #fff4ea=	0.999 0.953 0.914
+  G     255 244 4  #fff4ea=	0.999 0.953 0.914
   K     255 210 161  #ffd2a1=	0.999 0.820 0.629
   M     255 204 111  #ffcc6f=	0.999 0.787 0.433	*/
 
@@ -546,7 +546,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 <transform ID="world" DEF='world' rotation='0 1 0 0' >
 
-	<transform ID='axialtilt' DEF='AxialTilt' rotation='0 0 -1 0.4' >
+	<transform ID='axialtilt' DEF='AxialTilt' rotation='0 0 -1 0.0' >
 	<shape>
                 <appearance   sortKey="1" sortType="opaque"  >
 		<material diffuseColor='1.0 1.O 1.0' specularColor="0.25 0.25 0.25" shininess='0.8' ></material>
@@ -640,7 +640,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 	
 <!-- ORBIT ARRIVAL01 CYAN -->
 <transform rotation='0 1 0  0.00' > <!--YYY-->
-<transform rotation='1 0 0  0.79' > <!--XXX-->
+<transform rotation='1 0 0  0.00' > <!--XXX-->
 <transform rotation='0 0 1  0.00' > <!--ZZZ-->
 
 <Shape  ID="A_orbit1"  render="true" >
@@ -656,8 +656,8 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 
 <!-- ORBIT ARRIVAL02 CYAN -->
-<transform rotation='0 1 0  1.05' > <!--YYY-->
-<transform rotation='1 0 0  0.79' > <!--XXX-->
+<transform rotation='0 1 0  0.52' > <!--YYY-->
+<transform rotation='1 0 0  0.00' > <!--XXX-->
 <transform rotation='0 0 1  0.00' > <!--ZZZ-->
 
 <Shape  ID="A_orbit2"  render="true" >
@@ -671,9 +671,9 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 </transform>
 
 
-<!-- ORBIT ARRIVAL03 RED -->
-<transform rotation='0 1 0  1.57' > <!--YYY-->
-<transform rotation='1 0 0  0.79' > <!--XXX-->
+<!-- ORBIT ARRIVAL03 CYAN -->
+<transform rotation='0 1 0  1.05' > <!--YYY-->
+<transform rotation='1 0 0  0.00' > <!--XXX-->
 <transform rotation='0 0 1  0.00' > <!--ZZZ-->
 
 <Shape  ID="A_orbit3"  render="true" >
@@ -689,8 +689,8 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 
 <!-- ORBIT ARRIVAL04 CYAN -->
-<transform rotation='0 1 0  2.09' > <!--YYY-->
-<transform rotation='1 0 0  0.79' > <!--XXX-->
+<transform rotation='0 1 0  1.57' > <!--YYY-->
+<transform rotation='1 0 0  0.00' > <!--XXX-->
 <transform rotation='0 0 1  0.00' > <!--ZZZ-->
 
 <Shape  ID="A_orbit4"  render="true" >
@@ -705,8 +705,8 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 
 <!-- ORBIT ARRIVAL05 CYAN -->
-<transform rotation='0 1 0  2.62' > <!--YYY-->
-<transform rotation='1 0 0  0.79' > <!--XXX-->
+<transform rotation='0 1 0  2.09' > <!--YYY-->
+<transform rotation='1 0 0  0.00' > <!--XXX-->
 <transform rotation='0 0 1  0.00' > <!--ZZZ-->
 
 <Shape  ID="A_orbit5"  render="true" >
@@ -722,7 +722,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 <!-- ORBIT ARRIVAL06 CYAN -->
 <transform rotation='0 1 0  2.62' > <!--YYY-->
-<transform rotation='1 0 0  0.79' > <!--XXX-->
+<transform rotation='1 0 0  0.00' > <!--XXX-->
 <transform rotation='0 0 1  0.00' > <!--ZZZ-->
 
 <Shape  ID="A_orbit6"  render="true" >
