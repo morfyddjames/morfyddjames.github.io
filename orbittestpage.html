@@ -226,7 +226,7 @@ function changetilt(){	// THIS WAS DIFFICULT DUE TO MULTIPLE NESTED AXIIS ROTATI
   B     170 191 255  #aabfff=	0.664 0.776 0.999
   A     202 215 255  #cad7ff=	0.789 0.840 0.999
   F     248 247 255  #f8f7ff=	0.968 0.964 0.999
-  G     255 244 4  #fff4ea=	0.999 0.953 0.914
+  G     255 244 234  #fff4ea=	0.999 0.953 0.914
   K     255 210 161  #ffd2a1=	0.999 0.820 0.629
   M     255 204 111  #ffcc6f=	0.999 0.787 0.433	*/
 
@@ -377,10 +377,10 @@ function satellite_on(){
 <!-- AXIAL TILT -->
 <br><label for="AxialTilt">Axial Tilt:</label>
 <select id="AxialTilt" name="AxialTilt"  onchange="changetilt();" >
-  <option value="3" selected >0</option>
+  <option value="3">0</option>
   <option value="10">10</option>
   <option value="20">20</option>
-  <option value="23.5">23</option>
+  <option value="23.5" selected >23</option>
   <option value="30">30</option>
   <option value="40">40</option>
   <option value="50">50</option>
@@ -837,80 +837,6 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 </transform>
 
 
-
-
-	
-
-<!-- THIS IS THE PLANETS CLOUDS- SET render="true" TO TEST (GLITCHY ON FIREFOX ; THE PLANET DISSAPEARS ABOVE THE EQUATOR)  -->
-<transform DEF='clouds' rotation='0 1 0 0' >
-	<shape ID="cloudon" render="false" >
-                <appearance   sortKey="2" >
-		<material diffuseColor='0 0 0 0' specularColor="0.12 0.05 0.25 0" shininess='0.8'   ></material>
-		<ImageTexture url=' "cloud.png" '></ImageTexture>
-		</appearance>
-	<sphere radius="3.05"   Solid="true"  > </sphere>
-	</shape>
-</transform>
-
-
-
-<!-- THIS IS THE PLANETS RING SYSTEM- ALSO GLITCHY  -->
-<!-- THIS SAME DISK2D THINGY CAN MAKE TILTED COLOUR CIRCLES LIKE ORBIT PATHS  -->
-<!-- THE RING IMAGE IS A SQUARE 512x512 PNG OF CONCENTRIC CIRCLES with HALF ALPHA TRANSPARENCY -->
-<transform  rotation='1 0 0 1.7'>
-<transform    rotation='0 1 0 -0.05'>
-	<shape ID="ringon"   render="false" >
-		<appearance  sortKey="3" >
-			<material diffuseColor='1 0 1 .2' emissiveColor='0 0 0' specularColor='0 .8 0'  transparency='0.2'></material> 
-			<ImageTexture id="ringimage" url="ringimage3.png"  ></ImageTexture>
-		</appearance>
-		<disk2d   innerRadius='5' outerRadius='9'  Solid="false"  ></disk2d>
-	</shape>
-</transform>
-</transform>
-
-
-<!--AN ORBIT PATH 1 -->
-<transform  rotation='1 0 0 1.8'>
-<transform    rotation='0 1 0 0.07'>
-	<shape ID="orbit1-old"  render="false" >
-		<appearance>
-			<material  emissiveColor='0 1 1' specularColor='0 .8 0'  transparency='0'></material> 
-		</appearance>
-		<disk2d   innerRadius='4' outerRadius='4.05'  Solid="false"  ></disk2d>
-	</shape>
-</transform>
-</transform>
-
-
-<!--AN ORBIT PATH 2 -->
-<transform  rotation='1 0 0 1.8'>
-<transform    rotation='0 1 0 0.07'>
-<transform    rotation='0 1 0 -0.27'>
-	<shape ID="orbit2-old"   render="false" >
-		<appearance>
-			<material  emissiveColor='1 0 1' specularColor='0 .8 0'  transparency='0'></material> 
-		</appearance>
-		<disk2d   innerRadius='4' outerRadius='4.05'  Solid="false"  ></disk2d>
-	</shape>
-</transform>
-</transform>
-</transform>
-
-
-<!--AN ORBIT PATH 3 -->
-<transform  rotation='1 0 0 1.8'>
-<transform    rotation='0 1 0 0.07'>
-<transform    rotation='1 0 0 0.2'>
-	<shape ID="orbit3-old"   render="false" >
-		<appearance>
-			<material  emissiveColor='1 1 0' specularColor='0 .8 0'  transparency='0'></material> 
-		</appearance>
-		<disk2d   innerRadius='4' outerRadius='4.05'  Solid="false"  ></disk2d>
-	</shape>
-</transform>
-</transform>
-</transform>
 
 
 <!-- THIS IS SPACECRAFT ZIPPING ROUND - A SIMPLE 1x4x9 MONOLITH HERE WITH NO TEXTURE  -->
