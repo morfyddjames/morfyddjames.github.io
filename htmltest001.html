@@ -5,7 +5,7 @@
 
 
 
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script id="MathJax-script" async src="tex-mml-chtml.js"></script>
 
 
 
@@ -15,10 +15,47 @@
 <h1>This is a Heading</h1>
 <p>This is a paragraph.</p>
 
-$$ h\Theta_\tau    \int e^x		$$	% THE IMPORTANT BIT
 
-\[ h\Theta_\tau    \int e^x		\]	% THE IMPORTANT BIT
+$$ \newline$$
+$$Period = T \newline$$
+$$SemiMajor Axis/Radius = A \newline$$
+$$Earth\ Radius = r \newline$$
+$$Equator\ Radius = r_\epsilon \newline$$
+$$Pole\ Radius = r_\rho \newline$$
+$$Mass\ of\ Earth = M \newline$$
+$$Universal\ Gravity\ Constant = G  \newline$$
+$$Angular\ Velocity = \omega  \newline$$
+$$Time\ in\ Seconds = t \newline$$
+$$Oblateness/flatness = f \newline$$
+$$J_2\ Perturbation = J_2 \newline$$
+$$Inclination = i \newline$$
 
-  
+
+
+\[ Period \qquad  T=2\pi \sqrt[2]{\frac{A^3}{ GM}} \]
+
+$$ SemiMajor Axis \qquad A=\sqrt[2]{\frac{GMT^2}{4\pi^2}} $$
+$$ Brachistochrone \qquad  X=R(T-\sin T)  $$
+$$ Brachistochrone \qquad   Y=R(1-\cos T)  $$
+$$ Brachistochrone \qquad   Slope = \cot(\frac{T}{2})  $$
+
+$$ Oblateness \qquad  f=\frac{\Delta A}{A} = \frac{5}{4} \frac{\omega^2a^3}{MG} =\frac{A_e-A_p}{A_e}  $$
+
+$$ J_2 = \frac{2f}{3}-\frac{A^3\omega^2}{3MG}    $$
+
+$$ Hohmann\, transfer \qquad   \Delta V_1=\sqrt{\frac{MG}{r_1}} \cdot \Bigg(\sqrt{\frac{2r_2}{r_1r_2}}-1  \Bigg)  $$
+
+$$  \Delta V_2=\sqrt{\frac{MG}{r_2}} \cdot \Bigg(1-\sqrt{\frac{2r_1}{r_1r_2}}  \Bigg)  $$
+$$  \Delta T = \pi \sqrt{\frac{(r_1+r_2)^3}{8MG}}  $$
+
+Inclination
+$$  V=\frac{2 \pi A}{T} = \omega \cdot A $$
+$$  \Delta V_i = 2V \cdot \sin(\frac{\Delta i}{2})  $$
+
+Lagrange Points \,\,
+
+$$ (L1,L2) \qquad r=R \cdot \sqrt[3]{\frac{MG}{3}}  $$
+$$ (L3) \qquad r=R \cdot \frac{7}{12} \cdot  MG    $$
+
 </body>
 </html> 
