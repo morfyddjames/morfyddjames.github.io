@@ -489,7 +489,7 @@ Select a Local File <input type="file" onchange="encodeImageFileAsURL(this)" />
 <button id="toggler" onclick="toggle('mainx3dwindow');return false;">Fullscreen</button>
 <x3d  id="mainwindow" width='100%' height='100%' profile='Immersive' version='3.3'  border="green"
 xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' 
-xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
+xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
  
 <scene>	<NavigationInfo id="head" headlight='false' type='"EXAMINE"'></NavigationInfo>
 
@@ -544,7 +544,7 @@ xsd:noNamespaceSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xs
 
 <!-- THIS IS THE PLANET HANGING IN SPACE WITH A PLATE-CARREE WRAPPED ROUND  -->
 
-<transform ID="world" DEF='world' rotation='0 1 0 0' >
+<transform ID="world" DEF='world' rotation='0 1 0 0' scale=' 0.4 1.0 1.0' >
 
 	<transform ID='axialtilt' DEF='AxialTilt' rotation='0 0 -1 0.4' >
 	<shape>
