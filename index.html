@@ -416,7 +416,9 @@ function satellite_on(){
   <option value="G" selected >G</option>
   <option value="K">K</option>
   <option value="M">M</option>
-</select> <br>
+</select> 
+	
+<br>
 
 <label class="switch"> Atmosphere
   <input  ID="cloudsw"  type="checkbox" unchecked   onchange="clouds_on()";>
@@ -430,34 +432,33 @@ function satellite_on(){
 
 <br>
 
-<label class="switch"> Standard Orbits
-  <input  ID="orbitsw"  type="checkbox" unchecked   onchange="orbits_on()";>
-  <span class="slider"></span>
+<label for="oblateness">Oblateness: 
+<input id="oblateness" type="number" name="oblateness" value="0" step="1" min="0" max="100"  />
 </label>
 
 <label class="switch"> Rotation
   <input  ID="stopsw"  type="checkbox" checked   onchange="stop_start()";>
   <span class="slider"></span>
 </label>
+
 <br>
 
-<label for="oblateness">Oblateness: 
-<input id="oblateness" type="number" name="oblateness" value="0" step="1" min="0" max="100"  />
-</label>
-
-	
-<label class="switch"> Full Illumination
-  <input ID="lightsw" type="checkbox" unchecked  onchange="full_light_on()";	>
+<label class="switch"> Standard Orbits
+  <input  ID="orbitsw"  type="checkbox" unchecked   onchange="orbits_on()";>
   <span class="slider"></span>
 </label>
-
 
 <label class="switch"> Satellite
   <input ID="satellitesw" type="checkbox" unchecked  onchange="satellite_on()";	>
   <span class="slider"></span>
 </label>
 
+<br>
 
+<label class="switch"> Full Illumination
+  <input ID="lightsw" type="checkbox" unchecked  onchange="full_light_on()";	>
+  <span class="slider"></span>
+</label>
 	
 <br>
 
