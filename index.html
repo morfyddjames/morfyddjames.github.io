@@ -432,9 +432,21 @@ function satellite_on(){
 
 <br>
 
-<label for="oblateness">Oblateness: 
-<input id="oblateness" type="number" name="oblateness" value="0" step="1" min="0" max="100"  />
+
+
+<!-- FIND FIND FIND OBLATE -->
+
+<label class="switch"> Oblateness: 
+  <input id="oblateness" type="number" name="oblateness" value="0" step="1" min="0" max="100"   onchange="oblatechange()";>
+  <span class="slider"></span>
 </label>
+
+<!-- FIND FIND FIND OBLATE -->
+
+	
+<!--label for="oblateness">Oblateness: 
+<input id="oblateness" type="number" name="oblateness" value="0" step="1" min="0" max="100"  />
+</label -->
 
 <label class="switch"> Rotation
   <input  ID="stopsw"  type="checkbox" checked   onchange="stop_start()";>
