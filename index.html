@@ -289,6 +289,17 @@ function changerot(){	// NOT FUNCTIONING // ???
 	console.log(document.querySelector('#timeworld').cycleInterval);
 };
 
+
+function oblatechange(){	// FIND FIND FIND FIND
+	console.log("Oblateness = " + document.querySelector('#oblateness').value);
+	const oblatenessPCT = document.querySelector('#oblateness').value * -0.01 + 1;
+	
+	const Q0 = 0; const Q1 = 0.5*Math.PI; const Q2 = 1*Math.PI; const Q3 = 1.5*Math.PI; const Q4 = 2*Math.PI; 
+	document.querySelector('#axialtilt').setAttribute('scale', `1.0 ${oblatenessPCT} 1.0`);
+ };
+
+
+	
 function changename(){
 	const worldname = document.querySelector('#worldname').value; console.log("worldname="+worldname);
 	if (worldname){ document.querySelector('#worldnamedisp').setAttribute("string", `${worldname}`);}
@@ -437,7 +448,7 @@ function satellite_on(){
 <!-- FIND FIND FIND OBLATE -->
 
 <label class="switch"> Oblateness: 
-  <input id="oblateness" type="number" name="oblateness" value="0" step="1" min="0" max="100"   onchange="oblatechange()";>
+  <input id="oblateness" type="number" name="oblateness" value="0" step="1" min="0" max="99"   onchange="oblatechange()";>
   <span class="slider"></span>
 </label>
 
