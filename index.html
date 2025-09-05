@@ -575,7 +575,6 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 <!-- THIS IS THE PLANET HANGING IN SPACE WITH A PLATE-CARREE WRAPPED ROUND  Note line 549 oblateness scale = '1.0 0.9588 1.0'   -->
 
 <transform ID="world" DEF='world'   rotation='0 1 0 0' >
-
 	<transform ID='axialtilt' DEF='AxialTilt' rotation='0 0 -1 0.4'  scale='1.0 0.9988 1.0'  >
 	<shape>
                 <appearance   sortKey="1" sortType="opaque"  >
@@ -668,8 +667,8 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 	
 
 <!-- THIS IS THE PLANETS CLOUDS- SET render="true" TO TEST (GLITCHY ON FIREFOX ; THE PLANET DISSAPEARS ABOVE THE EQUATOR)  -->
-<transform DEF='clouds' rotation='0 1 0 0' >
-	<transform ID='axialtiltclouds' DEF='AxialTilt' rotation='0 0 -1 0.4'  scale='1.0 1.9988 1.0'  >
+<transform ID="clouds" DEF='clouds' rotation='0 1 0 0' >
+	<transform ID='axialtiltclouds' DEF='AxialTiltClouds' rotation='0 0 -1 0.4'  scale='1.0 1.9988 1.0'  >
 	<shape ID="cloudon" render="false" >
                 <appearance   sortKey="2" >
 		<material diffuseColor='0 0 0 0' specularColor="0.12 0.05 0.25 0" shininess='0.8'   ></material>
