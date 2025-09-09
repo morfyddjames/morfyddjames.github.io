@@ -298,6 +298,8 @@ function oblatechange(){	// FIND FIND FIND FIND
 	
 	const Q0 = 0; const Q1 = 0.5*Math.PI; const Q2 = 1*Math.PI; const Q3 = 1.5*Math.PI; const Q4 = 2*Math.PI; 
 	document.querySelector('#axialtilt').setAttribute('scale', `1.0 ${oblatenessPCT} 1.0`);
+	document.querySelector('#axialtiltclouds').setAttribute('scale', `1.0 ${oblatenessPCT} 1.0`);
+	
  };
 
 
@@ -677,7 +679,7 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 	
 
 <!-- THIS IS THE PLANETS CLOUDS- SET render="true" TO TEST (GLITCHY ON FIREFOX ; THE PLANET DISSAPEARS ABOVE THE EQUATOR)  -->
-<transform ID="clouds" DEF='clouds' rotation='0 1 0 0' >
+<transform ID="clouds" DEF='clouds' rotation='0 0 1 0' >
 	<transform ID='axialtiltclouds' DEF='AxialTiltClouds' rotation='0 0 -1 0.4'  scale='1.0 1.0 1.0'  >
 	<shape ID="cloudon" render="false" >
                 <appearance   sortKey="2" >
