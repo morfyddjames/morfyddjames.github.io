@@ -217,7 +217,7 @@ function changetilt(){	// THIS WAS DIFFICULT DUE TO MULTIPLE NESTED AXIIS ROTATI
 	document.querySelector('#axialtilt').setAttribute('rotation', `0 0 -1 ${tiltrad}`);
 	document.querySelector('#axialrot').setAttribute('keyValue', `${tiltsin} ${tiltcos} 0 ${Q0} ${tiltsin} ${tiltcos} 0 ${Q1} ${tiltsin} ${tiltcos} 0 ${Q2} ${tiltsin} ${tiltcos} 0 ${Q3} ${tiltsin} ${tiltcos} 0 ${Q4}`);
 	document.querySelector('#axialtiltRING').setAttribute('rotation', `0  -1 0 ${tiltrad}`);
-
+	document.querySelector('#axialtiltclouds').setAttribute('rotation', `0 0 -1 ${tiltrad}`);
 	//console.log(document.querySelector('#axialrot').keyValue);
 };
 
