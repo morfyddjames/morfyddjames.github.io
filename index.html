@@ -540,7 +540,7 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 
 
 
-	<!-- THIS IS THE POSITION OF THE CAMERA  >
+	<!-- THIS IS THE POSITION OF THE CAMERA (aligned with the Zed axis) >
 	<Viewpoint  ID="camera01"
 		fieldOfView='0.7854'
 		position="0.000 0.000 +20.000" 
@@ -548,11 +548,11 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 	</Viewpoint-->
 
 
-	<!-- THIS IS THE POSITION OF THE CAMERA  -->
+	<!-- THIS IS THE POSITION OF THE CAMERA  (slightly offset North/Dark_Side)-->
 	<Viewpoint  ID="camera01"
 		fieldOfView='0.7854'
-		position="+0.000 +8.000 +20.000" 
-		orientation="1 0 0 -0.4">
+		position="+8.000 +8.000 +20.000" 
+		orientation="1 0 0 -0.4" orientation="0 1 0 -0.4">
 	</Viewpoint>
 
 
