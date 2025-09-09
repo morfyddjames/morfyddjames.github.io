@@ -216,7 +216,7 @@ function changetilt(){	// THIS WAS DIFFICULT DUE TO MULTIPLE NESTED AXIIS ROTATI
 	const Q0 = 0; const Q1 = 0.5*Math.PI; const Q2 = 1*Math.PI; const Q3 = 1.5*Math.PI; const Q4 = 2*Math.PI; 
 	document.querySelector('#axialtilt').setAttribute('rotation', `0 0 -1 ${tiltrad}`);
 	document.querySelector('#axialrot').setAttribute('keyValue', `${tiltsin} ${tiltcos} 0 ${Q0} ${tiltsin} ${tiltcos} 0 ${Q1} ${tiltsin} ${tiltcos} 0 ${Q2} ${tiltsin} ${tiltcos} 0 ${Q3} ${tiltsin} ${tiltcos} 0 ${Q4}`);
-	document.querySelector('#axialtiltRING').setAttribute('rotation', `0 0 -1 ${tiltrad}`);
+	document.querySelector('#axialtiltRING').setAttribute('rotation', `0  -1 0 ${tiltrad}`);
 
 	//console.log(document.querySelector('#axialrot').keyValue);
 };
@@ -696,7 +696,7 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 <!--transform  rotation='1 0 0 1.7'>
 <transform    rotation='0 1 0 -0.05'-->
 <transform ID="ring" DEF='ring'  rotation='1 0 0 1.57079632'>
-<transform ID='axialtiltRING' DEF='AxialTiltRING' rotation='0 0 -1 0.4'>
+<transform ID='axialtiltRING' DEF='AxialTiltRING' rotation='0  -1 0 0.4'>
 	<shape ID="ringon"   render="false" >
 		<appearance  sortKey="3" >
 			<material diffuseColor='1 0 1 .2' emissiveColor='0 0 0' specularColor='0 .8 0'  transparency='0.2'></material> 
