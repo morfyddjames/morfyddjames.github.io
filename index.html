@@ -815,7 +815,15 @@ loop='true'></timeSensor>
 <!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
 <orientationInterpolator DEF='spinThings' 
 key='0.0 0.25 0.50 0.75 1.0' 
-keyValue='0 1 0 0 0 1 0 1.570796327 0 1 0 3.141592654 0 1 0 4.71238898 0 1 0 6.283185307 '>
+	keyValue='
+
+.39 .92 0 			0  
+.39 .92 0  		1.570796327  
+.39 .92 0  		3.141592654  
+.39 .92 0  		4.71238898  
+.39 .92 0  		6.283185307
+'>
+<!--keyValue='0 1 0 0 0 1 0 1.570796327 0 1 0 3.141592654 0 1 0 4.71238898 0 1 0 6.283185307 '-->
 </orientationInterpolator>
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
 <ROUTE fromNode='clock0' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
