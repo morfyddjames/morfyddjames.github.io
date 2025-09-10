@@ -488,7 +488,7 @@ function satellite_on(){
 </label>
 	
 
-Optional Text: <input type="text" placeholder="text" id="worldname"  onkeyup="validateOnlyTextField(this)"  onchange="changename();">
+Optional Text: <input type="text" placeholder="text" id="worldname"  onup="validateOnlyTextField(this)"  onchange="changename();">
 <br>
 <br>
 
@@ -589,7 +589,7 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 <transform ID="world" DEF='world'   rotation='0 1 0 0' >
 	<transform ID='axialtilt' DEF='AxialTilt' rotation='0 0 -1 0.4'  scale='1.0 0.9988 1.0'  >
 	<shape>
-                <appearance   sortKey="1" sortType="opaque"  >
+                <appearance   sort="1" sortType="opaque"  >
 		<material diffuseColor='1.0 1.O 1.0' specularColor="0.25 0.25 0.25" shininess='0.8' ></material>
 
 		<!--ImageTexture id="worldmap" url="icohex360seaw.png"  ></ImageTexture-->
@@ -682,7 +682,7 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 <transform ID="clouds" DEF='clouds' rotation='0 0 1 0' >
 	<transform ID='axialtiltclouds' DEF='AxialTiltClouds'  scale='1.0 1.0 1.0'  rotation='0 0 -1 0.4'  >
 	<shape ID="cloudon" render="false" >
-                <appearance   sortKey="2" >
+                <appearance   sort="2" >
 		<material diffuseColor='0 0 0 0' specularColor="0.12 0.05 0.25 0" shininess='0.8'   ></material>
 		<ImageTexture url=' "cloud.png" '></ImageTexture>
 		</appearance>
@@ -700,7 +700,7 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 <transform ID="ring" DEF='ring'  rotation='1 0 0 1.57079632'>
 <transform ID='axialtiltRING' DEF='AxialTiltRING' rotation='0  -1 0 0.4'>
 	<shape ID="ringon"   render="false" >
-		<appearance  sortKey="3" >
+		<appearance  sort="3" >
 			<material diffuseColor='1 0 1 .2' emissiveColor='0 0 0' specularColor='0 .8 0'  transparency='0.2'></material> 
 			<ImageTexture id="ringimage" url="ringimage3.png"  ></ImageTexture>
 		</appearance>
@@ -815,14 +815,7 @@ loop='true'></timeSensor>
 <!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
 <orientationInterpolator DEF='spinThings' 
 key='0.0 0.25 0.50 0.75 1.0' 
-	keyValue='
-
-.39 .92 0 			0  
-.39 .92 0  		1.570796327  
-.39 .92 0  		3.141592654  
-.39 .92 0  		4.71238898  
-.39 .92 0  		6.283185307
-'>
+keyValue='0 1 0 0 0 1 0 1.570796327 0 1 0 3.141592654 0 1 0 4.71238898 0 1 0 6.283185307 '>
 <!--keyValue='0 1 0 0 0 1 0 1.570796327 0 1 0 3.141592654 0 1 0 4.71238898 0 1 0 6.283185307 '-->
 </orientationInterpolator>
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
