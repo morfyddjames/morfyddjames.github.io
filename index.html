@@ -218,6 +218,8 @@ function changetilt(){	// THIS WAS DIFFICULT DUE TO MULTIPLE NESTED AXIIS ROTATI
 	document.querySelector('#axialrot').setAttribute('keyValue', `${tiltsin} ${tiltcos} 0 ${Q0} ${tiltsin} ${tiltcos} 0 ${Q1} ${tiltsin} ${tiltcos} 0 ${Q2} ${tiltsin} ${tiltcos} 0 ${Q3} ${tiltsin} ${tiltcos} 0 ${Q4}`);
 	document.querySelector('#axialtiltRING').setAttribute('rotation', `0  -1 0 ${tiltrad}`);
 	document.querySelector('#axialtiltclouds').setAttribute('rotation', `0 0 -1 ${tiltrad}`);
+	document.querySelector('#axialrotclouds').setAttribute('keyValue', `${tiltsin} ${tiltcos} 0 ${Q0} ${tiltsin} ${tiltcos} 0 ${Q1} ${tiltsin} ${tiltcos} 0 ${Q2} ${tiltsin} ${tiltcos} 0 ${Q3} ${tiltsin} ${tiltcos} 0 ${Q4}`);
+	
 	//console.log(document.querySelector('#axialrot').keyValue);
 };
 
@@ -829,7 +831,7 @@ keyValue='0 1 0 0 0 1 0 1.570796327 0 1 0 3.141592654 0 1 0 4.71238898 0 1 0 6.2
 cycleInterval='50' 
 loop='true'></timeSensor-->
 <!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
-<orientationInterpolator DEF='spinThings2' 
+<orientationInterpolator  ID='axialrotclouds'  DEF='spinThings2' 
 key='0.0 0.25 0.50 0.75 1.0' 
 	keyValue='
 
