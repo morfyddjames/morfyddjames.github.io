@@ -438,12 +438,12 @@ function satellite_on(){
 <br>
 
 <label class="switch"> Atmosphere
-  <input  ID="cloudsw"  type="checkbox" unchecked   onchange="clouds_on()";>
+  <input  ID="cloudsw"  type="checkbox" checked   onchange="clouds_on()";>
   <span class="slider"></span>
 </label>
 
 <label class="switch"> Ring System
-  <input ID="ringsw" type="checkbox" unchecked     onchange="rings_on()";	>
+  <input ID="ringsw" type="checkbox" checked     onchange="rings_on()";	>
   <span class="slider"></span>
 </label>
 
@@ -683,7 +683,7 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 <!-- THIS IS THE PLANETS CLOUDS- SET render="true" TO TEST (GLITCHY ON FIREFOX ; THE PLANET DISSAPEARS ABOVE THE EQUATOR)  -->
 <transform ID="clouds" DEF='clouds' rotation='0 0 1 0' >
 	<transform ID='axialtiltclouds' DEF='AxialTiltClouds'  scale='1.0 1.0 1.0'  rotation='0 0 -1 0.4'  >
-	<shape ID="cloudon" render="false" >
+	<shape ID="cloudon" render="true" >
                 <appearance   sort="2" >
 		<material diffuseColor='0 0 0 0' specularColor="0.12 0.05 0.25 0" shininess='0.8'   ></material>
 		<ImageTexture url=' "cloud.png" '></ImageTexture>
@@ -701,7 +701,7 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 <transform    rotation='0 1 0 -0.05'-->
 <transform ID="ring" DEF='ring'  rotation='1 0 0 1.57079632'>
 <transform ID='axialtiltRING' DEF='AxialTiltRING' rotation='0  -1 0 0.4'>
-	<shape ID="ringon"   render="false" >
+	<shape ID="ringon"   render="true" >
 		<appearance  sort="3" >
 			<material diffuseColor='1 0 1 .2' emissiveColor='0 0 0' specularColor='0 .8 0'  transparency='0.2'></material> 
 			<ImageTexture id="ringimage" url="ringimage3.png"  ></ImageTexture>
