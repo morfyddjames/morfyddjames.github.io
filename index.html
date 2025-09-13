@@ -213,14 +213,14 @@ function changetilt(){	// THIS WAS DIFFICULT DUE TO MULTIPLE NESTED AXIIS ROTATI
 	const tiltrad = document.querySelector('#AxialTilt').value * Math.PI/180;
 	const tiltsin = Math.sin(tiltrad);
 	const tiltcos = Math.cos(tiltrad);
-	const tiltsinCLOUD = Math.sin(tiltrad/2);
-	const tiltcosCLOUD = Math.cos(tiltrad/2);
+	const tiltsinCLOUD = Math.sin(tiltrad/1);
+	const tiltcosCLOUD = Math.cos(tiltrad/1);
 	
 	const Q0 = 0; const Q1 = 0.5*Math.PI; const Q2 = 1*Math.PI; const Q3 = 1.5*Math.PI; const Q4 = 2*Math.PI; 
 	document.querySelector('#axialtilt').setAttribute('rotation', `0 0 -1 ${tiltrad}`);
 	document.querySelector('#axialrot').setAttribute('keyValue', `${tiltsin} ${tiltcos} 0 ${Q0} ${tiltsin} ${tiltcos} 0 ${Q1} ${tiltsin} ${tiltcos} 0 ${Q2} ${tiltsin} ${tiltcos} 0 ${Q3} ${tiltsin} ${tiltcos} 0 ${Q4}`);
 	document.querySelector('#axialtiltRING').setAttribute('rotation', `0  -1 0 ${tiltrad}`);
-	document.querySelector('#axialtiltclouds').setAttribute('rotation', `0 0 -1 ${tiltrad/2}`);
+	document.querySelector('#axialtiltclouds').setAttribute('rotation', `0 0 -1 ${tiltrad/1}`);
 	document.querySelector('#axialrotclouds').setAttribute('keyValue', `${tiltsinCLOUD} ${tiltcosCLOUD} 0 ${Q0} ${tiltsinCLOUD} ${tiltcosCLOUD} 0 ${Q1} ${tiltsinCLOUD} ${tiltcosCLOUD} 0 ${Q2} ${tiltsinCLOUD} ${tiltcosCLOUD} 0 ${Q3} ${tiltsinCLOUD} ${tiltcosCLOUD} 0 ${Q4}`);
 	
 	//console.log(document.querySelector('#axialrot').keyValue);
@@ -841,11 +841,11 @@ loop='true'></timeSensor-->
 key='0.0 0.25 0.50 0.75 1.0' 
 	keyValue='
 
-.20 .98 0 			0  
-.20 .98 0  		1.570796327  
-.20 .98 0  		3.141592654  
-.20 .98 0  		4.71238898  
-.20 .98 0  		6.283185307	
+.39 .92 0 			0  
+.39 .92 0  		1.570796327  
+.39 .92 0  		3.141592654  
+.39 .92 0  		4.71238898  
+.39 .92 0  		6.283185307	
 '>
 </orientationInterpolator>
 <!-- ALL AUTOMATICALLY DONE BY THE BROWSER SPIN SPIN SPIN -->
