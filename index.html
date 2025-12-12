@@ -375,7 +375,10 @@ function orbits_on(){
 function stop_start(){	// THIS IS A COMPROMISE. PAUSETIME IS BETTER BUT MORE COMPLEX
 	if(document.getElementById("stopsw").checked != true)
 	{document.querySelector('#timeworld').setAttribute("enabled", "false"); console.log("cb.ring="+" false");
-	} else {document.querySelector('#timeworld').setAttribute("enabled", "true");  console.log("cb.ring="+"true");}
+	 document.querySelector('#timeclouds').setAttribute("enabled", "false"); console.log("cb.ring="+" false");
+	} else {document.querySelector('#timeworld').setAttribute("enabled", "true");  console.log("cb.ring="+"true");
+			document.querySelector('#timeclouds').setAttribute("enabled", "true");  console.log("cb.ring="+"true");
+		   }
 }
 
 
@@ -876,7 +879,7 @@ keyValue='0 1 0 0 0 1 0 1.570796327 0 1 0 3.141592654 0 1 0 4.71238898 0 1 0 6.2
 
 <!-- THE CLOUDS  -->
 <!-- THIS IS HOW MANY SECONDS TO SPIN ROUND ONCE... WORLD +10 IS GOOD -->
-<timeSensor DEF='clock2' 
+<timeSensor ID='timeclouds'  DEF='clock2'  enabled='true'
 cycleInterval='30' 
 loop='true'></timeSensor-->
 <!-- THIS IS THE FOUR POINTS ON A CIRCLE OF ROTATION 0, 90, 180, 270 (IN RADIANS)  -->
