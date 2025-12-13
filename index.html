@@ -634,7 +634,10 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 			shadowMapSize='8192'
 			color="0.999 0.953 0.914"
 			global="TRUE"
-			direction='1,0,0'>
+			direction='-1,0,0'
+
+			shadowIntensity='0.5'
+			shadowFilterSize='3'>
 	</DirectionalLight>
 
 
@@ -655,7 +658,7 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 <transform ID="world" DEF='world'   rotation='0 1 0 0' >
 	<transform ID='axialtilt' DEF='AxialTilt' rotation='0 0 -1 0.4'  scale='1.0 0.9988 1.0'  >
 	<shape>
-                <appearance   sort="2" sortType="opaque"  >
+                <appearance   sort="1" sortType="opaque"  >
 		<material diffuseColor='1.0 1.O 1.0' specularColor="0.25 0.25 0.25" shininess='0.8' ></material>
 
 		<!--ImageTexture id="worldmap" url="icohex360seaw.png"  ></ImageTexture-->
@@ -748,7 +751,7 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 <transform ID="clouds" DEF='clouds' rotation='0 0 1 0' >
 	<transform ID='axialtiltclouds' DEF='AxialTiltClouds'  scale='1.0 1.0 1.0'  rotation='0 0 -1 0.4'  >
 	<shape ID="cloudon" render="true" >
-                <appearance   sort="3" >
+                <appearance   sort="2" >
 		<material diffuseColor='0 0 0 0' specularColor="0.12 0.05 0.25 0" shininess='0.8'   ></material>
 		<ImageTexture url=' "cloud.png" '></ImageTexture>
 		</appearance>
@@ -766,7 +769,7 @@ xsd:noNameSchemaLocation =' https://www.web3d.org/specifications/x3d-4.0.xsd '>
 <transform ID="ring" DEF='ring'  rotation='1 0 0 1.57079632'>
 <transform ID='axialtiltRING' DEF='AxialTiltRING' rotation='0  -1 0 0.4'>
 	<shape ID="ringon"   render="true" >
-		<appearance  sort="1" >
+		<appearance  sort="3" >
 			<material diffuseColor='1 0 1 .2' emissiveColor='0 0 0' specularColor='0 .8 0'  transparency='0.0'></material> 
 			<ImageTexture id="ringimage" hideChildren='false' url="ringimage3.png"  ></ImageTexture>
 		</appearance>
